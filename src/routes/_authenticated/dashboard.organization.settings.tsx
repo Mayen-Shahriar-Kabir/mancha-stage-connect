@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PortalLayout } from "@/components/portal/PortalLayout";
-import { ORG_NAV } from "@/components/portal/org-nav";
+import { getOrgNav } from "@/components/portal/org-nav";
 import { ProfileSettingsPanel, PasswordSettingsPanel, ToggleSettingsPanel } from "@/components/portal/SettingsPanels";
 import { Panel } from "@/components/admin/primitives";
 import { Input } from "@/components/ui/input";
@@ -20,7 +20,7 @@ function SettingsPage() {
     <PortalLayout
       groupLabel="Partner Portal"
       homeUrl="/dashboard/organization"
-      nav={ORG_NAV}
+      nav={getOrgNav(orgType)}
       eyebrow="Settings"
       title="Organization preferences"
     >
