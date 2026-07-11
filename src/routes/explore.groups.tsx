@@ -46,7 +46,7 @@ function GroupsTab() {
   }, [search.city, search.minYears, search.maxYears, search.sort, search.q]);
 
   const set = (patch: Partial<typeof search>) =>
-    navigate({ search: (prev) => ({ ...prev, ...patch, page: 1 }) });
+    navigate({ search: (prev: typeof search) => ({ ...prev, ...patch, page: 1 }) });
 
   const clear = () =>
     navigate({ search: () => ({ q: "", sort: "popular", city: "", minYears: 0, maxYears: 60, page: 1 }) });
@@ -134,7 +134,7 @@ function GroupsTab() {
               <Pagination
                 page={page}
                 totalPages={totalPages}
-                onChange={(p) => navigate({ search: (prev) => ({ ...prev, page: p }) })}
+                onChange={(p) => navigate({ search: (prev: typeof search) => ({ ...prev, page: p }) })}
               />
             </>
           )}

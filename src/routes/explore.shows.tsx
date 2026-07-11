@@ -49,7 +49,7 @@ function ShowsTab() {
   }, [search.genre, search.city, search.status, search.minPrice, search.maxPrice, search.sort, search.q]);
 
   const set = (patch: Partial<typeof search>) =>
-    navigate({ search: (prev) => ({ ...prev, ...patch, page: 1 }) });
+    navigate({ search: (prev: typeof search) => ({ ...prev, ...patch, page: 1 }) });
 
   const clear = () =>
     navigate({
@@ -162,7 +162,7 @@ function ShowsTab() {
               <Pagination
                 page={page}
                 totalPages={totalPages}
-                onChange={(p) => navigate({ search: (prev) => ({ ...prev, page: p }) })}
+                onChange={(p) => navigate({ search: (prev: typeof search) => ({ ...prev, page: p }) })}
               />
             </>
           )}

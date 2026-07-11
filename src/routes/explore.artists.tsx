@@ -47,7 +47,7 @@ function ArtistsTab() {
   }, [search.spec, search.availability, search.minExp, search.maxExp, search.sort, search.q]);
 
   const set = (patch: Partial<typeof search>) =>
-    navigate({ search: (prev) => ({ ...prev, ...patch, page: 1 }) });
+    navigate({ search: (prev: typeof search) => ({ ...prev, ...patch, page: 1 }) });
 
   const clear = () =>
     navigate({ search: () => ({ q: "", sort: "newest", spec: "", availability: "", minExp: 0, maxExp: 50, page: 1 }) });
@@ -149,7 +149,7 @@ function ArtistsTab() {
               <Pagination
                 page={page}
                 totalPages={totalPages}
-                onChange={(p) => navigate({ search: (prev) => ({ ...prev, page: p }) })}
+                onChange={(p) => navigate({ search: (prev: typeof search) => ({ ...prev, page: p }) })}
               />
             </>
           )}
