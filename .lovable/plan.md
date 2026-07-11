@@ -1,42 +1,96 @@
-## Connect your own Supabase project to Mancha
 
-The codebase is already wired for a BYO (bring-your-own) Supabase setup — `src/lib/supabase.ts` reads credentials from Vite env vars. We just need to (1) plug in your project's keys, (2) make the client easy to import, and (3) verify the connection with a tiny health check.
+# Public Explore Section — Build Plan
 
-### Steps
+Rebuild public discovery around a single **Explore** hub with three tabs (Shows, Artists, Theatre Groups), plus rich detail pages. No backend, no auth, no dashboards — realistic placeholder data only, styled with the existing Mancha design system (Deep Burgundy, Theatre Gold, Warm Ivory, Playfair + Inter).
 
-1. **Collect your Supabase credentials** (from Supabase Dashboard → Project Settings → API):
-   - Project URL (e.g. `https://xxxx.supabase.co`)
-   - `anon` / publishable key (safe to ship in the browser)
-   - *(Do NOT paste the `service_role` key — it must never live in frontend code.)*
+## 1. Navigation change
 
-2. **Store them as environment variables** so the same code works locally and on Vercel:
-   - Local dev: create `.env.local` at project root with
-     ```
-     VITE_SUPABASE_URL=https://xxxx.supabase.co
-     VITE_SUPABASE_ANON_KEY=eyJhbGciOi...
-     ```
-   - Vercel: add the same two vars in Project → Settings → Environment Variables (Production + Preview).
-   - `.env.local` is already gitignored by default — keys won't be committed.
+- `src/components/layout/Navbar.tsx`: collapse Shows / Artists / Groups links into a single **Explore** link pointing to `/explore`. Keep About, Contact, auth actions untouched.
+- `src/components/layout/Footer.tsx`: same collapse.
+- Delete legacy routes `src/routes/shows.tsx`, `artists.tsx`, `groups.tsx` (their content moves into Explore tabs and detail routes).
 
-3. **Small code polish in `src/lib/supabase.ts`**
-   - Export a ready-to-use `supabase` proxy alongside `getSupabase()` so components can do `import { supabase } from "@/lib/supabase"` directly (matches the pattern the rest of the app will use for auth/data).
-   - Keep the friendly error message when env vars are missing.
+## 2. Placeholder data layer
 
-4. **Add a dev-only connection indicator**
-   - A tiny `SupabaseStatus` badge (only visible when `import.meta.env.DEV`) that pings `supabase.auth.getSession()` on mount and shows green ("Connected to Supabase") or red ("Env vars missing") in the corner. Removed automatically in production builds.
-   - Mount it once in `__root.tsx`.
+New `src/data/explore/` module (pure TypeScript, no network):
+- `shows.ts` — ~12 shows: title, slug, poster, genre, duration, venue, city, date, price, status (`upcoming | live | archived`), groupSlug, description, synopsis, cast[], director, gallery[], schedule[], pricing tiers, reviews[], trailerUrl (YouTube), livestreamUrl.
+- `artists.ts` — ~16 artists: name, stageName, slug, photo, cover, specialization, yearsExperience, currentGroupSlug, availability (`available | busy | touring`), bio, skills[], awards[], certificates[], gallery[], videos[], pastProductions[], reviews[], socials.
+- `groups.ts` — ~8 groups: name, slug, logo, cover, city, yearsActive, memberCount, description, showsPerformed, followers, history, mission, members[], featuredProductions[], trainingPrograms[], communityActivities[], sponsors[], achievements[], gallery[], videos[], upcomingShows[], pastShows[], reviews[].
+- `types.ts` — shared TS types.
+- Reuse existing generated poster/artist images in `src/assets/` where available; fill the rest with themed Unsplash URLs.
 
-5. **Docs update**
-   - Add a short `SUPABASE_SETUP.md` at project root with the exact steps above (URL, key, env var names, Vercel note) so future you / collaborators can repeat it in 30 seconds.
+## 3. Explore hub
 
-### What this plan does NOT do (per your original brief)
+`src/routes/explore.tsx` — layout route with `<Outlet />` and shared UI:
+- `PageHero` intro ("Explore Mancha").
+- Sticky sub-nav using shadcn Tabs bound to child routes (`/explore/shows`, `/explore/artists`, `/explore/groups`) via `<Link>`; animated underline with Framer Motion `layoutId` for smooth switching.
+- Global search bar (`ExploreSearch`) with instant client-side suggestions across shows/artists/groups; keyboard nav; grouped results; navigates to detail pages.
+- Sort dropdown (Newest / Most Popular / Highest Rated / Alphabetical) shared across tabs via URL search params (`?sort=`, `?q=`, filter keys) validated with `zodValidator` + `fallback`.
 
-- No authentication UI wiring (login/register stay as placeholders).
-- No database tables, RLS policies, or migrations.
-- No `service_role` usage or server-side admin client.
+`src/routes/explore.index.tsx` — redirects to `/explore/shows`.
 
-Once your `.env.local` has the two values and you restart the dev server, the badge should flip to green and you'll be ready to build real features against your Supabase project.
+## 4. Tab pages
 
-### Optional (say the word)
+Each tab lives in its own route file and shares components in `src/components/explore/`:
 
-- I can instead use the built-in **Lovable Cloud** (managed Supabase) which skips the manual key setup entirely — but since you specifically want *your own* Supabase project on Vercel, the BYO flow above is the right fit.
+- `src/routes/explore.shows.tsx`
+  - Filters (slide-in Sheet on mobile, sidebar on desktop): Genre, City, Date range, Price range, Status.
+  - `ShowCard` grid: poster, title, genre chip, duration, venue, date, price, status badge, group name, short description, "View Details" + bookmark toggle (local state only).
+  - Pagination (12/page).
+- `src/routes/explore.artists.tsx`
+  - Filters: Specialization, Experience range, Availability.
+  - `ArtistCard`: photo, name, stage name, specialization, years, current group, availability badge, "View Portfolio".
+- `src/routes/explore.groups.tsx`
+  - Filters: City, Years Active range.
+  - `GroupCard`: logo, name, city, years active, member count, description, shows count, followers, "Visit Profile".
+
+Shared UI:
+- `ExploreToolbar` (search + sort + filter trigger).
+- `FiltersPanel` (Sheet + inline).
+- `EmptyState` (illustrated SVG, message, "Clear filters" button).
+- `SkeletonGrid` for loading (shown briefly via a mock async delay to demo skeletons).
+- `Pagination` component (elegant, prev/next + numbered).
+
+## 5. Detail pages
+
+- `src/routes/explore.shows.$slug.tsx`
+  - Cinematic hero banner (backdrop gradient over poster), title, status badge.
+  - Poster + synopsis, cast list, director card, gallery masonry, venue + schedule, ticket pricing table, reviews (placeholder cards with star ratings), recommended shows (same genre).
+  - If `status === 'archived'` → "Watch Trailer" (YouTube link, opens in dialog).
+  - If `status === 'live'` → "Watch Live" (YouTube live placeholder).
+  - Related productions strip.
+- `src/routes/explore.artists.$slug.tsx`
+  - Large cover + overlapping profile photo, bio, skills chips, awards timeline, certificates, gallery, videos (YouTube embeds), current group card, past productions list, reviews, social links, availability badge, "Contact" button (placeholder toast).
+- `src/routes/explore.groups.$slug.tsx`
+  - Hero, history + mission, members grid, featured productions, training programs, community activities, sponsors marquee, achievements timeline, gallery, videos, upcoming shows, past shows, reviews.
+
+All detail routes: proper `head()` meta (title, description, og:title/description, og:image = hero image), `notFoundComponent`, `errorComponent`.
+
+## 6. Interactions & polish
+
+- Framer Motion (already available via shadcn deps or add `motion` package if missing) for tab underline, filter sheet, card hover lift, page fade-in.
+- Bookmarks and search history persist to `localStorage` (read inside `useEffect` to avoid SSR mismatch).
+- All colors via semantic tokens; no hardcoded hex in components.
+- Responsive: single-column on mobile, 2-col md, 3-col lg for cards; filter sheet on mobile.
+- Accessibility: aria labels on filter toggles, keyboard-navigable search suggestions.
+
+## Technical notes
+
+- URL state (`q`, `sort`, filter fields) via TanStack Router `validateSearch` with `zodValidator(fallback(...))` per `tanstack-search-params` rules.
+- File-based routes: `explore.tsx` layout renders `<Outlet />`; `explore.shows.$slug.tsx` etc. use `createFileRoute("/explore/shows/$slug")` matching filenames.
+- Data fetched via a tiny `useExploreData()` hook that returns the static arrays; wrap in `useMemo` for filter/sort. No server functions.
+- Add `framer-motion` if not already installed.
+- Delete `shows.tsx`, `artists.tsx`, `groups.tsx` from `src/routes/` and update `Navbar`/`Footer` links in the same batch to avoid dead links.
+- Keep bundle lean: lazy-load detail route heavy sections (gallery, videos) with `React.lazy` only if needed.
+
+## Deliverable checklist (will be reported at end of build)
+
+- [ ] Navbar/Footer collapsed to single Explore link
+- [ ] Explore layout with animated tabs
+- [ ] Shows / Artists / Groups tab pages with cards, filters, sort, pagination, empty & loading states
+- [ ] Global search with suggestions
+- [ ] Show detail page + trailer/live dialog
+- [ ] Artist profile page
+- [ ] Theatre group profile page
+- [ ] Realistic placeholder data for all three entities
+- [ ] Responsive + hover animations + design-system compliant
+- [ ] Old shows/artists/groups routes removed
