@@ -139,6 +139,10 @@ function BookingsPage() {
         </div>
       )}
 
+      {(orgType === "corporate" || orgType === "tourism_board" || orgType === "university") ? <AvailableVenuesPanel /> : null}
+
+
+
       <DemoFormDialog
         open={open}
         onOpenChange={setOpen}
