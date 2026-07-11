@@ -7,7 +7,7 @@ import { Panel } from "@/components/admin/primitives";
 import { Button } from "@/components/ui/button";
 import { CampaignFormDialog } from "@/components/business/CampaignFormDialog";
 import { useAuth } from "@/hooks/use-auth";
-import { listMyCampaigns, fmtBDT, type Campaign, updateProduction } from "@/lib/business";
+import { listMyCampaigns, fmtBDT, type Campaign } from "@/lib/business";
 import { supabase } from "@/integrations/supabase/client";
 
 export const Route = createFileRoute("/_authenticated/dashboard/group/funding")({
