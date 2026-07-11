@@ -81,7 +81,7 @@ function ErrorView({ reset }: { reset: () => void }) {
 }
 
 function ShowDetail() {
-  const { show } = Route.useLoaderData();
+  const { show } = Route.useLoaderData() as { show: import("@/data/explore").Show };
   const [videoOpen, setVideoOpen] = useState(false);
   const related = SHOWS.filter((s) => s.slug !== show.slug && s.genre === show.genre).slice(0, 3);
   const recommended = SHOWS.filter((s) => s.slug !== show.slug).slice(0, 4);

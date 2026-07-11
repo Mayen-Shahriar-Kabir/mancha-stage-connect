@@ -70,7 +70,7 @@ export const Route = createFileRoute("/explore/groups/$slug")({
 });
 
 function GroupDetail() {
-  const { group } = Route.useLoaderData();
+  const { group } = Route.useLoaderData() as { group: import("@/data/explore").Group };
   const upcoming = group.upcomingShows.map(findShow).filter(Boolean).slice(0, 3);
   const past = group.pastShows.map(findShow).filter(Boolean).slice(0, 3);
   const fallbackUpcoming = SHOWS.filter((s) => s.groupSlug === group.slug && s.status !== "archived").slice(0, 3);

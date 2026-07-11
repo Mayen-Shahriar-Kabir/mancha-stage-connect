@@ -70,7 +70,7 @@ export const Route = createFileRoute("/explore/artists/$slug")({
 });
 
 function ArtistDetail() {
-  const { artist } = Route.useLoaderData();
+  const { artist } = Route.useLoaderData() as { artist: import("@/data/explore").Artist };
   const related = ARTISTS.filter(
     (a) => a.slug !== artist.slug && a.specialization === artist.specialization,
   ).slice(0, 4);
