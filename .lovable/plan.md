@@ -1,96 +1,72 @@
+# Mancha — Final Refinement Pass
 
-# Public Explore Section — Build Plan
+Scope is intentionally focused on polish and role-specific completeness. No redesign, no new visual language — every new page reuses `PortalLayout`, `Panel`, `StatCard`, `StatusPill`, and existing dialog primitives.
 
-Rebuild public discovery around a single **Explore** hub with three tabs (Shows, Artists, Theatre Groups), plus rich detail pages. No backend, no auth, no dashboards — realistic placeholder data only, styled with the existing Mancha design system (Deep Burgundy, Theatre Gold, Warm Ivory, Playfair + Inter).
+## 1. Small visual fixes
 
-## 1. Navigation change
+- **Artist portfolio avatar**: change the `-mt-16 h-24 w-24 … object-cover` treatment so the full headshot is visible. Use `object-cover object-top` on a taller frame OR switch to a circular avatar with `object-cover` + `object-position: center 20%`. Also lift the cover overlap.
+- **Meghdoot poster**: the Unsplash photo `1571266028243-d220bc568cbf` is dead. Replace with a working stage image (`photo-1503095396549-807759245b35`) everywhere it appears (`artist.ts`, `audience.ts`).
+- **Broken thumbs fallback**: add a shared `<PosterImg />` component that swaps to a branded fallback on `onError` and use it in `ShowCard`, watchlist, ticket wallet, artist productions.
 
-- `src/components/layout/Navbar.tsx`: collapse Shows / Artists / Groups links into a single **Explore** link pointing to `/explore`. Keep About, Contact, auth actions untouched.
-- `src/components/layout/Footer.tsx`: same collapse.
-- Delete legacy routes `src/routes/shows.tsx`, `artists.tsx`, `groups.tsx` (their content moves into Explore tabs and detail routes).
+## 2. Organization dashboards — split by type
 
-## 2. Placeholder data layer
+Replace the single ORG_NAV with a per-type nav selected from `profile.organization_type`.
 
-New `src/data/explore/` module (pure TypeScript, no network):
-- `shows.ts` — ~12 shows: title, slug, poster, genre, duration, venue, city, date, price, status (`upcoming | live | archived`), groupSlug, description, synopsis, cast[], director, gallery[], schedule[], pricing tiers, reviews[], trailerUrl (YouTube), livestreamUrl.
-- `artists.ts` — ~16 artists: name, stageName, slug, photo, cover, specialization, yearsExperience, currentGroupSlug, availability (`available | busy | touring`), bio, skills[], awards[], certificates[], gallery[], videos[], pastProductions[], reviews[], socials.
-- `groups.ts` — ~8 groups: name, slug, logo, cover, city, yearsActive, memberCount, description, showsPerformed, followers, history, mission, members[], featuredProductions[], trainingPrograms[], communityActivities[], sponsors[], achievements[], gallery[], videos[], upcomingShows[], pastShows[], reviews[].
-- `types.ts` — shared TS types.
-- Reuse existing generated poster/artist images in `src/assets/` where available; fill the rest with themed Unsplash URLs.
+```
+Corporate:    Dashboard · Bookings · Sponsorships · History · Settings
+Tourism:      Dashboard · Bookings · Cultural Programs · History · Settings
+Film & OTT:   Dashboard · Auditions · Jobs · Applications · Settings
+University:   Dashboard · Venue Booking · Internships · Campus Programs · Settings
+```
 
-## 3. Explore hub
+- New `org-nav.ts` exports `getOrgNav(type)`.
+- Delete/repurpose: `opportunities.tsx`, `collaborations.tsx`, `events.tsx`, `analytics.tsx`, `notifications.tsx` (keep notifications only if referenced from index; otherwise remove links).
+- New routes (each is a `PortalLayout` + `Panel` grid, no new design language):
+  - `dashboard.organization.sponsorships.tsx` (corporate)
+  - `dashboard.organization.history.tsx` (corporate + tourism)
+  - `dashboard.organization.cultural-programs.tsx` (tourism)
+  - `dashboard.organization.auditions.tsx` (film)
+  - `dashboard.organization.jobs.tsx` (film)
+  - `dashboard.organization.applications.tsx` (film)
+  - `dashboard.organization.venues.tsx` (university)
+  - `dashboard.organization.internships.tsx` (university)
+  - `dashboard.organization.campus-programs.tsx` (university)
+- `dashboard.organization.bookings.tsx` becomes a booking hub with a **Create Booking** dialog (target = Group or Artist, event name, purpose, date, venue, budget, notes, status pill).
 
-`src/routes/explore.tsx` — layout route with `<Outlet />` and shared UI:
-- `PageHero` intro ("Explore Mancha").
-- Sticky sub-nav using shadcn Tabs bound to child routes (`/explore/shows`, `/explore/artists`, `/explore/groups`) via `<Link>`; animated underline with Framer Motion `layoutId` for smooth switching.
-- Global search bar (`ExploreSearch`) with instant client-side suggestions across shows/artists/groups; keyboard nav; grouped results; navigates to detail pages.
-- Sort dropdown (Newest / Most Popular / Highest Rated / Alphabetical) shared across tabs via URL search params (`?sort=`, `?q=`, filter keys) validated with `zodValidator` + `fallback`.
+## 3. Demo persistence layer
 
-`src/routes/explore.index.tsx` — redirects to `/explore/shows`.
+New `src/lib/demo-store.ts`: tiny typed wrapper around `localStorage` keyed per feature (`mancha.demo.<feature>.<userId>`). Exports `useDemoList<T>(key, seed)` returning `{ items, add, update, remove }`. All new workflow dialogs write through this so create/edit/delete/status changes persist across a session and feel real.
 
-## 4. Tab pages
+Applied to: org bookings, sponsorships, cultural programs, auditions, jobs, applications (shortlist/reject), venues, internships, campus programs.
 
-Each tab lives in its own route file and shares components in `src/components/explore/`:
+## 4. Reusable dialogs
 
-- `src/routes/explore.shows.tsx`
-  - Filters (slide-in Sheet on mobile, sidebar on desktop): Genre, City, Date range, Price range, Status.
-  - `ShowCard` grid: poster, title, genre chip, duration, venue, date, price, status badge, group name, short description, "View Details" + bookmark toggle (local state only).
-  - Pagination (12/page).
-- `src/routes/explore.artists.tsx`
-  - Filters: Specialization, Experience range, Availability.
-  - `ArtistCard`: photo, name, stage name, specialization, years, current group, availability badge, "View Portfolio".
-- `src/routes/explore.groups.tsx`
-  - Filters: City, Years Active range.
-  - `GroupCard`: logo, name, city, years active, member count, description, shows count, followers, "Visit Profile".
+- `BookingFormDialog` — reused by Corporate, Tourism, University (fields config-driven).
+- `AuditionFormDialog`, `JobFormDialog` — Film.
+- `VenueFormDialog` — University publishes venues (auditorium, capacity, dates, facilities, description). Read by Groups/Corporate/Tourism via a new **Available Venues** panel on their existing bookings/collab pages.
+- `SimpleFormDialog` — generic wrapper for cultural programs, internships, campus programs.
 
-Shared UI:
-- `ExploreToolbar` (search + sort + filter trigger).
-- `FiltersPanel` (Sheet + inline).
-- `EmptyState` (illustrated SVG, message, "Clear filters" button).
-- `SkeletonGrid` for loading (shown briefly via a mock async delay to demo skeletons).
-- `Pagination` component (elegant, prev/next + numbered).
+Each dialog reuses shadcn `Dialog`, `Input`, `Textarea`, `Select`, `Button` — no new component library.
 
-## 5. Detail pages
+## 5. Cross-role venue visibility
 
-- `src/routes/explore.shows.$slug.tsx`
-  - Cinematic hero banner (backdrop gradient over poster), title, status badge.
-  - Poster + synopsis, cast list, director card, gallery masonry, venue + schedule, ticket pricing table, reviews (placeholder cards with star ratings), recommended shows (same genre).
-  - If `status === 'archived'` → "Watch Trailer" (YouTube link, opens in dialog).
-  - If `status === 'live'` → "Watch Live" (YouTube live placeholder).
-  - Related productions strip.
-- `src/routes/explore.artists.$slug.tsx`
-  - Large cover + overlapping profile photo, bio, skills chips, awards timeline, certificates, gallery, videos (YouTube embeds), current group card, past productions list, reviews, social links, availability badge, "Contact" button (placeholder toast).
-- `src/routes/explore.groups.$slug.tsx`
-  - Hero, history + mission, members grid, featured productions, training programs, community activities, sponsors marquee, achievements timeline, gallery, videos, upcoming shows, past shows, reviews.
+- Venues published by Universities are stored in a shared `mancha.demo.venues` key.
+- New `AvailableVenuesPanel` component surfaced on:
+  - Group → Community (existing page, add panel).
+  - Corporate → Bookings (side panel).
+  - Tourism → Bookings (side panel).
 
-All detail routes: proper `head()` meta (title, description, og:title/description, og:image = hero image), `notFoundComponent`, `errorComponent`.
+## 6. Quality sweep
 
-## 6. Interactions & polish
+- Fix org root component to read `organization_type` and route the sidebar/actions accordingly.
+- Remove stale nav entries after per-type split (no dead links).
+- Add `onError` fallback to any `<img>` in card grids.
+- Verify build + walk through each dashboard as each role via Playwright screenshots.
 
-- Framer Motion (already available via shadcn deps or add `motion` package if missing) for tab underline, filter sheet, card hover lift, page fade-in.
-- Bookmarks and search history persist to `localStorage` (read inside `useEffect` to avoid SSR mismatch).
-- All colors via semantic tokens; no hardcoded hex in components.
-- Responsive: single-column on mobile, 2-col md, 3-col lg for cards; filter sheet on mobile.
-- Accessibility: aria labels on filter toggles, keyboard-navigable search suggestions.
+## Out of scope (kept honest)
 
-## Technical notes
+Real backend for the new workflows — everything above uses localStorage demo persistence. The existing Supabase-backed modules (productions, tickets, funding, reviews, notifications) stay as-is. A follow-up phase is required to promote these demo workflows (bookings, sponsorships, venues, auditions, jobs, applications, internships, campus programs, cultural programs) to real tables + RLS.
 
-- URL state (`q`, `sort`, filter fields) via TanStack Router `validateSearch` with `zodValidator(fallback(...))` per `tanstack-search-params` rules.
-- File-based routes: `explore.tsx` layout renders `<Outlet />`; `explore.shows.$slug.tsx` etc. use `createFileRoute("/explore/shows/$slug")` matching filenames.
-- Data fetched via a tiny `useExploreData()` hook that returns the static arrays; wrap in `useMemo` for filter/sort. No server functions.
-- Add `framer-motion` if not already installed.
-- Delete `shows.tsx`, `artists.tsx`, `groups.tsx` from `src/routes/` and update `Navbar`/`Footer` links in the same batch to avoid dead links.
-- Keep bundle lean: lazy-load detail route heavy sections (gallery, videos) with `React.lazy` only if needed.
+## Deliverable at end
 
-## Deliverable checklist (will be reported at end of build)
-
-- [ ] Navbar/Footer collapsed to single Explore link
-- [ ] Explore layout with animated tabs
-- [ ] Shows / Artists / Groups tab pages with cards, filters, sort, pagination, empty & loading states
-- [ ] Global search with suggestions
-- [ ] Show detail page + trailer/live dialog
-- [ ] Artist profile page
-- [ ] Theatre group profile page
-- [ ] Realistic placeholder data for all three entities
-- [ ] Responsive + hover animations + design-system compliant
-- [ ] Old shows/artists/groups routes removed
+Short summary listing: fixed inconsistencies, updated org dashboards, completed placeholder workflows, and modules still requiring a production backend.
