@@ -42,12 +42,7 @@ import { Route as AuthenticatedDashboardAudienceIndexRouteImport } from './route
 import { Route as AuthenticatedDashboardArtistIndexRouteImport } from './routes/_authenticated/dashboard.artist.index'
 import { Route as AuthenticatedDashboardAdminIndexRouteImport } from './routes/_authenticated/dashboard.admin.index'
 import { Route as AuthenticatedDashboardOrganizationSettingsRouteImport } from './routes/_authenticated/dashboard.organization.settings'
-import { Route as AuthenticatedDashboardOrganizationOpportunitiesRouteImport } from './routes/_authenticated/dashboard.organization.opportunities'
-import { Route as AuthenticatedDashboardOrganizationNotificationsRouteImport } from './routes/_authenticated/dashboard.organization.notifications'
-import { Route as AuthenticatedDashboardOrganizationEventsRouteImport } from './routes/_authenticated/dashboard.organization.events'
-import { Route as AuthenticatedDashboardOrganizationCollaborationsRouteImport } from './routes/_authenticated/dashboard.organization.collaborations'
 import { Route as AuthenticatedDashboardOrganizationBookingsRouteImport } from './routes/_authenticated/dashboard.organization.bookings'
-import { Route as AuthenticatedDashboardOrganizationAnalyticsRouteImport } from './routes/_authenticated/dashboard.organization.analytics'
 import { Route as AuthenticatedDashboardGroupSettingsRouteImport } from './routes/_authenticated/dashboard.group.settings'
 import { Route as AuthenticatedDashboardGroupProductionsRouteImport } from './routes/_authenticated/dashboard.group.productions'
 import { Route as AuthenticatedDashboardGroupOpportunitiesRouteImport } from './routes/_authenticated/dashboard.group.opportunities'
@@ -261,40 +256,10 @@ const AuthenticatedDashboardOrganizationSettingsRoute =
     path: '/settings',
     getParentRoute: () => AuthenticatedDashboardOrganizationRoute,
   } as any)
-const AuthenticatedDashboardOrganizationOpportunitiesRoute =
-  AuthenticatedDashboardOrganizationOpportunitiesRouteImport.update({
-    id: '/opportunities',
-    path: '/opportunities',
-    getParentRoute: () => AuthenticatedDashboardOrganizationRoute,
-  } as any)
-const AuthenticatedDashboardOrganizationNotificationsRoute =
-  AuthenticatedDashboardOrganizationNotificationsRouteImport.update({
-    id: '/notifications',
-    path: '/notifications',
-    getParentRoute: () => AuthenticatedDashboardOrganizationRoute,
-  } as any)
-const AuthenticatedDashboardOrganizationEventsRoute =
-  AuthenticatedDashboardOrganizationEventsRouteImport.update({
-    id: '/events',
-    path: '/events',
-    getParentRoute: () => AuthenticatedDashboardOrganizationRoute,
-  } as any)
-const AuthenticatedDashboardOrganizationCollaborationsRoute =
-  AuthenticatedDashboardOrganizationCollaborationsRouteImport.update({
-    id: '/collaborations',
-    path: '/collaborations',
-    getParentRoute: () => AuthenticatedDashboardOrganizationRoute,
-  } as any)
 const AuthenticatedDashboardOrganizationBookingsRoute =
   AuthenticatedDashboardOrganizationBookingsRouteImport.update({
     id: '/bookings',
     path: '/bookings',
-    getParentRoute: () => AuthenticatedDashboardOrganizationRoute,
-  } as any)
-const AuthenticatedDashboardOrganizationAnalyticsRoute =
-  AuthenticatedDashboardOrganizationAnalyticsRouteImport.update({
-    id: '/analytics',
-    path: '/analytics',
     getParentRoute: () => AuthenticatedDashboardOrganizationRoute,
   } as any)
 const AuthenticatedDashboardGroupSettingsRoute =
@@ -577,12 +542,7 @@ export interface FileRoutesByFullPath {
   '/dashboard/group/opportunities': typeof AuthenticatedDashboardGroupOpportunitiesRoute
   '/dashboard/group/productions': typeof AuthenticatedDashboardGroupProductionsRoute
   '/dashboard/group/settings': typeof AuthenticatedDashboardGroupSettingsRoute
-  '/dashboard/organization/analytics': typeof AuthenticatedDashboardOrganizationAnalyticsRoute
   '/dashboard/organization/bookings': typeof AuthenticatedDashboardOrganizationBookingsRoute
-  '/dashboard/organization/collaborations': typeof AuthenticatedDashboardOrganizationCollaborationsRoute
-  '/dashboard/organization/events': typeof AuthenticatedDashboardOrganizationEventsRoute
-  '/dashboard/organization/notifications': typeof AuthenticatedDashboardOrganizationNotificationsRoute
-  '/dashboard/organization/opportunities': typeof AuthenticatedDashboardOrganizationOpportunitiesRoute
   '/dashboard/organization/settings': typeof AuthenticatedDashboardOrganizationSettingsRoute
   '/dashboard/admin/': typeof AuthenticatedDashboardAdminIndexRoute
   '/dashboard/artist/': typeof AuthenticatedDashboardArtistIndexRoute
@@ -647,12 +607,7 @@ export interface FileRoutesByTo {
   '/dashboard/group/opportunities': typeof AuthenticatedDashboardGroupOpportunitiesRoute
   '/dashboard/group/productions': typeof AuthenticatedDashboardGroupProductionsRoute
   '/dashboard/group/settings': typeof AuthenticatedDashboardGroupSettingsRoute
-  '/dashboard/organization/analytics': typeof AuthenticatedDashboardOrganizationAnalyticsRoute
   '/dashboard/organization/bookings': typeof AuthenticatedDashboardOrganizationBookingsRoute
-  '/dashboard/organization/collaborations': typeof AuthenticatedDashboardOrganizationCollaborationsRoute
-  '/dashboard/organization/events': typeof AuthenticatedDashboardOrganizationEventsRoute
-  '/dashboard/organization/notifications': typeof AuthenticatedDashboardOrganizationNotificationsRoute
-  '/dashboard/organization/opportunities': typeof AuthenticatedDashboardOrganizationOpportunitiesRoute
   '/dashboard/organization/settings': typeof AuthenticatedDashboardOrganizationSettingsRoute
   '/dashboard/admin': typeof AuthenticatedDashboardAdminIndexRoute
   '/dashboard/artist': typeof AuthenticatedDashboardArtistIndexRoute
@@ -725,12 +680,7 @@ export interface FileRoutesById {
   '/_authenticated/dashboard/group/opportunities': typeof AuthenticatedDashboardGroupOpportunitiesRoute
   '/_authenticated/dashboard/group/productions': typeof AuthenticatedDashboardGroupProductionsRoute
   '/_authenticated/dashboard/group/settings': typeof AuthenticatedDashboardGroupSettingsRoute
-  '/_authenticated/dashboard/organization/analytics': typeof AuthenticatedDashboardOrganizationAnalyticsRoute
   '/_authenticated/dashboard/organization/bookings': typeof AuthenticatedDashboardOrganizationBookingsRoute
-  '/_authenticated/dashboard/organization/collaborations': typeof AuthenticatedDashboardOrganizationCollaborationsRoute
-  '/_authenticated/dashboard/organization/events': typeof AuthenticatedDashboardOrganizationEventsRoute
-  '/_authenticated/dashboard/organization/notifications': typeof AuthenticatedDashboardOrganizationNotificationsRoute
-  '/_authenticated/dashboard/organization/opportunities': typeof AuthenticatedDashboardOrganizationOpportunitiesRoute
   '/_authenticated/dashboard/organization/settings': typeof AuthenticatedDashboardOrganizationSettingsRoute
   '/_authenticated/dashboard/admin/': typeof AuthenticatedDashboardAdminIndexRoute
   '/_authenticated/dashboard/artist/': typeof AuthenticatedDashboardArtistIndexRoute
@@ -803,12 +753,7 @@ export interface FileRouteTypes {
     | '/dashboard/group/opportunities'
     | '/dashboard/group/productions'
     | '/dashboard/group/settings'
-    | '/dashboard/organization/analytics'
     | '/dashboard/organization/bookings'
-    | '/dashboard/organization/collaborations'
-    | '/dashboard/organization/events'
-    | '/dashboard/organization/notifications'
-    | '/dashboard/organization/opportunities'
     | '/dashboard/organization/settings'
     | '/dashboard/admin/'
     | '/dashboard/artist/'
@@ -873,12 +818,7 @@ export interface FileRouteTypes {
     | '/dashboard/group/opportunities'
     | '/dashboard/group/productions'
     | '/dashboard/group/settings'
-    | '/dashboard/organization/analytics'
     | '/dashboard/organization/bookings'
-    | '/dashboard/organization/collaborations'
-    | '/dashboard/organization/events'
-    | '/dashboard/organization/notifications'
-    | '/dashboard/organization/opportunities'
     | '/dashboard/organization/settings'
     | '/dashboard/admin'
     | '/dashboard/artist'
@@ -950,12 +890,7 @@ export interface FileRouteTypes {
     | '/_authenticated/dashboard/group/opportunities'
     | '/_authenticated/dashboard/group/productions'
     | '/_authenticated/dashboard/group/settings'
-    | '/_authenticated/dashboard/organization/analytics'
     | '/_authenticated/dashboard/organization/bookings'
-    | '/_authenticated/dashboard/organization/collaborations'
-    | '/_authenticated/dashboard/organization/events'
-    | '/_authenticated/dashboard/organization/notifications'
-    | '/_authenticated/dashboard/organization/opportunities'
     | '/_authenticated/dashboard/organization/settings'
     | '/_authenticated/dashboard/admin/'
     | '/_authenticated/dashboard/artist/'
@@ -1214,46 +1149,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardOrganizationSettingsRouteImport
       parentRoute: typeof AuthenticatedDashboardOrganizationRoute
     }
-    '/_authenticated/dashboard/organization/opportunities': {
-      id: '/_authenticated/dashboard/organization/opportunities'
-      path: '/opportunities'
-      fullPath: '/dashboard/organization/opportunities'
-      preLoaderRoute: typeof AuthenticatedDashboardOrganizationOpportunitiesRouteImport
-      parentRoute: typeof AuthenticatedDashboardOrganizationRoute
-    }
-    '/_authenticated/dashboard/organization/notifications': {
-      id: '/_authenticated/dashboard/organization/notifications'
-      path: '/notifications'
-      fullPath: '/dashboard/organization/notifications'
-      preLoaderRoute: typeof AuthenticatedDashboardOrganizationNotificationsRouteImport
-      parentRoute: typeof AuthenticatedDashboardOrganizationRoute
-    }
-    '/_authenticated/dashboard/organization/events': {
-      id: '/_authenticated/dashboard/organization/events'
-      path: '/events'
-      fullPath: '/dashboard/organization/events'
-      preLoaderRoute: typeof AuthenticatedDashboardOrganizationEventsRouteImport
-      parentRoute: typeof AuthenticatedDashboardOrganizationRoute
-    }
-    '/_authenticated/dashboard/organization/collaborations': {
-      id: '/_authenticated/dashboard/organization/collaborations'
-      path: '/collaborations'
-      fullPath: '/dashboard/organization/collaborations'
-      preLoaderRoute: typeof AuthenticatedDashboardOrganizationCollaborationsRouteImport
-      parentRoute: typeof AuthenticatedDashboardOrganizationRoute
-    }
     '/_authenticated/dashboard/organization/bookings': {
       id: '/_authenticated/dashboard/organization/bookings'
       path: '/bookings'
       fullPath: '/dashboard/organization/bookings'
       preLoaderRoute: typeof AuthenticatedDashboardOrganizationBookingsRouteImport
-      parentRoute: typeof AuthenticatedDashboardOrganizationRoute
-    }
-    '/_authenticated/dashboard/organization/analytics': {
-      id: '/_authenticated/dashboard/organization/analytics'
-      path: '/analytics'
-      fullPath: '/dashboard/organization/analytics'
-      preLoaderRoute: typeof AuthenticatedDashboardOrganizationAnalyticsRouteImport
       parentRoute: typeof AuthenticatedDashboardOrganizationRoute
     }
     '/_authenticated/dashboard/group/settings': {
@@ -1680,30 +1580,15 @@ const AuthenticatedDashboardGroupRouteWithChildren =
   )
 
 interface AuthenticatedDashboardOrganizationRouteChildren {
-  AuthenticatedDashboardOrganizationAnalyticsRoute: typeof AuthenticatedDashboardOrganizationAnalyticsRoute
   AuthenticatedDashboardOrganizationBookingsRoute: typeof AuthenticatedDashboardOrganizationBookingsRoute
-  AuthenticatedDashboardOrganizationCollaborationsRoute: typeof AuthenticatedDashboardOrganizationCollaborationsRoute
-  AuthenticatedDashboardOrganizationEventsRoute: typeof AuthenticatedDashboardOrganizationEventsRoute
-  AuthenticatedDashboardOrganizationNotificationsRoute: typeof AuthenticatedDashboardOrganizationNotificationsRoute
-  AuthenticatedDashboardOrganizationOpportunitiesRoute: typeof AuthenticatedDashboardOrganizationOpportunitiesRoute
   AuthenticatedDashboardOrganizationSettingsRoute: typeof AuthenticatedDashboardOrganizationSettingsRoute
   AuthenticatedDashboardOrganizationIndexRoute: typeof AuthenticatedDashboardOrganizationIndexRoute
 }
 
 const AuthenticatedDashboardOrganizationRouteChildren: AuthenticatedDashboardOrganizationRouteChildren =
   {
-    AuthenticatedDashboardOrganizationAnalyticsRoute:
-      AuthenticatedDashboardOrganizationAnalyticsRoute,
     AuthenticatedDashboardOrganizationBookingsRoute:
       AuthenticatedDashboardOrganizationBookingsRoute,
-    AuthenticatedDashboardOrganizationCollaborationsRoute:
-      AuthenticatedDashboardOrganizationCollaborationsRoute,
-    AuthenticatedDashboardOrganizationEventsRoute:
-      AuthenticatedDashboardOrganizationEventsRoute,
-    AuthenticatedDashboardOrganizationNotificationsRoute:
-      AuthenticatedDashboardOrganizationNotificationsRoute,
-    AuthenticatedDashboardOrganizationOpportunitiesRoute:
-      AuthenticatedDashboardOrganizationOpportunitiesRoute,
     AuthenticatedDashboardOrganizationSettingsRoute:
       AuthenticatedDashboardOrganizationSettingsRoute,
     AuthenticatedDashboardOrganizationIndexRoute:
