@@ -11,6 +11,26 @@ const photoFor = (i: number, gender: "m" | "f") => {
   return pool[i % pool.length];
 };
 
+const GENDER: Record<string, "m" | "f"> = {
+  "anisul-haque": "m",
+  "meherun-nisa": "f",
+  "rafid-rahman": "m",
+  "sultana-begum": "f",
+  "farhana-mithila": "f",
+  "tanvir-chowdhury": "m",
+  "nusrat-jahan": "f",
+  "kamruzzaman-runu": "m",
+  "shamim-ara": "f",
+  "muhammad-salim": "m",
+  "ayesha-karim": "f",
+  "imran-hossain": "m",
+  "sabina-yasmin-arif": "f",
+  "rifat-chowdhury": "m",
+  "faisal-ahmed": "m",
+  "nazia-kabir": "f",
+};
+
+
 const covers = [
   "https://images.unsplash.com/photo-1503095396549-807759245b35?w=1600&q=80",
   "https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?w=1600&q=80",
