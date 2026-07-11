@@ -19,12 +19,14 @@ import { Route as PendingApprovalRouteImport } from './routes/pending-approval'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as GroupsRouteImport } from './routes/groups'
 import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
+import { Route as ExploreRouteImport } from './routes/explore'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as ArtistsRouteImport } from './routes/artists'
 import { Route as AccessDeniedRouteImport } from './routes/access-denied'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ExploreIndexRouteImport } from './routes/explore.index'
 import { Route as AuthenticatedDashboardIndexRouteImport } from './routes/_authenticated/dashboard.index'
 import { Route as AuthenticatedDashboardOrganizationRouteImport } from './routes/_authenticated/dashboard.organization'
 import { Route as AuthenticatedDashboardGroupRouteImport } from './routes/_authenticated/dashboard.group'
@@ -82,6 +84,11 @@ const ForgotPasswordRoute = ForgotPasswordRouteImport.update({
   path: '/forgot-password',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ExploreRoute = ExploreRouteImport.update({
+  id: '/explore',
+  path: '/explore',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
@@ -110,6 +117,11 @@ const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
+} as any)
+const ExploreIndexRoute = ExploreIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ExploreRoute,
 } as any)
 const AuthenticatedDashboardIndexRoute =
   AuthenticatedDashboardIndexRouteImport.update({
@@ -154,6 +166,7 @@ export interface FileRoutesByFullPath {
   '/access-denied': typeof AccessDeniedRoute
   '/artists': typeof ArtistsRoute
   '/contact': typeof ContactRoute
+  '/explore': typeof ExploreRouteWithChildren
   '/forgot-password': typeof ForgotPasswordRoute
   '/groups': typeof GroupsRoute
   '/login': typeof LoginRoute
@@ -164,6 +177,7 @@ export interface FileRoutesByFullPath {
   '/shows': typeof ShowsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/suspended': typeof SuspendedRoute
+  '/explore/': typeof ExploreIndexRoute
   '/dashboard/admin': typeof AuthenticatedDashboardAdminRoute
   '/dashboard/artist': typeof AuthenticatedDashboardArtistRoute
   '/dashboard/audience': typeof AuthenticatedDashboardAudienceRoute
@@ -187,6 +201,7 @@ export interface FileRoutesByTo {
   '/shows': typeof ShowsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/suspended': typeof SuspendedRoute
+  '/explore': typeof ExploreIndexRoute
   '/dashboard/admin': typeof AuthenticatedDashboardAdminRoute
   '/dashboard/artist': typeof AuthenticatedDashboardArtistRoute
   '/dashboard/audience': typeof AuthenticatedDashboardAudienceRoute
@@ -202,6 +217,7 @@ export interface FileRoutesById {
   '/access-denied': typeof AccessDeniedRoute
   '/artists': typeof ArtistsRoute
   '/contact': typeof ContactRoute
+  '/explore': typeof ExploreRouteWithChildren
   '/forgot-password': typeof ForgotPasswordRoute
   '/groups': typeof GroupsRoute
   '/login': typeof LoginRoute
@@ -212,6 +228,7 @@ export interface FileRoutesById {
   '/shows': typeof ShowsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/suspended': typeof SuspendedRoute
+  '/explore/': typeof ExploreIndexRoute
   '/_authenticated/dashboard/admin': typeof AuthenticatedDashboardAdminRoute
   '/_authenticated/dashboard/artist': typeof AuthenticatedDashboardArtistRoute
   '/_authenticated/dashboard/audience': typeof AuthenticatedDashboardAudienceRoute
@@ -227,6 +244,7 @@ export interface FileRouteTypes {
     | '/access-denied'
     | '/artists'
     | '/contact'
+    | '/explore'
     | '/forgot-password'
     | '/groups'
     | '/login'
@@ -237,6 +255,7 @@ export interface FileRouteTypes {
     | '/shows'
     | '/sitemap.xml'
     | '/suspended'
+    | '/explore/'
     | '/dashboard/admin'
     | '/dashboard/artist'
     | '/dashboard/audience'
@@ -260,6 +279,7 @@ export interface FileRouteTypes {
     | '/shows'
     | '/sitemap.xml'
     | '/suspended'
+    | '/explore'
     | '/dashboard/admin'
     | '/dashboard/artist'
     | '/dashboard/audience'
@@ -274,6 +294,7 @@ export interface FileRouteTypes {
     | '/access-denied'
     | '/artists'
     | '/contact'
+    | '/explore'
     | '/forgot-password'
     | '/groups'
     | '/login'
@@ -284,6 +305,7 @@ export interface FileRouteTypes {
     | '/shows'
     | '/sitemap.xml'
     | '/suspended'
+    | '/explore/'
     | '/_authenticated/dashboard/admin'
     | '/_authenticated/dashboard/artist'
     | '/_authenticated/dashboard/audience'
@@ -299,6 +321,7 @@ export interface RootRouteChildren {
   AccessDeniedRoute: typeof AccessDeniedRoute
   ArtistsRoute: typeof ArtistsRoute
   ContactRoute: typeof ContactRoute
+  ExploreRoute: typeof ExploreRouteWithChildren
   ForgotPasswordRoute: typeof ForgotPasswordRoute
   GroupsRoute: typeof GroupsRoute
   LoginRoute: typeof LoginRoute
@@ -383,6 +406,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ForgotPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/explore': {
+      id: '/explore'
+      path: '/explore'
+      fullPath: '/explore'
+      preLoaderRoute: typeof ExploreRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/contact': {
       id: '/contact'
       path: '/contact'
@@ -424,6 +454,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/explore/': {
+      id: '/explore/'
+      path: '/'
+      fullPath: '/explore/'
+      preLoaderRoute: typeof ExploreIndexRouteImport
+      parentRoute: typeof ExploreRoute
     }
     '/_authenticated/dashboard/': {
       id: '/_authenticated/dashboard/'
@@ -492,6 +529,17 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
 const AuthenticatedRouteRouteWithChildren =
   AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
 
+interface ExploreRouteChildren {
+  ExploreIndexRoute: typeof ExploreIndexRoute
+}
+
+const ExploreRouteChildren: ExploreRouteChildren = {
+  ExploreIndexRoute: ExploreIndexRoute,
+}
+
+const ExploreRouteWithChildren =
+  ExploreRoute._addFileChildren(ExploreRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
@@ -499,6 +547,7 @@ const rootRouteChildren: RootRouteChildren = {
   AccessDeniedRoute: AccessDeniedRoute,
   ArtistsRoute: ArtistsRoute,
   ContactRoute: ContactRoute,
+  ExploreRoute: ExploreRouteWithChildren,
   ForgotPasswordRoute: ForgotPasswordRoute,
   GroupsRoute: GroupsRoute,
   LoginRoute: LoginRoute,
