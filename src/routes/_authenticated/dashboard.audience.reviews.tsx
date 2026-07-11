@@ -1,63 +1,63 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Star } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Star, MessageSquare } from "lucide-react";
 import { PortalLayout } from "@/components/portal/PortalLayout";
 import { AUDIENCE_NAV } from "@/components/portal/audience-nav";
-import { Panel } from "@/components/admin/primitives";
-import { Button } from "@/components/ui/button";
-import { tickets } from "@/data/portal/audience";
+import { useAuth } from "@/hooks/use-auth";
+import { listMyReviews, type Review } from "@/lib/business";
 
 export const Route = createFileRoute("/_authenticated/dashboard/audience/reviews")({
-  head: () => ({ meta: [{ title: "Reviews — Mancha" }, { name: "robots", content: "noindex" }] }),
-  component: ReviewsPage,
+  head: () => ({ meta: [{ title: "My Reviews — Mancha" }, { name: "robots", content: "noindex" }] }),
+  component: MyReviewsPage,
 });
 
-const REVIEWS = [
-  { id: "rv1", show: "Meghdoot", rating: 5, text: "Aranyak's staging was breathtaking. The Yaksha's monologue held the room silent." },
-  { id: "rv2", show: "Chairs", rating: 4, text: "A brave choice of text — the leads landed the absurdity with heart." },
-];
+function MyReviewsPage() {
+  const { user } = useAuth();
+  const [items, setItems] = useState<Review[]>([]);
+  const [loading, setLoading] = useState(true);
 
-function ReviewsPage() {
-  const toReview = tickets.filter((t) => t.status === "past").slice(0, 3);
+  useEffect(() => {
+    if (!user) return;
+    listMyReviews(user.id).then(setItems).finally(() => setLoading(false));
+  }, [user?.id]);
+
+  const avg = items.length ? (items.reduce((s, r) => s + r.rating, 0) / items.length).toFixed(1) : "—";
+
   return (
     <PortalLayout
       groupLabel="Audience Lounge"
       homeUrl="/dashboard/audience"
       nav={AUDIENCE_NAV}
-      eyebrow="Reviews"
-      title="What did you think?"
+      eyebrow="Voice"
+      title="My reviews"
+      description={items.length ? `Average ${avg} ★ · ${items.length} review${items.length === 1 ? "" : "s"}` : "You haven't reviewed anything yet."}
     >
-      <Panel title="Shows to review">
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {toReview.map((t) => (
-            <div key={t.id} className="flex items-center gap-3 rounded-2xl border border-border/60 bg-card p-4">
-              <img src={t.poster} alt="" className="h-14 w-14 rounded-lg object-cover" />
-              <div className="min-w-0 flex-1">
-                <div className="truncate font-medium text-foreground">{t.show}</div>
-                <div className="text-xs text-muted-foreground">{t.date}</div>
-              </div>
-              <Button size="sm" className="rounded-full bg-brand text-brand-foreground hover:bg-brand/90">Write</Button>
-            </div>
-          ))}
+      {loading ? (
+        <div className="space-y-3">{[0,1].map((i) => <div key={i} className="h-24 animate-pulse rounded-xl border border-border/60 bg-muted/30" />)}</div>
+      ) : items.length === 0 ? (
+        <div className="rounded-3xl border border-dashed border-border/60 p-16 text-center">
+          <MessageSquare className="mx-auto h-10 w-10 text-muted-foreground" />
+          <div className="font-display mt-3 text-xl text-foreground">Nothing yet</div>
+          <p className="mt-2 text-sm text-muted-foreground">Reviews you post from a show or group page appear here.</p>
         </div>
-      </Panel>
-
-      <Panel title="Your published reviews">
-        <ul className="space-y-4">
-          {REVIEWS.map((r) => (
-            <li key={r.id} className="rounded-2xl border border-border/60 bg-card p-5">
+      ) : (
+        <ul className="grid gap-3 md:grid-cols-2">
+          {items.map((r) => (
+            <li key={r.id} className="rounded-2xl border border-border/60 bg-card p-4">
               <div className="flex items-center justify-between">
-                <div className="font-display text-lg text-foreground">{r.show}</div>
-                <div className="flex">
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <Star key={i} className={`h-4 w-4 ${i < r.rating ? "fill-accent text-accent" : "text-muted-foreground/30"}`} />
+                <div className="flex items-center gap-1">
+                  {[1,2,3,4,5].map((n) => (
+                    <Star key={n} className={`h-4 w-4 ${n <= r.rating ? "fill-accent text-accent" : "text-muted-foreground/40"}`} />
                   ))}
                 </div>
+                <span className="rounded-full bg-muted px-2 py-0.5 text-[10px] uppercase tracking-wider text-muted-foreground">{r.target_type}</span>
               </div>
-              <p className="mt-2 text-sm text-muted-foreground">{r.text}</p>
+              {r.comment && <p className="mt-2 text-sm text-foreground">{r.comment}</p>}
+              <div className="mt-2 text-[11px] text-muted-foreground">{new Date(r.created_at).toLocaleDateString()}</div>
             </li>
           ))}
         </ul>
-      </Panel>
+      )}
     </PortalLayout>
   );
 }
