@@ -282,7 +282,7 @@ const seed: Omit<Group, "cover" | "members" | "gallery">[] = [
 
 export const GROUPS: Group[] = seed.map((g, i) => ({
   ...g,
-  cover: covers[i % covers.length],
+  cover: COVER_OVERRIDES[g.slug] ?? covers[i % covers.length],
   gallery: covers.slice(0, 6),
   members: Array.from({ length: 6 }).map((_, j) => ({
     name: ["Ayesha Karim", "Rifat Chowdhury", "Sabina Yasmin", "Tanvir Alam", "Nusrat Jahan", "Imran Hossain"][j],
