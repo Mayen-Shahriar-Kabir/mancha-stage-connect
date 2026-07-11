@@ -45,6 +45,7 @@ import { Route as AuthenticatedDashboardGroupLearningRouteImport } from './route
 import { Route as AuthenticatedDashboardGroupFundingRouteImport } from './routes/_authenticated/dashboard.group.funding'
 import { Route as AuthenticatedDashboardGroupCommunityRouteImport } from './routes/_authenticated/dashboard.group.community'
 import { Route as AuthenticatedDashboardGroupAnalyticsRouteImport } from './routes/_authenticated/dashboard.group.analytics'
+import { Route as AuthenticatedDashboardArtistProductionsRouteImport } from './routes/_authenticated/dashboard.artist.productions'
 import { Route as AuthenticatedDashboardArtistPortfolioRouteImport } from './routes/_authenticated/dashboard.artist.portfolio'
 import { Route as AuthenticatedDashboardArtistInvitationsRouteImport } from './routes/_authenticated/dashboard.artist.invitations'
 import { Route as AuthenticatedDashboardArtistGroupsRouteImport } from './routes/_authenticated/dashboard.artist.groups'
@@ -252,6 +253,12 @@ const AuthenticatedDashboardGroupAnalyticsRoute =
     path: '/analytics',
     getParentRoute: () => AuthenticatedDashboardGroupRoute,
   } as any)
+const AuthenticatedDashboardArtistProductionsRoute =
+  AuthenticatedDashboardArtistProductionsRouteImport.update({
+    id: '/productions',
+    path: '/productions',
+    getParentRoute: () => AuthenticatedDashboardArtistRoute,
+  } as any)
 const AuthenticatedDashboardArtistPortfolioRoute =
   AuthenticatedDashboardArtistPortfolioRouteImport.update({
     id: '/portfolio',
@@ -362,6 +369,7 @@ export interface FileRoutesByFullPath {
   '/dashboard/artist/groups': typeof AuthenticatedDashboardArtistGroupsRoute
   '/dashboard/artist/invitations': typeof AuthenticatedDashboardArtistInvitationsRoute
   '/dashboard/artist/portfolio': typeof AuthenticatedDashboardArtistPortfolioRoute
+  '/dashboard/artist/productions': typeof AuthenticatedDashboardArtistProductionsRoute
   '/dashboard/group/analytics': typeof AuthenticatedDashboardGroupAnalyticsRoute
   '/dashboard/group/community': typeof AuthenticatedDashboardGroupCommunityRoute
   '/dashboard/group/funding': typeof AuthenticatedDashboardGroupFundingRoute
@@ -407,6 +415,7 @@ export interface FileRoutesByTo {
   '/dashboard/artist/groups': typeof AuthenticatedDashboardArtistGroupsRoute
   '/dashboard/artist/invitations': typeof AuthenticatedDashboardArtistInvitationsRoute
   '/dashboard/artist/portfolio': typeof AuthenticatedDashboardArtistPortfolioRoute
+  '/dashboard/artist/productions': typeof AuthenticatedDashboardArtistProductionsRoute
   '/dashboard/group/analytics': typeof AuthenticatedDashboardGroupAnalyticsRoute
   '/dashboard/group/community': typeof AuthenticatedDashboardGroupCommunityRoute
   '/dashboard/group/funding': typeof AuthenticatedDashboardGroupFundingRoute
@@ -458,6 +467,7 @@ export interface FileRoutesById {
   '/_authenticated/dashboard/artist/groups': typeof AuthenticatedDashboardArtistGroupsRoute
   '/_authenticated/dashboard/artist/invitations': typeof AuthenticatedDashboardArtistInvitationsRoute
   '/_authenticated/dashboard/artist/portfolio': typeof AuthenticatedDashboardArtistPortfolioRoute
+  '/_authenticated/dashboard/artist/productions': typeof AuthenticatedDashboardArtistProductionsRoute
   '/_authenticated/dashboard/group/analytics': typeof AuthenticatedDashboardGroupAnalyticsRoute
   '/_authenticated/dashboard/group/community': typeof AuthenticatedDashboardGroupCommunityRoute
   '/_authenticated/dashboard/group/funding': typeof AuthenticatedDashboardGroupFundingRoute
@@ -509,6 +519,7 @@ export interface FileRouteTypes {
     | '/dashboard/artist/groups'
     | '/dashboard/artist/invitations'
     | '/dashboard/artist/portfolio'
+    | '/dashboard/artist/productions'
     | '/dashboard/group/analytics'
     | '/dashboard/group/community'
     | '/dashboard/group/funding'
@@ -554,6 +565,7 @@ export interface FileRouteTypes {
     | '/dashboard/artist/groups'
     | '/dashboard/artist/invitations'
     | '/dashboard/artist/portfolio'
+    | '/dashboard/artist/productions'
     | '/dashboard/group/analytics'
     | '/dashboard/group/community'
     | '/dashboard/group/funding'
@@ -604,6 +616,7 @@ export interface FileRouteTypes {
     | '/_authenticated/dashboard/artist/groups'
     | '/_authenticated/dashboard/artist/invitations'
     | '/_authenticated/dashboard/artist/portfolio'
+    | '/_authenticated/dashboard/artist/productions'
     | '/_authenticated/dashboard/group/analytics'
     | '/_authenticated/dashboard/group/community'
     | '/_authenticated/dashboard/group/funding'
@@ -888,6 +901,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardGroupAnalyticsRouteImport
       parentRoute: typeof AuthenticatedDashboardGroupRoute
     }
+    '/_authenticated/dashboard/artist/productions': {
+      id: '/_authenticated/dashboard/artist/productions'
+      path: '/productions'
+      fullPath: '/dashboard/artist/productions'
+      preLoaderRoute: typeof AuthenticatedDashboardArtistProductionsRouteImport
+      parentRoute: typeof AuthenticatedDashboardArtistRoute
+    }
     '/_authenticated/dashboard/artist/portfolio': {
       id: '/_authenticated/dashboard/artist/portfolio'
       path: '/portfolio'
@@ -1019,6 +1039,7 @@ interface AuthenticatedDashboardArtistRouteChildren {
   AuthenticatedDashboardArtistGroupsRoute: typeof AuthenticatedDashboardArtistGroupsRoute
   AuthenticatedDashboardArtistInvitationsRoute: typeof AuthenticatedDashboardArtistInvitationsRoute
   AuthenticatedDashboardArtistPortfolioRoute: typeof AuthenticatedDashboardArtistPortfolioRoute
+  AuthenticatedDashboardArtistProductionsRoute: typeof AuthenticatedDashboardArtistProductionsRoute
   AuthenticatedDashboardArtistIndexRoute: typeof AuthenticatedDashboardArtistIndexRoute
 }
 
@@ -1032,6 +1053,8 @@ const AuthenticatedDashboardArtistRouteChildren: AuthenticatedDashboardArtistRou
       AuthenticatedDashboardArtistInvitationsRoute,
     AuthenticatedDashboardArtistPortfolioRoute:
       AuthenticatedDashboardArtistPortfolioRoute,
+    AuthenticatedDashboardArtistProductionsRoute:
+      AuthenticatedDashboardArtistProductionsRoute,
     AuthenticatedDashboardArtistIndexRoute:
       AuthenticatedDashboardArtistIndexRoute,
   }
