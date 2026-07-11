@@ -36,6 +36,15 @@ import { Route as AuthenticatedDashboardGroupRouteImport } from './routes/_authe
 import { Route as AuthenticatedDashboardAudienceRouteImport } from './routes/_authenticated/dashboard.audience'
 import { Route as AuthenticatedDashboardArtistRouteImport } from './routes/_authenticated/dashboard.artist'
 import { Route as AuthenticatedDashboardAdminRouteImport } from './routes/_authenticated/dashboard.admin'
+import { Route as AuthenticatedDashboardAdminIndexRouteImport } from './routes/_authenticated/dashboard.admin.index'
+import { Route as AuthenticatedDashboardAdminUsersRouteImport } from './routes/_authenticated/dashboard.admin.users'
+import { Route as AuthenticatedDashboardAdminSubscriptionsRouteImport } from './routes/_authenticated/dashboard.admin.subscriptions'
+import { Route as AuthenticatedDashboardAdminSettingsRouteImport } from './routes/_authenticated/dashboard.admin.settings'
+import { Route as AuthenticatedDashboardAdminReviewsRouteImport } from './routes/_authenticated/dashboard.admin.reviews'
+import { Route as AuthenticatedDashboardAdminReportsRouteImport } from './routes/_authenticated/dashboard.admin.reports'
+import { Route as AuthenticatedDashboardAdminProductionsRouteImport } from './routes/_authenticated/dashboard.admin.productions'
+import { Route as AuthenticatedDashboardAdminFundingRouteImport } from './routes/_authenticated/dashboard.admin.funding'
+import { Route as AuthenticatedDashboardAdminApprovalsRouteImport } from './routes/_authenticated/dashboard.admin.approvals'
 
 const SuspendedRoute = SuspendedRouteImport.update({
   id: '/suspended',
@@ -177,6 +186,60 @@ const AuthenticatedDashboardAdminRoute =
     path: '/dashboard/admin',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedDashboardAdminIndexRoute =
+  AuthenticatedDashboardAdminIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => AuthenticatedDashboardAdminRoute,
+  } as any)
+const AuthenticatedDashboardAdminUsersRoute =
+  AuthenticatedDashboardAdminUsersRouteImport.update({
+    id: '/users',
+    path: '/users',
+    getParentRoute: () => AuthenticatedDashboardAdminRoute,
+  } as any)
+const AuthenticatedDashboardAdminSubscriptionsRoute =
+  AuthenticatedDashboardAdminSubscriptionsRouteImport.update({
+    id: '/subscriptions',
+    path: '/subscriptions',
+    getParentRoute: () => AuthenticatedDashboardAdminRoute,
+  } as any)
+const AuthenticatedDashboardAdminSettingsRoute =
+  AuthenticatedDashboardAdminSettingsRouteImport.update({
+    id: '/settings',
+    path: '/settings',
+    getParentRoute: () => AuthenticatedDashboardAdminRoute,
+  } as any)
+const AuthenticatedDashboardAdminReviewsRoute =
+  AuthenticatedDashboardAdminReviewsRouteImport.update({
+    id: '/reviews',
+    path: '/reviews',
+    getParentRoute: () => AuthenticatedDashboardAdminRoute,
+  } as any)
+const AuthenticatedDashboardAdminReportsRoute =
+  AuthenticatedDashboardAdminReportsRouteImport.update({
+    id: '/reports',
+    path: '/reports',
+    getParentRoute: () => AuthenticatedDashboardAdminRoute,
+  } as any)
+const AuthenticatedDashboardAdminProductionsRoute =
+  AuthenticatedDashboardAdminProductionsRouteImport.update({
+    id: '/productions',
+    path: '/productions',
+    getParentRoute: () => AuthenticatedDashboardAdminRoute,
+  } as any)
+const AuthenticatedDashboardAdminFundingRoute =
+  AuthenticatedDashboardAdminFundingRouteImport.update({
+    id: '/funding',
+    path: '/funding',
+    getParentRoute: () => AuthenticatedDashboardAdminRoute,
+  } as any)
+const AuthenticatedDashboardAdminApprovalsRoute =
+  AuthenticatedDashboardAdminApprovalsRouteImport.update({
+    id: '/approvals',
+    path: '/approvals',
+    getParentRoute: () => AuthenticatedDashboardAdminRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -196,7 +259,7 @@ export interface FileRoutesByFullPath {
   '/explore/groups': typeof ExploreGroupsRouteWithChildren
   '/explore/shows': typeof ExploreShowsRouteWithChildren
   '/explore/': typeof ExploreIndexRoute
-  '/dashboard/admin': typeof AuthenticatedDashboardAdminRoute
+  '/dashboard/admin': typeof AuthenticatedDashboardAdminRouteWithChildren
   '/dashboard/artist': typeof AuthenticatedDashboardArtistRoute
   '/dashboard/audience': typeof AuthenticatedDashboardAudienceRoute
   '/dashboard/group': typeof AuthenticatedDashboardGroupRoute
@@ -205,6 +268,15 @@ export interface FileRoutesByFullPath {
   '/explore/groups/$slug': typeof ExploreGroupsSlugRoute
   '/explore/shows/$slug': typeof ExploreShowsSlugRoute
   '/dashboard/': typeof AuthenticatedDashboardIndexRoute
+  '/dashboard/admin/approvals': typeof AuthenticatedDashboardAdminApprovalsRoute
+  '/dashboard/admin/funding': typeof AuthenticatedDashboardAdminFundingRoute
+  '/dashboard/admin/productions': typeof AuthenticatedDashboardAdminProductionsRoute
+  '/dashboard/admin/reports': typeof AuthenticatedDashboardAdminReportsRoute
+  '/dashboard/admin/reviews': typeof AuthenticatedDashboardAdminReviewsRoute
+  '/dashboard/admin/settings': typeof AuthenticatedDashboardAdminSettingsRoute
+  '/dashboard/admin/subscriptions': typeof AuthenticatedDashboardAdminSubscriptionsRoute
+  '/dashboard/admin/users': typeof AuthenticatedDashboardAdminUsersRoute
+  '/dashboard/admin/': typeof AuthenticatedDashboardAdminIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -223,7 +295,6 @@ export interface FileRoutesByTo {
   '/explore/groups': typeof ExploreGroupsRouteWithChildren
   '/explore/shows': typeof ExploreShowsRouteWithChildren
   '/explore': typeof ExploreIndexRoute
-  '/dashboard/admin': typeof AuthenticatedDashboardAdminRoute
   '/dashboard/artist': typeof AuthenticatedDashboardArtistRoute
   '/dashboard/audience': typeof AuthenticatedDashboardAudienceRoute
   '/dashboard/group': typeof AuthenticatedDashboardGroupRoute
@@ -232,6 +303,15 @@ export interface FileRoutesByTo {
   '/explore/groups/$slug': typeof ExploreGroupsSlugRoute
   '/explore/shows/$slug': typeof ExploreShowsSlugRoute
   '/dashboard': typeof AuthenticatedDashboardIndexRoute
+  '/dashboard/admin/approvals': typeof AuthenticatedDashboardAdminApprovalsRoute
+  '/dashboard/admin/funding': typeof AuthenticatedDashboardAdminFundingRoute
+  '/dashboard/admin/productions': typeof AuthenticatedDashboardAdminProductionsRoute
+  '/dashboard/admin/reports': typeof AuthenticatedDashboardAdminReportsRoute
+  '/dashboard/admin/reviews': typeof AuthenticatedDashboardAdminReviewsRoute
+  '/dashboard/admin/settings': typeof AuthenticatedDashboardAdminSettingsRoute
+  '/dashboard/admin/subscriptions': typeof AuthenticatedDashboardAdminSubscriptionsRoute
+  '/dashboard/admin/users': typeof AuthenticatedDashboardAdminUsersRoute
+  '/dashboard/admin': typeof AuthenticatedDashboardAdminIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -253,7 +333,7 @@ export interface FileRoutesById {
   '/explore/groups': typeof ExploreGroupsRouteWithChildren
   '/explore/shows': typeof ExploreShowsRouteWithChildren
   '/explore/': typeof ExploreIndexRoute
-  '/_authenticated/dashboard/admin': typeof AuthenticatedDashboardAdminRoute
+  '/_authenticated/dashboard/admin': typeof AuthenticatedDashboardAdminRouteWithChildren
   '/_authenticated/dashboard/artist': typeof AuthenticatedDashboardArtistRoute
   '/_authenticated/dashboard/audience': typeof AuthenticatedDashboardAudienceRoute
   '/_authenticated/dashboard/group': typeof AuthenticatedDashboardGroupRoute
@@ -262,6 +342,15 @@ export interface FileRoutesById {
   '/explore/groups/$slug': typeof ExploreGroupsSlugRoute
   '/explore/shows/$slug': typeof ExploreShowsSlugRoute
   '/_authenticated/dashboard/': typeof AuthenticatedDashboardIndexRoute
+  '/_authenticated/dashboard/admin/approvals': typeof AuthenticatedDashboardAdminApprovalsRoute
+  '/_authenticated/dashboard/admin/funding': typeof AuthenticatedDashboardAdminFundingRoute
+  '/_authenticated/dashboard/admin/productions': typeof AuthenticatedDashboardAdminProductionsRoute
+  '/_authenticated/dashboard/admin/reports': typeof AuthenticatedDashboardAdminReportsRoute
+  '/_authenticated/dashboard/admin/reviews': typeof AuthenticatedDashboardAdminReviewsRoute
+  '/_authenticated/dashboard/admin/settings': typeof AuthenticatedDashboardAdminSettingsRoute
+  '/_authenticated/dashboard/admin/subscriptions': typeof AuthenticatedDashboardAdminSubscriptionsRoute
+  '/_authenticated/dashboard/admin/users': typeof AuthenticatedDashboardAdminUsersRoute
+  '/_authenticated/dashboard/admin/': typeof AuthenticatedDashboardAdminIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -292,6 +381,15 @@ export interface FileRouteTypes {
     | '/explore/groups/$slug'
     | '/explore/shows/$slug'
     | '/dashboard/'
+    | '/dashboard/admin/approvals'
+    | '/dashboard/admin/funding'
+    | '/dashboard/admin/productions'
+    | '/dashboard/admin/reports'
+    | '/dashboard/admin/reviews'
+    | '/dashboard/admin/settings'
+    | '/dashboard/admin/subscriptions'
+    | '/dashboard/admin/users'
+    | '/dashboard/admin/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -310,7 +408,6 @@ export interface FileRouteTypes {
     | '/explore/groups'
     | '/explore/shows'
     | '/explore'
-    | '/dashboard/admin'
     | '/dashboard/artist'
     | '/dashboard/audience'
     | '/dashboard/group'
@@ -319,6 +416,15 @@ export interface FileRouteTypes {
     | '/explore/groups/$slug'
     | '/explore/shows/$slug'
     | '/dashboard'
+    | '/dashboard/admin/approvals'
+    | '/dashboard/admin/funding'
+    | '/dashboard/admin/productions'
+    | '/dashboard/admin/reports'
+    | '/dashboard/admin/reviews'
+    | '/dashboard/admin/settings'
+    | '/dashboard/admin/subscriptions'
+    | '/dashboard/admin/users'
+    | '/dashboard/admin'
   id:
     | '__root__'
     | '/'
@@ -348,6 +454,15 @@ export interface FileRouteTypes {
     | '/explore/groups/$slug'
     | '/explore/shows/$slug'
     | '/_authenticated/dashboard/'
+    | '/_authenticated/dashboard/admin/approvals'
+    | '/_authenticated/dashboard/admin/funding'
+    | '/_authenticated/dashboard/admin/productions'
+    | '/_authenticated/dashboard/admin/reports'
+    | '/_authenticated/dashboard/admin/reviews'
+    | '/_authenticated/dashboard/admin/settings'
+    | '/_authenticated/dashboard/admin/subscriptions'
+    | '/_authenticated/dashboard/admin/users'
+    | '/_authenticated/dashboard/admin/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -558,11 +673,113 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardAdminRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/dashboard/admin/': {
+      id: '/_authenticated/dashboard/admin/'
+      path: '/'
+      fullPath: '/dashboard/admin/'
+      preLoaderRoute: typeof AuthenticatedDashboardAdminIndexRouteImport
+      parentRoute: typeof AuthenticatedDashboardAdminRoute
+    }
+    '/_authenticated/dashboard/admin/users': {
+      id: '/_authenticated/dashboard/admin/users'
+      path: '/users'
+      fullPath: '/dashboard/admin/users'
+      preLoaderRoute: typeof AuthenticatedDashboardAdminUsersRouteImport
+      parentRoute: typeof AuthenticatedDashboardAdminRoute
+    }
+    '/_authenticated/dashboard/admin/subscriptions': {
+      id: '/_authenticated/dashboard/admin/subscriptions'
+      path: '/subscriptions'
+      fullPath: '/dashboard/admin/subscriptions'
+      preLoaderRoute: typeof AuthenticatedDashboardAdminSubscriptionsRouteImport
+      parentRoute: typeof AuthenticatedDashboardAdminRoute
+    }
+    '/_authenticated/dashboard/admin/settings': {
+      id: '/_authenticated/dashboard/admin/settings'
+      path: '/settings'
+      fullPath: '/dashboard/admin/settings'
+      preLoaderRoute: typeof AuthenticatedDashboardAdminSettingsRouteImport
+      parentRoute: typeof AuthenticatedDashboardAdminRoute
+    }
+    '/_authenticated/dashboard/admin/reviews': {
+      id: '/_authenticated/dashboard/admin/reviews'
+      path: '/reviews'
+      fullPath: '/dashboard/admin/reviews'
+      preLoaderRoute: typeof AuthenticatedDashboardAdminReviewsRouteImport
+      parentRoute: typeof AuthenticatedDashboardAdminRoute
+    }
+    '/_authenticated/dashboard/admin/reports': {
+      id: '/_authenticated/dashboard/admin/reports'
+      path: '/reports'
+      fullPath: '/dashboard/admin/reports'
+      preLoaderRoute: typeof AuthenticatedDashboardAdminReportsRouteImport
+      parentRoute: typeof AuthenticatedDashboardAdminRoute
+    }
+    '/_authenticated/dashboard/admin/productions': {
+      id: '/_authenticated/dashboard/admin/productions'
+      path: '/productions'
+      fullPath: '/dashboard/admin/productions'
+      preLoaderRoute: typeof AuthenticatedDashboardAdminProductionsRouteImport
+      parentRoute: typeof AuthenticatedDashboardAdminRoute
+    }
+    '/_authenticated/dashboard/admin/funding': {
+      id: '/_authenticated/dashboard/admin/funding'
+      path: '/funding'
+      fullPath: '/dashboard/admin/funding'
+      preLoaderRoute: typeof AuthenticatedDashboardAdminFundingRouteImport
+      parentRoute: typeof AuthenticatedDashboardAdminRoute
+    }
+    '/_authenticated/dashboard/admin/approvals': {
+      id: '/_authenticated/dashboard/admin/approvals'
+      path: '/approvals'
+      fullPath: '/dashboard/admin/approvals'
+      preLoaderRoute: typeof AuthenticatedDashboardAdminApprovalsRouteImport
+      parentRoute: typeof AuthenticatedDashboardAdminRoute
+    }
   }
 }
 
+interface AuthenticatedDashboardAdminRouteChildren {
+  AuthenticatedDashboardAdminApprovalsRoute: typeof AuthenticatedDashboardAdminApprovalsRoute
+  AuthenticatedDashboardAdminFundingRoute: typeof AuthenticatedDashboardAdminFundingRoute
+  AuthenticatedDashboardAdminProductionsRoute: typeof AuthenticatedDashboardAdminProductionsRoute
+  AuthenticatedDashboardAdminReportsRoute: typeof AuthenticatedDashboardAdminReportsRoute
+  AuthenticatedDashboardAdminReviewsRoute: typeof AuthenticatedDashboardAdminReviewsRoute
+  AuthenticatedDashboardAdminSettingsRoute: typeof AuthenticatedDashboardAdminSettingsRoute
+  AuthenticatedDashboardAdminSubscriptionsRoute: typeof AuthenticatedDashboardAdminSubscriptionsRoute
+  AuthenticatedDashboardAdminUsersRoute: typeof AuthenticatedDashboardAdminUsersRoute
+  AuthenticatedDashboardAdminIndexRoute: typeof AuthenticatedDashboardAdminIndexRoute
+}
+
+const AuthenticatedDashboardAdminRouteChildren: AuthenticatedDashboardAdminRouteChildren =
+  {
+    AuthenticatedDashboardAdminApprovalsRoute:
+      AuthenticatedDashboardAdminApprovalsRoute,
+    AuthenticatedDashboardAdminFundingRoute:
+      AuthenticatedDashboardAdminFundingRoute,
+    AuthenticatedDashboardAdminProductionsRoute:
+      AuthenticatedDashboardAdminProductionsRoute,
+    AuthenticatedDashboardAdminReportsRoute:
+      AuthenticatedDashboardAdminReportsRoute,
+    AuthenticatedDashboardAdminReviewsRoute:
+      AuthenticatedDashboardAdminReviewsRoute,
+    AuthenticatedDashboardAdminSettingsRoute:
+      AuthenticatedDashboardAdminSettingsRoute,
+    AuthenticatedDashboardAdminSubscriptionsRoute:
+      AuthenticatedDashboardAdminSubscriptionsRoute,
+    AuthenticatedDashboardAdminUsersRoute:
+      AuthenticatedDashboardAdminUsersRoute,
+    AuthenticatedDashboardAdminIndexRoute:
+      AuthenticatedDashboardAdminIndexRoute,
+  }
+
+const AuthenticatedDashboardAdminRouteWithChildren =
+  AuthenticatedDashboardAdminRoute._addFileChildren(
+    AuthenticatedDashboardAdminRouteChildren,
+  )
+
 interface AuthenticatedRouteRouteChildren {
-  AuthenticatedDashboardAdminRoute: typeof AuthenticatedDashboardAdminRoute
+  AuthenticatedDashboardAdminRoute: typeof AuthenticatedDashboardAdminRouteWithChildren
   AuthenticatedDashboardArtistRoute: typeof AuthenticatedDashboardArtistRoute
   AuthenticatedDashboardAudienceRoute: typeof AuthenticatedDashboardAudienceRoute
   AuthenticatedDashboardGroupRoute: typeof AuthenticatedDashboardGroupRoute
@@ -571,7 +788,8 @@ interface AuthenticatedRouteRouteChildren {
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
-  AuthenticatedDashboardAdminRoute: AuthenticatedDashboardAdminRoute,
+  AuthenticatedDashboardAdminRoute:
+    AuthenticatedDashboardAdminRouteWithChildren,
   AuthenticatedDashboardArtistRoute: AuthenticatedDashboardArtistRoute,
   AuthenticatedDashboardAudienceRoute: AuthenticatedDashboardAudienceRoute,
   AuthenticatedDashboardGroupRoute: AuthenticatedDashboardGroupRoute,
