@@ -32,6 +32,7 @@ import { Route as ExploreShowsSlugRouteImport } from './routes/explore.shows.$sl
 import { Route as ExploreGroupsSlugRouteImport } from './routes/explore.groups.$slug'
 import { Route as ExploreArtistsSlugRouteImport } from './routes/explore.artists.$slug'
 import { Route as AuthenticatedDashboardGroupRouteImport } from './routes/_authenticated/dashboard.group'
+import { Route as AuthenticatedDashboardArtistRouteImport } from './routes/_authenticated/dashboard.artist'
 import { Route as AuthenticatedDashboardAdminRouteImport } from './routes/_authenticated/dashboard.admin'
 import { Route as AuthenticatedDashboardGroupIndexRouteImport } from './routes/_authenticated/dashboard.group.index'
 import { Route as AuthenticatedDashboardAdminIndexRouteImport } from './routes/_authenticated/dashboard.admin.index'
@@ -168,6 +169,12 @@ const AuthenticatedDashboardGroupRoute =
     path: '/dashboard/group',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedDashboardArtistRoute =
+  AuthenticatedDashboardArtistRouteImport.update({
+    id: '/dashboard/artist',
+    path: '/dashboard/artist',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedDashboardAdminRoute =
   AuthenticatedDashboardAdminRouteImport.update({
     id: '/dashboard/admin',
@@ -302,6 +309,7 @@ export interface FileRoutesByFullPath {
   '/explore/shows': typeof ExploreShowsRouteWithChildren
   '/explore/': typeof ExploreIndexRoute
   '/dashboard/admin': typeof AuthenticatedDashboardAdminRouteWithChildren
+  '/dashboard/artist': typeof AuthenticatedDashboardArtistRoute
   '/dashboard/group': typeof AuthenticatedDashboardGroupRouteWithChildren
   '/explore/artists/$slug': typeof ExploreArtistsSlugRoute
   '/explore/groups/$slug': typeof ExploreGroupsSlugRoute
@@ -343,6 +351,7 @@ export interface FileRoutesByTo {
   '/explore/groups': typeof ExploreGroupsRouteWithChildren
   '/explore/shows': typeof ExploreShowsRouteWithChildren
   '/explore': typeof ExploreIndexRoute
+  '/dashboard/artist': typeof AuthenticatedDashboardArtistRoute
   '/explore/artists/$slug': typeof ExploreArtistsSlugRoute
   '/explore/groups/$slug': typeof ExploreGroupsSlugRoute
   '/explore/shows/$slug': typeof ExploreShowsSlugRoute
@@ -387,6 +396,7 @@ export interface FileRoutesById {
   '/explore/shows': typeof ExploreShowsRouteWithChildren
   '/explore/': typeof ExploreIndexRoute
   '/_authenticated/dashboard/admin': typeof AuthenticatedDashboardAdminRouteWithChildren
+  '/_authenticated/dashboard/artist': typeof AuthenticatedDashboardArtistRoute
   '/_authenticated/dashboard/group': typeof AuthenticatedDashboardGroupRouteWithChildren
   '/explore/artists/$slug': typeof ExploreArtistsSlugRoute
   '/explore/groups/$slug': typeof ExploreGroupsSlugRoute
@@ -432,6 +442,7 @@ export interface FileRouteTypes {
     | '/explore/shows'
     | '/explore/'
     | '/dashboard/admin'
+    | '/dashboard/artist'
     | '/dashboard/group'
     | '/explore/artists/$slug'
     | '/explore/groups/$slug'
@@ -473,6 +484,7 @@ export interface FileRouteTypes {
     | '/explore/groups'
     | '/explore/shows'
     | '/explore'
+    | '/dashboard/artist'
     | '/explore/artists/$slug'
     | '/explore/groups/$slug'
     | '/explore/shows/$slug'
@@ -516,6 +528,7 @@ export interface FileRouteTypes {
     | '/explore/shows'
     | '/explore/'
     | '/_authenticated/dashboard/admin'
+    | '/_authenticated/dashboard/artist'
     | '/_authenticated/dashboard/group'
     | '/explore/artists/$slug'
     | '/explore/groups/$slug'
@@ -719,6 +732,13 @@ declare module '@tanstack/react-router' {
       path: '/dashboard/group'
       fullPath: '/dashboard/group'
       preLoaderRoute: typeof AuthenticatedDashboardGroupRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/dashboard/artist': {
+      id: '/_authenticated/dashboard/artist'
+      path: '/dashboard/artist'
+      fullPath: '/dashboard/artist'
+      preLoaderRoute: typeof AuthenticatedDashboardArtistRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/dashboard/admin': {
@@ -937,6 +957,7 @@ const AuthenticatedDashboardGroupRouteWithChildren =
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedDashboardAdminRoute: typeof AuthenticatedDashboardAdminRouteWithChildren
+  AuthenticatedDashboardArtistRoute: typeof AuthenticatedDashboardArtistRoute
   AuthenticatedDashboardGroupRoute: typeof AuthenticatedDashboardGroupRouteWithChildren
   AuthenticatedDashboardIndexRoute: typeof AuthenticatedDashboardIndexRoute
 }
@@ -944,6 +965,7 @@ interface AuthenticatedRouteRouteChildren {
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedDashboardAdminRoute:
     AuthenticatedDashboardAdminRouteWithChildren,
+  AuthenticatedDashboardArtistRoute: AuthenticatedDashboardArtistRoute,
   AuthenticatedDashboardGroupRoute:
     AuthenticatedDashboardGroupRouteWithChildren,
   AuthenticatedDashboardIndexRoute: AuthenticatedDashboardIndexRoute,
