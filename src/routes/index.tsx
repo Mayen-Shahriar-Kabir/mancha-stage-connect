@@ -260,7 +260,7 @@ function Hero() {
               size="lg"
               className="rounded-full bg-gold text-gold-foreground shadow-gold hover:bg-gold/90"
             >
-              <Link to="/shows">
+              <Link to="/explore/shows">
                 Explore Shows <ArrowRight className="ml-1 h-4 w-4" />
               </Link>
             </Button>
@@ -270,7 +270,7 @@ function Hero() {
               variant="outline"
               className="rounded-full border-ivory/30 bg-white/5 text-ivory backdrop-blur hover:bg-white/10 hover:text-ivory"
             >
-              <Link to="/artists">Discover Artists</Link>
+              <Link to="/explore/artists">Discover Artists</Link>
             </Button>
             <Button
               asChild
@@ -348,7 +348,7 @@ function FeaturedShows() {
         eyebrow="Now on stage"
         title="Featured shows this season"
         desc="Handpicked productions from across the country — from folk revivals to bold new writing."
-        cta={{ to: "/shows", label: "See all shows" }}
+        cta={{ to: "/explore/shows", label: "See all shows" }}
       />
 
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -403,7 +403,7 @@ function FeaturedShows() {
                 size="sm"
                 className="mt-2 rounded-full border-border hover:border-brand hover:bg-brand hover:text-brand-foreground"
               >
-                <Link to="/shows">
+                <Link to="/explore/shows">
                   <Ticket className="mr-1 h-3.5 w-3.5" /> View Details
                 </Link>
               </Button>
@@ -423,7 +423,7 @@ function FeaturedGroups() {
           eyebrow="The troupes"
           title="Featured theatre groups"
           desc="From heritage institutions to bold new collectives shaping the next chapter of Bangla theatre."
-          cta={{ to: "/groups", label: "Browse all groups" }}
+          cta={{ to: "/explore/groups", label: "Browse all groups" }}
         />
 
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -471,7 +471,7 @@ function FeaturedGroups() {
                 size="sm"
                 className="mt-5 justify-start px-0 text-brand hover:bg-transparent hover:text-brand/80"
               >
-                <Link to="/groups">
+                <Link to="/explore/groups">
                   Visit Profile <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </Link>
               </Button>
@@ -490,7 +490,7 @@ function FeaturedArtists() {
         eyebrow="The talent"
         title="Featured artists"
         desc="Verified performers, directors and playwrights building tomorrow's canon."
-        cta={{ to: "/artists", label: "Discover all artists" }}
+        cta={{ to: "/explore/artists", label: "Discover all artists" }}
       />
 
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -531,7 +531,7 @@ function FeaturedArtists() {
                   size="sm"
                   className="mt-5 w-full rounded-full bg-ivory text-charcoal hover:bg-gold hover:text-gold-foreground"
                 >
-                  <Link to="/artists">View Portfolio</Link>
+                  <Link to="/explore/artists">View Portfolio</Link>
                 </Button>
               </div>
             </div>

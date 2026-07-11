@@ -2,11 +2,11 @@ import { Link } from "@tanstack/react-router";
 
 const COLS = [
   {
-    title: "Discover",
+    title: "Explore",
     links: [
-      { to: "/shows", label: "Shows" },
-      { to: "/artists", label: "Artists" },
-      { to: "/groups", label: "Groups" },
+      { to: "/explore/shows", label: "Shows" },
+      { to: "/explore/artists", label: "Artists" },
+      { to: "/explore/groups", label: "Theatre Groups" },
     ],
   },
   {
