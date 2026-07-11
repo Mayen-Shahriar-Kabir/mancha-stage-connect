@@ -23,7 +23,8 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 
-const NAV = [
+type NavItem = { title: string; url: string; icon: typeof LayoutDashboard; exact?: boolean };
+const NAV: NavItem[] = [
   { title: "Dashboard", url: "/dashboard/group", icon: LayoutDashboard, exact: true },
   { title: "Members", url: "/dashboard/group/members", icon: Users },
   { title: "Productions", url: "/dashboard/group/productions", icon: Clapperboard },
@@ -33,7 +34,7 @@ const NAV = [
   { title: "Opportunities", url: "/dashboard/group/opportunities", icon: Briefcase },
   { title: "Analytics", url: "/dashboard/group/analytics", icon: BarChart3 },
   { title: "Settings", url: "/dashboard/group/settings", icon: Settings },
-] as const;
+];
 
 export function GroupSidebar() {
   const { state } = useSidebar();
