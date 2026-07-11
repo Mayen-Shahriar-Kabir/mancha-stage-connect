@@ -31,6 +31,9 @@ import { Route as ExploreShowsRouteImport } from './routes/explore.shows'
 import { Route as ExploreGroupsRouteImport } from './routes/explore.groups'
 import { Route as ExploreArtistsRouteImport } from './routes/explore.artists'
 import { Route as AuthenticatedDashboardIndexRouteImport } from './routes/_authenticated/dashboard.index'
+import { Route as ExploreShowsSlugRouteImport } from './routes/explore.shows.$slug'
+import { Route as ExploreGroupsSlugRouteImport } from './routes/explore.groups.$slug'
+import { Route as ExploreArtistsSlugRouteImport } from './routes/explore.artists.$slug'
 import { Route as AuthenticatedDashboardOrganizationRouteImport } from './routes/_authenticated/dashboard.organization'
 import { Route as AuthenticatedDashboardGroupRouteImport } from './routes/_authenticated/dashboard.group'
 import { Route as AuthenticatedDashboardAudienceRouteImport } from './routes/_authenticated/dashboard.audience'
@@ -147,6 +150,21 @@ const AuthenticatedDashboardIndexRoute =
     path: '/dashboard/',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const ExploreShowsSlugRoute = ExploreShowsSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => ExploreShowsRoute,
+} as any)
+const ExploreGroupsSlugRoute = ExploreGroupsSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => ExploreGroupsRoute,
+} as any)
+const ExploreArtistsSlugRoute = ExploreArtistsSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => ExploreArtistsRoute,
+} as any)
 const AuthenticatedDashboardOrganizationRoute =
   AuthenticatedDashboardOrganizationRouteImport.update({
     id: '/dashboard/organization',
@@ -195,15 +213,18 @@ export interface FileRoutesByFullPath {
   '/shows': typeof ShowsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/suspended': typeof SuspendedRoute
-  '/explore/artists': typeof ExploreArtistsRoute
-  '/explore/groups': typeof ExploreGroupsRoute
-  '/explore/shows': typeof ExploreShowsRoute
+  '/explore/artists': typeof ExploreArtistsRouteWithChildren
+  '/explore/groups': typeof ExploreGroupsRouteWithChildren
+  '/explore/shows': typeof ExploreShowsRouteWithChildren
   '/explore/': typeof ExploreIndexRoute
   '/dashboard/admin': typeof AuthenticatedDashboardAdminRoute
   '/dashboard/artist': typeof AuthenticatedDashboardArtistRoute
   '/dashboard/audience': typeof AuthenticatedDashboardAudienceRoute
   '/dashboard/group': typeof AuthenticatedDashboardGroupRoute
   '/dashboard/organization': typeof AuthenticatedDashboardOrganizationRoute
+  '/explore/artists/$slug': typeof ExploreArtistsSlugRoute
+  '/explore/groups/$slug': typeof ExploreGroupsSlugRoute
+  '/explore/shows/$slug': typeof ExploreShowsSlugRoute
   '/dashboard/': typeof AuthenticatedDashboardIndexRoute
 }
 export interface FileRoutesByTo {
@@ -222,15 +243,18 @@ export interface FileRoutesByTo {
   '/shows': typeof ShowsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/suspended': typeof SuspendedRoute
-  '/explore/artists': typeof ExploreArtistsRoute
-  '/explore/groups': typeof ExploreGroupsRoute
-  '/explore/shows': typeof ExploreShowsRoute
+  '/explore/artists': typeof ExploreArtistsRouteWithChildren
+  '/explore/groups': typeof ExploreGroupsRouteWithChildren
+  '/explore/shows': typeof ExploreShowsRouteWithChildren
   '/explore': typeof ExploreIndexRoute
   '/dashboard/admin': typeof AuthenticatedDashboardAdminRoute
   '/dashboard/artist': typeof AuthenticatedDashboardArtistRoute
   '/dashboard/audience': typeof AuthenticatedDashboardAudienceRoute
   '/dashboard/group': typeof AuthenticatedDashboardGroupRoute
   '/dashboard/organization': typeof AuthenticatedDashboardOrganizationRoute
+  '/explore/artists/$slug': typeof ExploreArtistsSlugRoute
+  '/explore/groups/$slug': typeof ExploreGroupsSlugRoute
+  '/explore/shows/$slug': typeof ExploreShowsSlugRoute
   '/dashboard': typeof AuthenticatedDashboardIndexRoute
 }
 export interface FileRoutesById {
@@ -252,15 +276,18 @@ export interface FileRoutesById {
   '/shows': typeof ShowsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/suspended': typeof SuspendedRoute
-  '/explore/artists': typeof ExploreArtistsRoute
-  '/explore/groups': typeof ExploreGroupsRoute
-  '/explore/shows': typeof ExploreShowsRoute
+  '/explore/artists': typeof ExploreArtistsRouteWithChildren
+  '/explore/groups': typeof ExploreGroupsRouteWithChildren
+  '/explore/shows': typeof ExploreShowsRouteWithChildren
   '/explore/': typeof ExploreIndexRoute
   '/_authenticated/dashboard/admin': typeof AuthenticatedDashboardAdminRoute
   '/_authenticated/dashboard/artist': typeof AuthenticatedDashboardArtistRoute
   '/_authenticated/dashboard/audience': typeof AuthenticatedDashboardAudienceRoute
   '/_authenticated/dashboard/group': typeof AuthenticatedDashboardGroupRoute
   '/_authenticated/dashboard/organization': typeof AuthenticatedDashboardOrganizationRoute
+  '/explore/artists/$slug': typeof ExploreArtistsSlugRoute
+  '/explore/groups/$slug': typeof ExploreGroupsSlugRoute
+  '/explore/shows/$slug': typeof ExploreShowsSlugRoute
   '/_authenticated/dashboard/': typeof AuthenticatedDashboardIndexRoute
 }
 export interface FileRouteTypes {
@@ -291,6 +318,9 @@ export interface FileRouteTypes {
     | '/dashboard/audience'
     | '/dashboard/group'
     | '/dashboard/organization'
+    | '/explore/artists/$slug'
+    | '/explore/groups/$slug'
+    | '/explore/shows/$slug'
     | '/dashboard/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -318,6 +348,9 @@ export interface FileRouteTypes {
     | '/dashboard/audience'
     | '/dashboard/group'
     | '/dashboard/organization'
+    | '/explore/artists/$slug'
+    | '/explore/groups/$slug'
+    | '/explore/shows/$slug'
     | '/dashboard'
   id:
     | '__root__'
@@ -347,6 +380,9 @@ export interface FileRouteTypes {
     | '/_authenticated/dashboard/audience'
     | '/_authenticated/dashboard/group'
     | '/_authenticated/dashboard/organization'
+    | '/explore/artists/$slug'
+    | '/explore/groups/$slug'
+    | '/explore/shows/$slug'
     | '/_authenticated/dashboard/'
   fileRoutesById: FileRoutesById
 }
@@ -526,6 +562,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/explore/shows/$slug': {
+      id: '/explore/shows/$slug'
+      path: '/$slug'
+      fullPath: '/explore/shows/$slug'
+      preLoaderRoute: typeof ExploreShowsSlugRouteImport
+      parentRoute: typeof ExploreShowsRoute
+    }
+    '/explore/groups/$slug': {
+      id: '/explore/groups/$slug'
+      path: '/$slug'
+      fullPath: '/explore/groups/$slug'
+      preLoaderRoute: typeof ExploreGroupsSlugRouteImport
+      parentRoute: typeof ExploreGroupsRoute
+    }
+    '/explore/artists/$slug': {
+      id: '/explore/artists/$slug'
+      path: '/$slug'
+      fullPath: '/explore/artists/$slug'
+      preLoaderRoute: typeof ExploreArtistsSlugRouteImport
+      parentRoute: typeof ExploreArtistsRoute
+    }
     '/_authenticated/dashboard/organization': {
       id: '/_authenticated/dashboard/organization'
       path: '/dashboard/organization'
@@ -586,17 +643,53 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
 const AuthenticatedRouteRouteWithChildren =
   AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
 
+interface ExploreArtistsRouteChildren {
+  ExploreArtistsSlugRoute: typeof ExploreArtistsSlugRoute
+}
+
+const ExploreArtistsRouteChildren: ExploreArtistsRouteChildren = {
+  ExploreArtistsSlugRoute: ExploreArtistsSlugRoute,
+}
+
+const ExploreArtistsRouteWithChildren = ExploreArtistsRoute._addFileChildren(
+  ExploreArtistsRouteChildren,
+)
+
+interface ExploreGroupsRouteChildren {
+  ExploreGroupsSlugRoute: typeof ExploreGroupsSlugRoute
+}
+
+const ExploreGroupsRouteChildren: ExploreGroupsRouteChildren = {
+  ExploreGroupsSlugRoute: ExploreGroupsSlugRoute,
+}
+
+const ExploreGroupsRouteWithChildren = ExploreGroupsRoute._addFileChildren(
+  ExploreGroupsRouteChildren,
+)
+
+interface ExploreShowsRouteChildren {
+  ExploreShowsSlugRoute: typeof ExploreShowsSlugRoute
+}
+
+const ExploreShowsRouteChildren: ExploreShowsRouteChildren = {
+  ExploreShowsSlugRoute: ExploreShowsSlugRoute,
+}
+
+const ExploreShowsRouteWithChildren = ExploreShowsRoute._addFileChildren(
+  ExploreShowsRouteChildren,
+)
+
 interface ExploreRouteChildren {
-  ExploreArtistsRoute: typeof ExploreArtistsRoute
-  ExploreGroupsRoute: typeof ExploreGroupsRoute
-  ExploreShowsRoute: typeof ExploreShowsRoute
+  ExploreArtistsRoute: typeof ExploreArtistsRouteWithChildren
+  ExploreGroupsRoute: typeof ExploreGroupsRouteWithChildren
+  ExploreShowsRoute: typeof ExploreShowsRouteWithChildren
   ExploreIndexRoute: typeof ExploreIndexRoute
 }
 
 const ExploreRouteChildren: ExploreRouteChildren = {
-  ExploreArtistsRoute: ExploreArtistsRoute,
-  ExploreGroupsRoute: ExploreGroupsRoute,
-  ExploreShowsRoute: ExploreShowsRoute,
+  ExploreArtistsRoute: ExploreArtistsRouteWithChildren,
+  ExploreGroupsRoute: ExploreGroupsRouteWithChildren,
+  ExploreShowsRoute: ExploreShowsRouteWithChildren,
   ExploreIndexRoute: ExploreIndexRoute,
 }
 
