@@ -1,3 +1,4 @@
+import { PosterImg } from "@/components/business/PosterImg";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
 import { toast } from "sonner";
@@ -94,7 +95,7 @@ Status: ${t.status}`;
               <div className="grid gap-4 md:grid-cols-2">
                 {g.rows.map((t) => (
                   <div key={t.id} className="flex overflow-hidden rounded-2xl border border-border/60 bg-card transition hover:shadow-md">
-                    {t.production?.poster_url && <img src={t.production.poster_url} alt="" className="h-full w-32 object-cover" />}
+                    <PosterImg src={t.production?.poster_url ?? undefined} className="h-full w-32 object-cover" />
                     <div className="flex flex-1 flex-col p-4">
                       <div className="flex items-start justify-between gap-2">
                         <div>

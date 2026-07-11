@@ -1,3 +1,4 @@
+import { PosterImg } from "@/components/business/PosterImg";
 import { createFileRoute } from "@tanstack/react-router";
 import { Heart, Play } from "lucide-react";
 import { PortalLayout } from "@/components/portal/PortalLayout";
@@ -24,7 +25,7 @@ function WatchlistPage() {
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {savedShows.map((s) => (
             <div key={s.slug} className="group overflow-hidden rounded-2xl border border-border/60 bg-card transition hover:-translate-y-0.5 hover:shadow-md">
-              <div className="aspect-[3/4] overflow-hidden"><img src={s.poster} alt="" className="h-full w-full object-cover transition duration-500 group-hover:scale-105" /></div>
+              <div className="aspect-[3/4] overflow-hidden"><PosterImg src={s.poster} className="h-full w-full object-cover transition duration-500 group-hover:scale-105" /></div>
               <div className="p-4">
                 <div className="font-display text-base text-foreground">{s.title}</div>
                 <div className="text-xs text-muted-foreground">{s.group} · Opens {s.opens}</div>
@@ -43,7 +44,7 @@ function WatchlistPage() {
           {watchHistory.map((w) => (
             <div key={w.id} className="group relative overflow-hidden rounded-2xl border border-border/60 bg-card transition hover:shadow-md">
               <div className="relative aspect-video overflow-hidden">
-                <img src={w.thumb} alt="" className="h-full w-full object-cover" />
+                <PosterImg src={w.thumb} className="h-full w-full object-cover" />
                 <div className="absolute inset-0 grid place-items-center bg-black/30 opacity-0 transition group-hover:opacity-100">
                   <Play className="h-10 w-10 fill-white text-white" />
                 </div>
