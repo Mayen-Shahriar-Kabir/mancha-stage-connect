@@ -46,6 +46,7 @@ import { Route as AuthenticatedDashboardGroupFundingRouteImport } from './routes
 import { Route as AuthenticatedDashboardGroupCommunityRouteImport } from './routes/_authenticated/dashboard.group.community'
 import { Route as AuthenticatedDashboardGroupAnalyticsRouteImport } from './routes/_authenticated/dashboard.group.analytics'
 import { Route as AuthenticatedDashboardArtistPortfolioRouteImport } from './routes/_authenticated/dashboard.artist.portfolio'
+import { Route as AuthenticatedDashboardArtistGroupsRouteImport } from './routes/_authenticated/dashboard.artist.groups'
 import { Route as AuthenticatedDashboardAdminUsersRouteImport } from './routes/_authenticated/dashboard.admin.users'
 import { Route as AuthenticatedDashboardAdminSubscriptionsRouteImport } from './routes/_authenticated/dashboard.admin.subscriptions'
 import { Route as AuthenticatedDashboardAdminSettingsRouteImport } from './routes/_authenticated/dashboard.admin.settings'
@@ -255,6 +256,12 @@ const AuthenticatedDashboardArtistPortfolioRoute =
     path: '/portfolio',
     getParentRoute: () => AuthenticatedDashboardArtistRoute,
   } as any)
+const AuthenticatedDashboardArtistGroupsRoute =
+  AuthenticatedDashboardArtistGroupsRouteImport.update({
+    id: '/groups',
+    path: '/groups',
+    getParentRoute: () => AuthenticatedDashboardArtistRoute,
+  } as any)
 const AuthenticatedDashboardAdminUsersRoute =
   AuthenticatedDashboardAdminUsersRouteImport.update({
     id: '/users',
@@ -337,6 +344,7 @@ export interface FileRoutesByFullPath {
   '/dashboard/admin/settings': typeof AuthenticatedDashboardAdminSettingsRoute
   '/dashboard/admin/subscriptions': typeof AuthenticatedDashboardAdminSubscriptionsRoute
   '/dashboard/admin/users': typeof AuthenticatedDashboardAdminUsersRoute
+  '/dashboard/artist/groups': typeof AuthenticatedDashboardArtistGroupsRoute
   '/dashboard/artist/portfolio': typeof AuthenticatedDashboardArtistPortfolioRoute
   '/dashboard/group/analytics': typeof AuthenticatedDashboardGroupAnalyticsRoute
   '/dashboard/group/community': typeof AuthenticatedDashboardGroupCommunityRoute
@@ -379,6 +387,7 @@ export interface FileRoutesByTo {
   '/dashboard/admin/settings': typeof AuthenticatedDashboardAdminSettingsRoute
   '/dashboard/admin/subscriptions': typeof AuthenticatedDashboardAdminSubscriptionsRoute
   '/dashboard/admin/users': typeof AuthenticatedDashboardAdminUsersRoute
+  '/dashboard/artist/groups': typeof AuthenticatedDashboardArtistGroupsRoute
   '/dashboard/artist/portfolio': typeof AuthenticatedDashboardArtistPortfolioRoute
   '/dashboard/group/analytics': typeof AuthenticatedDashboardGroupAnalyticsRoute
   '/dashboard/group/community': typeof AuthenticatedDashboardGroupCommunityRoute
@@ -427,6 +436,7 @@ export interface FileRoutesById {
   '/_authenticated/dashboard/admin/settings': typeof AuthenticatedDashboardAdminSettingsRoute
   '/_authenticated/dashboard/admin/subscriptions': typeof AuthenticatedDashboardAdminSubscriptionsRoute
   '/_authenticated/dashboard/admin/users': typeof AuthenticatedDashboardAdminUsersRoute
+  '/_authenticated/dashboard/artist/groups': typeof AuthenticatedDashboardArtistGroupsRoute
   '/_authenticated/dashboard/artist/portfolio': typeof AuthenticatedDashboardArtistPortfolioRoute
   '/_authenticated/dashboard/group/analytics': typeof AuthenticatedDashboardGroupAnalyticsRoute
   '/_authenticated/dashboard/group/community': typeof AuthenticatedDashboardGroupCommunityRoute
@@ -475,6 +485,7 @@ export interface FileRouteTypes {
     | '/dashboard/admin/settings'
     | '/dashboard/admin/subscriptions'
     | '/dashboard/admin/users'
+    | '/dashboard/artist/groups'
     | '/dashboard/artist/portfolio'
     | '/dashboard/group/analytics'
     | '/dashboard/group/community'
@@ -517,6 +528,7 @@ export interface FileRouteTypes {
     | '/dashboard/admin/settings'
     | '/dashboard/admin/subscriptions'
     | '/dashboard/admin/users'
+    | '/dashboard/artist/groups'
     | '/dashboard/artist/portfolio'
     | '/dashboard/group/analytics'
     | '/dashboard/group/community'
@@ -564,6 +576,7 @@ export interface FileRouteTypes {
     | '/_authenticated/dashboard/admin/settings'
     | '/_authenticated/dashboard/admin/subscriptions'
     | '/_authenticated/dashboard/admin/users'
+    | '/_authenticated/dashboard/artist/groups'
     | '/_authenticated/dashboard/artist/portfolio'
     | '/_authenticated/dashboard/group/analytics'
     | '/_authenticated/dashboard/group/community'
@@ -856,6 +869,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardArtistPortfolioRouteImport
       parentRoute: typeof AuthenticatedDashboardArtistRoute
     }
+    '/_authenticated/dashboard/artist/groups': {
+      id: '/_authenticated/dashboard/artist/groups'
+      path: '/groups'
+      fullPath: '/dashboard/artist/groups'
+      preLoaderRoute: typeof AuthenticatedDashboardArtistGroupsRouteImport
+      parentRoute: typeof AuthenticatedDashboardArtistRoute
+    }
     '/_authenticated/dashboard/admin/users': {
       id: '/_authenticated/dashboard/admin/users'
       path: '/users'
@@ -955,12 +975,15 @@ const AuthenticatedDashboardAdminRouteWithChildren =
   )
 
 interface AuthenticatedDashboardArtistRouteChildren {
+  AuthenticatedDashboardArtistGroupsRoute: typeof AuthenticatedDashboardArtistGroupsRoute
   AuthenticatedDashboardArtistPortfolioRoute: typeof AuthenticatedDashboardArtistPortfolioRoute
   AuthenticatedDashboardArtistIndexRoute: typeof AuthenticatedDashboardArtistIndexRoute
 }
 
 const AuthenticatedDashboardArtistRouteChildren: AuthenticatedDashboardArtistRouteChildren =
   {
+    AuthenticatedDashboardArtistGroupsRoute:
+      AuthenticatedDashboardArtistGroupsRoute,
     AuthenticatedDashboardArtistPortfolioRoute:
       AuthenticatedDashboardArtistPortfolioRoute,
     AuthenticatedDashboardArtistIndexRoute:
