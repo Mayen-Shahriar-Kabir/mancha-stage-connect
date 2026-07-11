@@ -16,8 +16,8 @@ import { DemoFormDialog, type DemoField } from "@/components/business/DemoFormDi
 import { useDemoList } from "@/lib/demo-store";
 import { useAuth } from "@/hooks/use-auth";
 import { orgBookings as seedBookings, type OrgBooking } from "@/data/portal/organization";
-import { groups as allGroups } from "@/data/explore/groups";
-import { artists as allArtists } from "@/data/explore/artists";
+import { GROUPS as allGroups } from "@/data/explore/groups";
+import { ARTISTS as allArtists } from "@/data/explore/artists";
 
 export const Route = createFileRoute("/_authenticated/dashboard/organization/bookings")({
   head: () => ({ meta: [{ title: "Bookings — Mancha" }, { name: "robots", content: "noindex" }] }),
