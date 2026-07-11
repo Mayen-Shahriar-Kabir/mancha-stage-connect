@@ -24,12 +24,7 @@ const schema = z
     full_name: z.string().trim().min(2, "Please tell us your name").max(100),
     email: z.string().trim().email("Enter a valid email").max(255),
     phone: z.string().trim().max(30).optional().or(z.literal("")),
-    password: z
-      .string()
-      .min(8, "At least 8 characters")
-      .max(72, "Too long")
-      .regex(/[A-Za-z]/, "Include a letter")
-      .regex(/[0-9]/, "Include a number"),
+    password: z.string().min(4, "At least 4 characters").max(72, "Too long"),
     confirm: z.string(),
     role: z.enum(["audience", "theatre_group", "theatre_artist", "organization"]),
     organization_type: z
