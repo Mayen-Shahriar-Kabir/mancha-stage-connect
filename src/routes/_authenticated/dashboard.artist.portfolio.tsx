@@ -39,7 +39,9 @@ function PortfolioPage() {
         </div>
         <div className="flex flex-col items-start gap-4 p-6 md:flex-row md:items-end md:justify-between">
           <div className="flex items-end gap-4">
-            <img src={artistProfile.photo} alt="" className="-mt-16 h-24 w-24 rounded-2xl border-4 border-card object-cover shadow-lg md:-mt-20 md:h-28 md:w-28" />
+            <div className="-mt-16 h-28 w-28 shrink-0 overflow-hidden rounded-2xl border-4 border-card bg-muted shadow-lg md:-mt-20 md:h-32 md:w-32">
+              <img src={artistProfile.photo} alt={artistProfile.name} className="h-full w-full object-cover object-top" />
+            </div>
             <div>
               <h2 className="font-display text-2xl text-foreground">{artistProfile.name}</h2>
               <p className="text-sm text-muted-foreground">{artistProfile.headline}</p>
