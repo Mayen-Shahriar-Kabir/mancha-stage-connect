@@ -25,7 +25,7 @@ function NotificationsPage() {
           {notifications.map((n) => (
             <li key={n.id} className="flex items-center justify-between py-4">
               <div className="flex items-center gap-3">
-                <span className={`h-2 w-2 rounded-full ${n.tone === "success" ? "bg-emerald-500" : n.tone === "warn" ? "bg-amber-500" : "bg-brand"}`} />
+                <span className={`h-2 w-2 rounded-full ${n.tone === "success" ? "bg-emerald-500" : "bg-brand"}`} />
                 <span className="text-sm text-foreground">{n.title}</span>
               </div>
               <span className="text-xs text-muted-foreground">{n.when}</span>
