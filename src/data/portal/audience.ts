@@ -16,7 +16,7 @@ export interface AudienceTicket {
 export const tickets: AudienceTicket[] = [
   { id: "TX-8821", show: "Nakshi Kanthar Math", group: "Nagorik", venue: "Shilpakala Academy, Hall A", date: "Feb 12, 2026", time: "7:30 PM", seat: "Balcony · C-14", price: 800, status: "upcoming", poster: "https://images.unsplash.com/photo-1507924538820-ede94a04019d?w=600" },
   { id: "TX-8797", show: "The Mountaintop", group: "Prachyanat", venue: "Mahila Samiti Auditorium", date: "Feb 27, 2026", time: "8:00 PM", seat: "Stalls · F-08", price: 600, status: "upcoming", poster: "https://images.unsplash.com/photo-1585699324551-f6c309eedeca?w=600" },
-  { id: "TX-8541", show: "Meghdoot", group: "Aranyak", venue: "TSC, DU", date: "Nov 30, 2025", time: "6:30 PM", seat: "Stalls · B-12", price: 500, status: "past", poster: "https://images.unsplash.com/photo-1571266028243-d220bc568cbf?w=600" },
+  { id: "TX-8541", show: "Meghdoot", group: "Aranyak", venue: "TSC, DU", date: "Nov 30, 2025", time: "6:30 PM", seat: "Stalls · B-12", price: 500, status: "past", poster: "https://images.unsplash.com/photo-1503095396549-807759245b35?w=600" },
   { id: "TX-8399", show: "Chairs", group: "Theatre Art Unit", venue: "Bengal Shilpalay", date: "Sep 04, 2025", time: "7:00 PM", seat: "Stalls · A-07", price: 700, status: "past", poster: "https://images.unsplash.com/photo-1503095396549-807759245b35?w=600" },
   { id: "TX-8210", show: "Barnaparichay", group: "Dhaka Theatre", venue: "Shilpakala Hall B", date: "Aug 21, 2025", time: "7:30 PM", seat: "Balcony · D-04", price: 450, status: "cancelled", poster: "https://images.unsplash.com/photo-1518929458113-3b5a4a1a1e91?w=600" },
 ];
@@ -44,12 +44,12 @@ export const plans = [
 export const savedShows = [
   { slug: "nakshi-kanthar-math", title: "Nakshi Kanthar Math", group: "Nagorik", opens: "Feb 12", poster: "https://images.unsplash.com/photo-1507924538820-ede94a04019d?w=600" },
   { slug: "mountaintop", title: "The Mountaintop", group: "Prachyanat", opens: "Feb 27", poster: "https://images.unsplash.com/photo-1585699324551-f6c309eedeca?w=600" },
-  { slug: "meghdoot-return", title: "Meghdoot (Return Season)", group: "Aranyak", opens: "Mar 14", poster: "https://images.unsplash.com/photo-1571266028243-d220bc568cbf?w=600" },
+  { slug: "meghdoot-return", title: "Meghdoot (Return Season)", group: "Aranyak", opens: "Mar 14", poster: "https://images.unsplash.com/photo-1503095396549-807759245b35?w=600" },
   { slug: "puppet-cycle", title: "The Puppet Cycle", group: "Loko Natya Dol", opens: "Apr 02", poster: "https://images.unsplash.com/photo-1503095396549-807759245b35?w=600" },
 ];
 
 export const watchHistory = [
-  { id: "w1", title: "Meghdoot — Opening Night", group: "Aranyak", watched: "80%", kind: "archive" as const, thumb: "https://images.unsplash.com/photo-1571266028243-d220bc568cbf?w=600" },
+  { id: "w1", title: "Meghdoot — Opening Night", group: "Aranyak", watched: "80%", kind: "archive" as const, thumb: "https://images.unsplash.com/photo-1503095396549-807759245b35?w=600" },
   { id: "w2", title: "Chairs — Livestream", group: "Theatre Art Unit", watched: "100%", kind: "livestream" as const, thumb: "https://images.unsplash.com/photo-1503095396549-807759245b35?w=600" },
   { id: "w3", title: "Rakter Onnesha (Ep. 2)", group: "Theatre Factory", watched: "34%", kind: "archive" as const, thumb: "https://images.unsplash.com/photo-1585699324551-f6c309eedeca?w=600" },
 ];

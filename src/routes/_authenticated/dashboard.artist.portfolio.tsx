@@ -139,7 +139,7 @@ function PortfolioPage() {
           {[
             "https://images.unsplash.com/photo-1503095396549-807759245b35?w=400",
             "https://images.unsplash.com/photo-1507924538820-ede94a04019d?w=400",
-            "https://images.unsplash.com/photo-1571266028243-d220bc568cbf?w=400",
+            "https://images.unsplash.com/photo-1503095396549-807759245b35?w=400",
             "https://images.unsplash.com/photo-1585699324551-f6c309eedeca?w=400",
           ].map((src) => (
             <img key={src} src={src} alt="" className="aspect-square w-full rounded-xl object-cover" />

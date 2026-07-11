@@ -104,7 +104,7 @@ export interface ArtistProduction {
 }
 export const artistProductions: ArtistProduction[] = [
   { id: "p1", title: "Nakshi Kanthar Math", role: "Rupai (Lead)", group: "Nagorik", year: 2025, status: "running", poster: "https://images.unsplash.com/photo-1507924538820-ede94a04019d?w=600" },
-  { id: "p2", title: "Meghdoot", role: "Yaksha", group: "Aranyak", year: 2024, status: "closed", poster: "https://images.unsplash.com/photo-1571266028243-d220bc568cbf?w=600" },
+  { id: "p2", title: "Meghdoot", role: "Yaksha", group: "Aranyak", year: 2024, status: "closed", poster: "https://images.unsplash.com/photo-1503095396549-807759245b35?w=600" },
   { id: "p3", title: "Chairs", role: "Old Woman", group: "Theatre Art Unit", year: 2023, status: "closed", poster: "https://images.unsplash.com/photo-1503095396549-807759245b35?w=600" },
   { id: "p4", title: "The Mountaintop", role: "Camae", group: "Prachyanat", year: 2026, status: "upcoming", poster: "https://images.unsplash.com/photo-1585699324551-f6c309eedeca?w=600" },
 ];
