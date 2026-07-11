@@ -139,6 +139,7 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
         <Outlet />
+        <ManchaAI />
         <Toaster />
       </AuthProvider>
     </QueryClientProvider>
