@@ -35,6 +35,7 @@ import { Route as AuthenticatedDashboardGroupRouteImport } from './routes/_authe
 import { Route as AuthenticatedDashboardArtistRouteImport } from './routes/_authenticated/dashboard.artist'
 import { Route as AuthenticatedDashboardAdminRouteImport } from './routes/_authenticated/dashboard.admin'
 import { Route as AuthenticatedDashboardGroupIndexRouteImport } from './routes/_authenticated/dashboard.group.index'
+import { Route as AuthenticatedDashboardArtistIndexRouteImport } from './routes/_authenticated/dashboard.artist.index'
 import { Route as AuthenticatedDashboardAdminIndexRouteImport } from './routes/_authenticated/dashboard.admin.index'
 import { Route as AuthenticatedDashboardGroupSettingsRouteImport } from './routes/_authenticated/dashboard.group.settings'
 import { Route as AuthenticatedDashboardGroupProductionsRouteImport } from './routes/_authenticated/dashboard.group.productions'
@@ -187,6 +188,12 @@ const AuthenticatedDashboardGroupIndexRoute =
     path: '/',
     getParentRoute: () => AuthenticatedDashboardGroupRoute,
   } as any)
+const AuthenticatedDashboardArtistIndexRoute =
+  AuthenticatedDashboardArtistIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => AuthenticatedDashboardArtistRoute,
+  } as any)
 const AuthenticatedDashboardAdminIndexRoute =
   AuthenticatedDashboardAdminIndexRouteImport.update({
     id: '/',
@@ -309,7 +316,7 @@ export interface FileRoutesByFullPath {
   '/explore/shows': typeof ExploreShowsRouteWithChildren
   '/explore/': typeof ExploreIndexRoute
   '/dashboard/admin': typeof AuthenticatedDashboardAdminRouteWithChildren
-  '/dashboard/artist': typeof AuthenticatedDashboardArtistRoute
+  '/dashboard/artist': typeof AuthenticatedDashboardArtistRouteWithChildren
   '/dashboard/group': typeof AuthenticatedDashboardGroupRouteWithChildren
   '/explore/artists/$slug': typeof ExploreArtistsSlugRoute
   '/explore/groups/$slug': typeof ExploreGroupsSlugRoute
@@ -332,6 +339,7 @@ export interface FileRoutesByFullPath {
   '/dashboard/group/productions': typeof AuthenticatedDashboardGroupProductionsRoute
   '/dashboard/group/settings': typeof AuthenticatedDashboardGroupSettingsRoute
   '/dashboard/admin/': typeof AuthenticatedDashboardAdminIndexRoute
+  '/dashboard/artist/': typeof AuthenticatedDashboardArtistIndexRoute
   '/dashboard/group/': typeof AuthenticatedDashboardGroupIndexRoute
 }
 export interface FileRoutesByTo {
@@ -351,7 +359,6 @@ export interface FileRoutesByTo {
   '/explore/groups': typeof ExploreGroupsRouteWithChildren
   '/explore/shows': typeof ExploreShowsRouteWithChildren
   '/explore': typeof ExploreIndexRoute
-  '/dashboard/artist': typeof AuthenticatedDashboardArtistRoute
   '/explore/artists/$slug': typeof ExploreArtistsSlugRoute
   '/explore/groups/$slug': typeof ExploreGroupsSlugRoute
   '/explore/shows/$slug': typeof ExploreShowsSlugRoute
@@ -373,6 +380,7 @@ export interface FileRoutesByTo {
   '/dashboard/group/productions': typeof AuthenticatedDashboardGroupProductionsRoute
   '/dashboard/group/settings': typeof AuthenticatedDashboardGroupSettingsRoute
   '/dashboard/admin': typeof AuthenticatedDashboardAdminIndexRoute
+  '/dashboard/artist': typeof AuthenticatedDashboardArtistIndexRoute
   '/dashboard/group': typeof AuthenticatedDashboardGroupIndexRoute
 }
 export interface FileRoutesById {
@@ -396,7 +404,7 @@ export interface FileRoutesById {
   '/explore/shows': typeof ExploreShowsRouteWithChildren
   '/explore/': typeof ExploreIndexRoute
   '/_authenticated/dashboard/admin': typeof AuthenticatedDashboardAdminRouteWithChildren
-  '/_authenticated/dashboard/artist': typeof AuthenticatedDashboardArtistRoute
+  '/_authenticated/dashboard/artist': typeof AuthenticatedDashboardArtistRouteWithChildren
   '/_authenticated/dashboard/group': typeof AuthenticatedDashboardGroupRouteWithChildren
   '/explore/artists/$slug': typeof ExploreArtistsSlugRoute
   '/explore/groups/$slug': typeof ExploreGroupsSlugRoute
@@ -419,6 +427,7 @@ export interface FileRoutesById {
   '/_authenticated/dashboard/group/productions': typeof AuthenticatedDashboardGroupProductionsRoute
   '/_authenticated/dashboard/group/settings': typeof AuthenticatedDashboardGroupSettingsRoute
   '/_authenticated/dashboard/admin/': typeof AuthenticatedDashboardAdminIndexRoute
+  '/_authenticated/dashboard/artist/': typeof AuthenticatedDashboardArtistIndexRoute
   '/_authenticated/dashboard/group/': typeof AuthenticatedDashboardGroupIndexRoute
 }
 export interface FileRouteTypes {
@@ -465,6 +474,7 @@ export interface FileRouteTypes {
     | '/dashboard/group/productions'
     | '/dashboard/group/settings'
     | '/dashboard/admin/'
+    | '/dashboard/artist/'
     | '/dashboard/group/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -484,7 +494,6 @@ export interface FileRouteTypes {
     | '/explore/groups'
     | '/explore/shows'
     | '/explore'
-    | '/dashboard/artist'
     | '/explore/artists/$slug'
     | '/explore/groups/$slug'
     | '/explore/shows/$slug'
@@ -506,6 +515,7 @@ export interface FileRouteTypes {
     | '/dashboard/group/productions'
     | '/dashboard/group/settings'
     | '/dashboard/admin'
+    | '/dashboard/artist'
     | '/dashboard/group'
   id:
     | '__root__'
@@ -551,6 +561,7 @@ export interface FileRouteTypes {
     | '/_authenticated/dashboard/group/productions'
     | '/_authenticated/dashboard/group/settings'
     | '/_authenticated/dashboard/admin/'
+    | '/_authenticated/dashboard/artist/'
     | '/_authenticated/dashboard/group/'
   fileRoutesById: FileRoutesById
 }
@@ -755,6 +766,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardGroupIndexRouteImport
       parentRoute: typeof AuthenticatedDashboardGroupRoute
     }
+    '/_authenticated/dashboard/artist/': {
+      id: '/_authenticated/dashboard/artist/'
+      path: '/'
+      fullPath: '/dashboard/artist/'
+      preLoaderRoute: typeof AuthenticatedDashboardArtistIndexRouteImport
+      parentRoute: typeof AuthenticatedDashboardArtistRoute
+    }
     '/_authenticated/dashboard/admin/': {
       id: '/_authenticated/dashboard/admin/'
       path: '/'
@@ -916,6 +934,21 @@ const AuthenticatedDashboardAdminRouteWithChildren =
     AuthenticatedDashboardAdminRouteChildren,
   )
 
+interface AuthenticatedDashboardArtistRouteChildren {
+  AuthenticatedDashboardArtistIndexRoute: typeof AuthenticatedDashboardArtistIndexRoute
+}
+
+const AuthenticatedDashboardArtistRouteChildren: AuthenticatedDashboardArtistRouteChildren =
+  {
+    AuthenticatedDashboardArtistIndexRoute:
+      AuthenticatedDashboardArtistIndexRoute,
+  }
+
+const AuthenticatedDashboardArtistRouteWithChildren =
+  AuthenticatedDashboardArtistRoute._addFileChildren(
+    AuthenticatedDashboardArtistRouteChildren,
+  )
+
 interface AuthenticatedDashboardGroupRouteChildren {
   AuthenticatedDashboardGroupAnalyticsRoute: typeof AuthenticatedDashboardGroupAnalyticsRoute
   AuthenticatedDashboardGroupCommunityRoute: typeof AuthenticatedDashboardGroupCommunityRoute
@@ -957,7 +990,7 @@ const AuthenticatedDashboardGroupRouteWithChildren =
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedDashboardAdminRoute: typeof AuthenticatedDashboardAdminRouteWithChildren
-  AuthenticatedDashboardArtistRoute: typeof AuthenticatedDashboardArtistRoute
+  AuthenticatedDashboardArtistRoute: typeof AuthenticatedDashboardArtistRouteWithChildren
   AuthenticatedDashboardGroupRoute: typeof AuthenticatedDashboardGroupRouteWithChildren
   AuthenticatedDashboardIndexRoute: typeof AuthenticatedDashboardIndexRoute
 }
@@ -965,7 +998,8 @@ interface AuthenticatedRouteRouteChildren {
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedDashboardAdminRoute:
     AuthenticatedDashboardAdminRouteWithChildren,
-  AuthenticatedDashboardArtistRoute: AuthenticatedDashboardArtistRoute,
+  AuthenticatedDashboardArtistRoute:
+    AuthenticatedDashboardArtistRouteWithChildren,
   AuthenticatedDashboardGroupRoute:
     AuthenticatedDashboardGroupRouteWithChildren,
   AuthenticatedDashboardIndexRoute: AuthenticatedDashboardIndexRoute,
