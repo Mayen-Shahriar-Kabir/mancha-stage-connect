@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Handshake, CalendarDays, Megaphone, Users, Plus } from "lucide-react";
 import { PortalLayout } from "@/components/portal/PortalLayout";
-import { ORG_NAV } from "@/components/portal/org-nav";
+import { getOrgNav } from "@/components/portal/org-nav";
 import { StatCard, Panel, StatusPill } from "@/components/admin/primitives";
 import { Button } from "@/components/ui/button";
 import { useAuth, type OrganizationType } from "@/hooks/use-auth";
@@ -29,7 +29,7 @@ function OrgHome() {
     <PortalLayout
       groupLabel={orgTypeLabels[type]}
       homeUrl="/dashboard/organization"
-      nav={ORG_NAV}
+      nav={getOrgNav(type)}
       eyebrow={orgTypeLabels[type]}
       title={profile?.organization_name ?? "Your organization portal"}
       description="Sponsor, host, cast, and measure — everything you do with Bangladesh's theatre ecosystem, in one place."

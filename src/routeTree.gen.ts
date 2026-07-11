@@ -41,13 +41,17 @@ import { Route as AuthenticatedDashboardGroupIndexRouteImport } from './routes/_
 import { Route as AuthenticatedDashboardAudienceIndexRouteImport } from './routes/_authenticated/dashboard.audience.index'
 import { Route as AuthenticatedDashboardArtistIndexRouteImport } from './routes/_authenticated/dashboard.artist.index'
 import { Route as AuthenticatedDashboardAdminIndexRouteImport } from './routes/_authenticated/dashboard.admin.index'
+import { Route as AuthenticatedDashboardOrganizationVenuesRouteImport } from './routes/_authenticated/dashboard.organization.venues'
+import { Route as AuthenticatedDashboardOrganizationSponsorshipsRouteImport } from './routes/_authenticated/dashboard.organization.sponsorships'
 import { Route as AuthenticatedDashboardOrganizationSettingsRouteImport } from './routes/_authenticated/dashboard.organization.settings'
-import { Route as AuthenticatedDashboardOrganizationOpportunitiesRouteImport } from './routes/_authenticated/dashboard.organization.opportunities'
-import { Route as AuthenticatedDashboardOrganizationNotificationsRouteImport } from './routes/_authenticated/dashboard.organization.notifications'
-import { Route as AuthenticatedDashboardOrganizationEventsRouteImport } from './routes/_authenticated/dashboard.organization.events'
-import { Route as AuthenticatedDashboardOrganizationCollaborationsRouteImport } from './routes/_authenticated/dashboard.organization.collaborations'
+import { Route as AuthenticatedDashboardOrganizationJobsRouteImport } from './routes/_authenticated/dashboard.organization.jobs'
+import { Route as AuthenticatedDashboardOrganizationInternshipsRouteImport } from './routes/_authenticated/dashboard.organization.internships'
+import { Route as AuthenticatedDashboardOrganizationHistoryRouteImport } from './routes/_authenticated/dashboard.organization.history'
+import { Route as AuthenticatedDashboardOrganizationCulturalProgramsRouteImport } from './routes/_authenticated/dashboard.organization.cultural-programs'
+import { Route as AuthenticatedDashboardOrganizationCampusProgramsRouteImport } from './routes/_authenticated/dashboard.organization.campus-programs'
 import { Route as AuthenticatedDashboardOrganizationBookingsRouteImport } from './routes/_authenticated/dashboard.organization.bookings'
-import { Route as AuthenticatedDashboardOrganizationAnalyticsRouteImport } from './routes/_authenticated/dashboard.organization.analytics'
+import { Route as AuthenticatedDashboardOrganizationAuditionsRouteImport } from './routes/_authenticated/dashboard.organization.auditions'
+import { Route as AuthenticatedDashboardOrganizationApplicationsRouteImport } from './routes/_authenticated/dashboard.organization.applications'
 import { Route as AuthenticatedDashboardGroupSettingsRouteImport } from './routes/_authenticated/dashboard.group.settings'
 import { Route as AuthenticatedDashboardGroupProductionsRouteImport } from './routes/_authenticated/dashboard.group.productions'
 import { Route as AuthenticatedDashboardGroupOpportunitiesRouteImport } from './routes/_authenticated/dashboard.group.opportunities'
@@ -255,34 +259,52 @@ const AuthenticatedDashboardAdminIndexRoute =
     path: '/',
     getParentRoute: () => AuthenticatedDashboardAdminRoute,
   } as any)
+const AuthenticatedDashboardOrganizationVenuesRoute =
+  AuthenticatedDashboardOrganizationVenuesRouteImport.update({
+    id: '/venues',
+    path: '/venues',
+    getParentRoute: () => AuthenticatedDashboardOrganizationRoute,
+  } as any)
+const AuthenticatedDashboardOrganizationSponsorshipsRoute =
+  AuthenticatedDashboardOrganizationSponsorshipsRouteImport.update({
+    id: '/sponsorships',
+    path: '/sponsorships',
+    getParentRoute: () => AuthenticatedDashboardOrganizationRoute,
+  } as any)
 const AuthenticatedDashboardOrganizationSettingsRoute =
   AuthenticatedDashboardOrganizationSettingsRouteImport.update({
     id: '/settings',
     path: '/settings',
     getParentRoute: () => AuthenticatedDashboardOrganizationRoute,
   } as any)
-const AuthenticatedDashboardOrganizationOpportunitiesRoute =
-  AuthenticatedDashboardOrganizationOpportunitiesRouteImport.update({
-    id: '/opportunities',
-    path: '/opportunities',
+const AuthenticatedDashboardOrganizationJobsRoute =
+  AuthenticatedDashboardOrganizationJobsRouteImport.update({
+    id: '/jobs',
+    path: '/jobs',
     getParentRoute: () => AuthenticatedDashboardOrganizationRoute,
   } as any)
-const AuthenticatedDashboardOrganizationNotificationsRoute =
-  AuthenticatedDashboardOrganizationNotificationsRouteImport.update({
-    id: '/notifications',
-    path: '/notifications',
+const AuthenticatedDashboardOrganizationInternshipsRoute =
+  AuthenticatedDashboardOrganizationInternshipsRouteImport.update({
+    id: '/internships',
+    path: '/internships',
     getParentRoute: () => AuthenticatedDashboardOrganizationRoute,
   } as any)
-const AuthenticatedDashboardOrganizationEventsRoute =
-  AuthenticatedDashboardOrganizationEventsRouteImport.update({
-    id: '/events',
-    path: '/events',
+const AuthenticatedDashboardOrganizationHistoryRoute =
+  AuthenticatedDashboardOrganizationHistoryRouteImport.update({
+    id: '/history',
+    path: '/history',
     getParentRoute: () => AuthenticatedDashboardOrganizationRoute,
   } as any)
-const AuthenticatedDashboardOrganizationCollaborationsRoute =
-  AuthenticatedDashboardOrganizationCollaborationsRouteImport.update({
-    id: '/collaborations',
-    path: '/collaborations',
+const AuthenticatedDashboardOrganizationCulturalProgramsRoute =
+  AuthenticatedDashboardOrganizationCulturalProgramsRouteImport.update({
+    id: '/cultural-programs',
+    path: '/cultural-programs',
+    getParentRoute: () => AuthenticatedDashboardOrganizationRoute,
+  } as any)
+const AuthenticatedDashboardOrganizationCampusProgramsRoute =
+  AuthenticatedDashboardOrganizationCampusProgramsRouteImport.update({
+    id: '/campus-programs',
+    path: '/campus-programs',
     getParentRoute: () => AuthenticatedDashboardOrganizationRoute,
   } as any)
 const AuthenticatedDashboardOrganizationBookingsRoute =
@@ -291,10 +313,16 @@ const AuthenticatedDashboardOrganizationBookingsRoute =
     path: '/bookings',
     getParentRoute: () => AuthenticatedDashboardOrganizationRoute,
   } as any)
-const AuthenticatedDashboardOrganizationAnalyticsRoute =
-  AuthenticatedDashboardOrganizationAnalyticsRouteImport.update({
-    id: '/analytics',
-    path: '/analytics',
+const AuthenticatedDashboardOrganizationAuditionsRoute =
+  AuthenticatedDashboardOrganizationAuditionsRouteImport.update({
+    id: '/auditions',
+    path: '/auditions',
+    getParentRoute: () => AuthenticatedDashboardOrganizationRoute,
+  } as any)
+const AuthenticatedDashboardOrganizationApplicationsRoute =
+  AuthenticatedDashboardOrganizationApplicationsRouteImport.update({
+    id: '/applications',
+    path: '/applications',
     getParentRoute: () => AuthenticatedDashboardOrganizationRoute,
   } as any)
 const AuthenticatedDashboardGroupSettingsRoute =
@@ -577,13 +605,17 @@ export interface FileRoutesByFullPath {
   '/dashboard/group/opportunities': typeof AuthenticatedDashboardGroupOpportunitiesRoute
   '/dashboard/group/productions': typeof AuthenticatedDashboardGroupProductionsRoute
   '/dashboard/group/settings': typeof AuthenticatedDashboardGroupSettingsRoute
-  '/dashboard/organization/analytics': typeof AuthenticatedDashboardOrganizationAnalyticsRoute
+  '/dashboard/organization/applications': typeof AuthenticatedDashboardOrganizationApplicationsRoute
+  '/dashboard/organization/auditions': typeof AuthenticatedDashboardOrganizationAuditionsRoute
   '/dashboard/organization/bookings': typeof AuthenticatedDashboardOrganizationBookingsRoute
-  '/dashboard/organization/collaborations': typeof AuthenticatedDashboardOrganizationCollaborationsRoute
-  '/dashboard/organization/events': typeof AuthenticatedDashboardOrganizationEventsRoute
-  '/dashboard/organization/notifications': typeof AuthenticatedDashboardOrganizationNotificationsRoute
-  '/dashboard/organization/opportunities': typeof AuthenticatedDashboardOrganizationOpportunitiesRoute
+  '/dashboard/organization/campus-programs': typeof AuthenticatedDashboardOrganizationCampusProgramsRoute
+  '/dashboard/organization/cultural-programs': typeof AuthenticatedDashboardOrganizationCulturalProgramsRoute
+  '/dashboard/organization/history': typeof AuthenticatedDashboardOrganizationHistoryRoute
+  '/dashboard/organization/internships': typeof AuthenticatedDashboardOrganizationInternshipsRoute
+  '/dashboard/organization/jobs': typeof AuthenticatedDashboardOrganizationJobsRoute
   '/dashboard/organization/settings': typeof AuthenticatedDashboardOrganizationSettingsRoute
+  '/dashboard/organization/sponsorships': typeof AuthenticatedDashboardOrganizationSponsorshipsRoute
+  '/dashboard/organization/venues': typeof AuthenticatedDashboardOrganizationVenuesRoute
   '/dashboard/admin/': typeof AuthenticatedDashboardAdminIndexRoute
   '/dashboard/artist/': typeof AuthenticatedDashboardArtistIndexRoute
   '/dashboard/audience/': typeof AuthenticatedDashboardAudienceIndexRoute
@@ -647,13 +679,17 @@ export interface FileRoutesByTo {
   '/dashboard/group/opportunities': typeof AuthenticatedDashboardGroupOpportunitiesRoute
   '/dashboard/group/productions': typeof AuthenticatedDashboardGroupProductionsRoute
   '/dashboard/group/settings': typeof AuthenticatedDashboardGroupSettingsRoute
-  '/dashboard/organization/analytics': typeof AuthenticatedDashboardOrganizationAnalyticsRoute
+  '/dashboard/organization/applications': typeof AuthenticatedDashboardOrganizationApplicationsRoute
+  '/dashboard/organization/auditions': typeof AuthenticatedDashboardOrganizationAuditionsRoute
   '/dashboard/organization/bookings': typeof AuthenticatedDashboardOrganizationBookingsRoute
-  '/dashboard/organization/collaborations': typeof AuthenticatedDashboardOrganizationCollaborationsRoute
-  '/dashboard/organization/events': typeof AuthenticatedDashboardOrganizationEventsRoute
-  '/dashboard/organization/notifications': typeof AuthenticatedDashboardOrganizationNotificationsRoute
-  '/dashboard/organization/opportunities': typeof AuthenticatedDashboardOrganizationOpportunitiesRoute
+  '/dashboard/organization/campus-programs': typeof AuthenticatedDashboardOrganizationCampusProgramsRoute
+  '/dashboard/organization/cultural-programs': typeof AuthenticatedDashboardOrganizationCulturalProgramsRoute
+  '/dashboard/organization/history': typeof AuthenticatedDashboardOrganizationHistoryRoute
+  '/dashboard/organization/internships': typeof AuthenticatedDashboardOrganizationInternshipsRoute
+  '/dashboard/organization/jobs': typeof AuthenticatedDashboardOrganizationJobsRoute
   '/dashboard/organization/settings': typeof AuthenticatedDashboardOrganizationSettingsRoute
+  '/dashboard/organization/sponsorships': typeof AuthenticatedDashboardOrganizationSponsorshipsRoute
+  '/dashboard/organization/venues': typeof AuthenticatedDashboardOrganizationVenuesRoute
   '/dashboard/admin': typeof AuthenticatedDashboardAdminIndexRoute
   '/dashboard/artist': typeof AuthenticatedDashboardArtistIndexRoute
   '/dashboard/audience': typeof AuthenticatedDashboardAudienceIndexRoute
@@ -725,13 +761,17 @@ export interface FileRoutesById {
   '/_authenticated/dashboard/group/opportunities': typeof AuthenticatedDashboardGroupOpportunitiesRoute
   '/_authenticated/dashboard/group/productions': typeof AuthenticatedDashboardGroupProductionsRoute
   '/_authenticated/dashboard/group/settings': typeof AuthenticatedDashboardGroupSettingsRoute
-  '/_authenticated/dashboard/organization/analytics': typeof AuthenticatedDashboardOrganizationAnalyticsRoute
+  '/_authenticated/dashboard/organization/applications': typeof AuthenticatedDashboardOrganizationApplicationsRoute
+  '/_authenticated/dashboard/organization/auditions': typeof AuthenticatedDashboardOrganizationAuditionsRoute
   '/_authenticated/dashboard/organization/bookings': typeof AuthenticatedDashboardOrganizationBookingsRoute
-  '/_authenticated/dashboard/organization/collaborations': typeof AuthenticatedDashboardOrganizationCollaborationsRoute
-  '/_authenticated/dashboard/organization/events': typeof AuthenticatedDashboardOrganizationEventsRoute
-  '/_authenticated/dashboard/organization/notifications': typeof AuthenticatedDashboardOrganizationNotificationsRoute
-  '/_authenticated/dashboard/organization/opportunities': typeof AuthenticatedDashboardOrganizationOpportunitiesRoute
+  '/_authenticated/dashboard/organization/campus-programs': typeof AuthenticatedDashboardOrganizationCampusProgramsRoute
+  '/_authenticated/dashboard/organization/cultural-programs': typeof AuthenticatedDashboardOrganizationCulturalProgramsRoute
+  '/_authenticated/dashboard/organization/history': typeof AuthenticatedDashboardOrganizationHistoryRoute
+  '/_authenticated/dashboard/organization/internships': typeof AuthenticatedDashboardOrganizationInternshipsRoute
+  '/_authenticated/dashboard/organization/jobs': typeof AuthenticatedDashboardOrganizationJobsRoute
   '/_authenticated/dashboard/organization/settings': typeof AuthenticatedDashboardOrganizationSettingsRoute
+  '/_authenticated/dashboard/organization/sponsorships': typeof AuthenticatedDashboardOrganizationSponsorshipsRoute
+  '/_authenticated/dashboard/organization/venues': typeof AuthenticatedDashboardOrganizationVenuesRoute
   '/_authenticated/dashboard/admin/': typeof AuthenticatedDashboardAdminIndexRoute
   '/_authenticated/dashboard/artist/': typeof AuthenticatedDashboardArtistIndexRoute
   '/_authenticated/dashboard/audience/': typeof AuthenticatedDashboardAudienceIndexRoute
@@ -803,13 +843,17 @@ export interface FileRouteTypes {
     | '/dashboard/group/opportunities'
     | '/dashboard/group/productions'
     | '/dashboard/group/settings'
-    | '/dashboard/organization/analytics'
+    | '/dashboard/organization/applications'
+    | '/dashboard/organization/auditions'
     | '/dashboard/organization/bookings'
-    | '/dashboard/organization/collaborations'
-    | '/dashboard/organization/events'
-    | '/dashboard/organization/notifications'
-    | '/dashboard/organization/opportunities'
+    | '/dashboard/organization/campus-programs'
+    | '/dashboard/organization/cultural-programs'
+    | '/dashboard/organization/history'
+    | '/dashboard/organization/internships'
+    | '/dashboard/organization/jobs'
     | '/dashboard/organization/settings'
+    | '/dashboard/organization/sponsorships'
+    | '/dashboard/organization/venues'
     | '/dashboard/admin/'
     | '/dashboard/artist/'
     | '/dashboard/audience/'
@@ -873,13 +917,17 @@ export interface FileRouteTypes {
     | '/dashboard/group/opportunities'
     | '/dashboard/group/productions'
     | '/dashboard/group/settings'
-    | '/dashboard/organization/analytics'
+    | '/dashboard/organization/applications'
+    | '/dashboard/organization/auditions'
     | '/dashboard/organization/bookings'
-    | '/dashboard/organization/collaborations'
-    | '/dashboard/organization/events'
-    | '/dashboard/organization/notifications'
-    | '/dashboard/organization/opportunities'
+    | '/dashboard/organization/campus-programs'
+    | '/dashboard/organization/cultural-programs'
+    | '/dashboard/organization/history'
+    | '/dashboard/organization/internships'
+    | '/dashboard/organization/jobs'
     | '/dashboard/organization/settings'
+    | '/dashboard/organization/sponsorships'
+    | '/dashboard/organization/venues'
     | '/dashboard/admin'
     | '/dashboard/artist'
     | '/dashboard/audience'
@@ -950,13 +998,17 @@ export interface FileRouteTypes {
     | '/_authenticated/dashboard/group/opportunities'
     | '/_authenticated/dashboard/group/productions'
     | '/_authenticated/dashboard/group/settings'
-    | '/_authenticated/dashboard/organization/analytics'
+    | '/_authenticated/dashboard/organization/applications'
+    | '/_authenticated/dashboard/organization/auditions'
     | '/_authenticated/dashboard/organization/bookings'
-    | '/_authenticated/dashboard/organization/collaborations'
-    | '/_authenticated/dashboard/organization/events'
-    | '/_authenticated/dashboard/organization/notifications'
-    | '/_authenticated/dashboard/organization/opportunities'
+    | '/_authenticated/dashboard/organization/campus-programs'
+    | '/_authenticated/dashboard/organization/cultural-programs'
+    | '/_authenticated/dashboard/organization/history'
+    | '/_authenticated/dashboard/organization/internships'
+    | '/_authenticated/dashboard/organization/jobs'
     | '/_authenticated/dashboard/organization/settings'
+    | '/_authenticated/dashboard/organization/sponsorships'
+    | '/_authenticated/dashboard/organization/venues'
     | '/_authenticated/dashboard/admin/'
     | '/_authenticated/dashboard/artist/'
     | '/_authenticated/dashboard/audience/'
@@ -1207,6 +1259,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardAdminIndexRouteImport
       parentRoute: typeof AuthenticatedDashboardAdminRoute
     }
+    '/_authenticated/dashboard/organization/venues': {
+      id: '/_authenticated/dashboard/organization/venues'
+      path: '/venues'
+      fullPath: '/dashboard/organization/venues'
+      preLoaderRoute: typeof AuthenticatedDashboardOrganizationVenuesRouteImport
+      parentRoute: typeof AuthenticatedDashboardOrganizationRoute
+    }
+    '/_authenticated/dashboard/organization/sponsorships': {
+      id: '/_authenticated/dashboard/organization/sponsorships'
+      path: '/sponsorships'
+      fullPath: '/dashboard/organization/sponsorships'
+      preLoaderRoute: typeof AuthenticatedDashboardOrganizationSponsorshipsRouteImport
+      parentRoute: typeof AuthenticatedDashboardOrganizationRoute
+    }
     '/_authenticated/dashboard/organization/settings': {
       id: '/_authenticated/dashboard/organization/settings'
       path: '/settings'
@@ -1214,32 +1280,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardOrganizationSettingsRouteImport
       parentRoute: typeof AuthenticatedDashboardOrganizationRoute
     }
-    '/_authenticated/dashboard/organization/opportunities': {
-      id: '/_authenticated/dashboard/organization/opportunities'
-      path: '/opportunities'
-      fullPath: '/dashboard/organization/opportunities'
-      preLoaderRoute: typeof AuthenticatedDashboardOrganizationOpportunitiesRouteImport
+    '/_authenticated/dashboard/organization/jobs': {
+      id: '/_authenticated/dashboard/organization/jobs'
+      path: '/jobs'
+      fullPath: '/dashboard/organization/jobs'
+      preLoaderRoute: typeof AuthenticatedDashboardOrganizationJobsRouteImport
       parentRoute: typeof AuthenticatedDashboardOrganizationRoute
     }
-    '/_authenticated/dashboard/organization/notifications': {
-      id: '/_authenticated/dashboard/organization/notifications'
-      path: '/notifications'
-      fullPath: '/dashboard/organization/notifications'
-      preLoaderRoute: typeof AuthenticatedDashboardOrganizationNotificationsRouteImport
+    '/_authenticated/dashboard/organization/internships': {
+      id: '/_authenticated/dashboard/organization/internships'
+      path: '/internships'
+      fullPath: '/dashboard/organization/internships'
+      preLoaderRoute: typeof AuthenticatedDashboardOrganizationInternshipsRouteImport
       parentRoute: typeof AuthenticatedDashboardOrganizationRoute
     }
-    '/_authenticated/dashboard/organization/events': {
-      id: '/_authenticated/dashboard/organization/events'
-      path: '/events'
-      fullPath: '/dashboard/organization/events'
-      preLoaderRoute: typeof AuthenticatedDashboardOrganizationEventsRouteImport
+    '/_authenticated/dashboard/organization/history': {
+      id: '/_authenticated/dashboard/organization/history'
+      path: '/history'
+      fullPath: '/dashboard/organization/history'
+      preLoaderRoute: typeof AuthenticatedDashboardOrganizationHistoryRouteImport
       parentRoute: typeof AuthenticatedDashboardOrganizationRoute
     }
-    '/_authenticated/dashboard/organization/collaborations': {
-      id: '/_authenticated/dashboard/organization/collaborations'
-      path: '/collaborations'
-      fullPath: '/dashboard/organization/collaborations'
-      preLoaderRoute: typeof AuthenticatedDashboardOrganizationCollaborationsRouteImport
+    '/_authenticated/dashboard/organization/cultural-programs': {
+      id: '/_authenticated/dashboard/organization/cultural-programs'
+      path: '/cultural-programs'
+      fullPath: '/dashboard/organization/cultural-programs'
+      preLoaderRoute: typeof AuthenticatedDashboardOrganizationCulturalProgramsRouteImport
+      parentRoute: typeof AuthenticatedDashboardOrganizationRoute
+    }
+    '/_authenticated/dashboard/organization/campus-programs': {
+      id: '/_authenticated/dashboard/organization/campus-programs'
+      path: '/campus-programs'
+      fullPath: '/dashboard/organization/campus-programs'
+      preLoaderRoute: typeof AuthenticatedDashboardOrganizationCampusProgramsRouteImport
       parentRoute: typeof AuthenticatedDashboardOrganizationRoute
     }
     '/_authenticated/dashboard/organization/bookings': {
@@ -1249,11 +1322,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardOrganizationBookingsRouteImport
       parentRoute: typeof AuthenticatedDashboardOrganizationRoute
     }
-    '/_authenticated/dashboard/organization/analytics': {
-      id: '/_authenticated/dashboard/organization/analytics'
-      path: '/analytics'
-      fullPath: '/dashboard/organization/analytics'
-      preLoaderRoute: typeof AuthenticatedDashboardOrganizationAnalyticsRouteImport
+    '/_authenticated/dashboard/organization/auditions': {
+      id: '/_authenticated/dashboard/organization/auditions'
+      path: '/auditions'
+      fullPath: '/dashboard/organization/auditions'
+      preLoaderRoute: typeof AuthenticatedDashboardOrganizationAuditionsRouteImport
+      parentRoute: typeof AuthenticatedDashboardOrganizationRoute
+    }
+    '/_authenticated/dashboard/organization/applications': {
+      id: '/_authenticated/dashboard/organization/applications'
+      path: '/applications'
+      fullPath: '/dashboard/organization/applications'
+      preLoaderRoute: typeof AuthenticatedDashboardOrganizationApplicationsRouteImport
       parentRoute: typeof AuthenticatedDashboardOrganizationRoute
     }
     '/_authenticated/dashboard/group/settings': {
@@ -1680,32 +1760,44 @@ const AuthenticatedDashboardGroupRouteWithChildren =
   )
 
 interface AuthenticatedDashboardOrganizationRouteChildren {
-  AuthenticatedDashboardOrganizationAnalyticsRoute: typeof AuthenticatedDashboardOrganizationAnalyticsRoute
+  AuthenticatedDashboardOrganizationApplicationsRoute: typeof AuthenticatedDashboardOrganizationApplicationsRoute
+  AuthenticatedDashboardOrganizationAuditionsRoute: typeof AuthenticatedDashboardOrganizationAuditionsRoute
   AuthenticatedDashboardOrganizationBookingsRoute: typeof AuthenticatedDashboardOrganizationBookingsRoute
-  AuthenticatedDashboardOrganizationCollaborationsRoute: typeof AuthenticatedDashboardOrganizationCollaborationsRoute
-  AuthenticatedDashboardOrganizationEventsRoute: typeof AuthenticatedDashboardOrganizationEventsRoute
-  AuthenticatedDashboardOrganizationNotificationsRoute: typeof AuthenticatedDashboardOrganizationNotificationsRoute
-  AuthenticatedDashboardOrganizationOpportunitiesRoute: typeof AuthenticatedDashboardOrganizationOpportunitiesRoute
+  AuthenticatedDashboardOrganizationCampusProgramsRoute: typeof AuthenticatedDashboardOrganizationCampusProgramsRoute
+  AuthenticatedDashboardOrganizationCulturalProgramsRoute: typeof AuthenticatedDashboardOrganizationCulturalProgramsRoute
+  AuthenticatedDashboardOrganizationHistoryRoute: typeof AuthenticatedDashboardOrganizationHistoryRoute
+  AuthenticatedDashboardOrganizationInternshipsRoute: typeof AuthenticatedDashboardOrganizationInternshipsRoute
+  AuthenticatedDashboardOrganizationJobsRoute: typeof AuthenticatedDashboardOrganizationJobsRoute
   AuthenticatedDashboardOrganizationSettingsRoute: typeof AuthenticatedDashboardOrganizationSettingsRoute
+  AuthenticatedDashboardOrganizationSponsorshipsRoute: typeof AuthenticatedDashboardOrganizationSponsorshipsRoute
+  AuthenticatedDashboardOrganizationVenuesRoute: typeof AuthenticatedDashboardOrganizationVenuesRoute
   AuthenticatedDashboardOrganizationIndexRoute: typeof AuthenticatedDashboardOrganizationIndexRoute
 }
 
 const AuthenticatedDashboardOrganizationRouteChildren: AuthenticatedDashboardOrganizationRouteChildren =
   {
-    AuthenticatedDashboardOrganizationAnalyticsRoute:
-      AuthenticatedDashboardOrganizationAnalyticsRoute,
+    AuthenticatedDashboardOrganizationApplicationsRoute:
+      AuthenticatedDashboardOrganizationApplicationsRoute,
+    AuthenticatedDashboardOrganizationAuditionsRoute:
+      AuthenticatedDashboardOrganizationAuditionsRoute,
     AuthenticatedDashboardOrganizationBookingsRoute:
       AuthenticatedDashboardOrganizationBookingsRoute,
-    AuthenticatedDashboardOrganizationCollaborationsRoute:
-      AuthenticatedDashboardOrganizationCollaborationsRoute,
-    AuthenticatedDashboardOrganizationEventsRoute:
-      AuthenticatedDashboardOrganizationEventsRoute,
-    AuthenticatedDashboardOrganizationNotificationsRoute:
-      AuthenticatedDashboardOrganizationNotificationsRoute,
-    AuthenticatedDashboardOrganizationOpportunitiesRoute:
-      AuthenticatedDashboardOrganizationOpportunitiesRoute,
+    AuthenticatedDashboardOrganizationCampusProgramsRoute:
+      AuthenticatedDashboardOrganizationCampusProgramsRoute,
+    AuthenticatedDashboardOrganizationCulturalProgramsRoute:
+      AuthenticatedDashboardOrganizationCulturalProgramsRoute,
+    AuthenticatedDashboardOrganizationHistoryRoute:
+      AuthenticatedDashboardOrganizationHistoryRoute,
+    AuthenticatedDashboardOrganizationInternshipsRoute:
+      AuthenticatedDashboardOrganizationInternshipsRoute,
+    AuthenticatedDashboardOrganizationJobsRoute:
+      AuthenticatedDashboardOrganizationJobsRoute,
     AuthenticatedDashboardOrganizationSettingsRoute:
       AuthenticatedDashboardOrganizationSettingsRoute,
+    AuthenticatedDashboardOrganizationSponsorshipsRoute:
+      AuthenticatedDashboardOrganizationSponsorshipsRoute,
+    AuthenticatedDashboardOrganizationVenuesRoute:
+      AuthenticatedDashboardOrganizationVenuesRoute,
     AuthenticatedDashboardOrganizationIndexRoute:
       AuthenticatedDashboardOrganizationIndexRoute,
   }
@@ -1813,13 +1905,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

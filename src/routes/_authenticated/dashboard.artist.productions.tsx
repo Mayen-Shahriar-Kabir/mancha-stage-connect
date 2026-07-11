@@ -1,3 +1,4 @@
+import { PosterImg } from "@/components/business/PosterImg";
 import { createFileRoute } from "@tanstack/react-router";
 import { PortalLayout } from "@/components/portal/PortalLayout";
 import { ARTIST_NAV } from "@/components/portal/artist-nav";
@@ -24,7 +25,7 @@ function ProductionsPage() {
         {artistProductions.map((p) => (
           <div key={p.id} className="group overflow-hidden rounded-2xl border border-border/60 bg-card transition hover:-translate-y-0.5 hover:shadow-lg">
             <div className="relative aspect-[3/4] overflow-hidden">
-              <img src={p.poster} alt="" className="h-full w-full object-cover transition duration-500 group-hover:scale-105" />
+              <PosterImg src={p.poster} className="h-full w-full object-cover transition duration-500 group-hover:scale-105" />
               <div className="absolute left-3 top-3">
                 <StatusPill status={p.status} />
               </div>
