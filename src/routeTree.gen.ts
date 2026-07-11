@@ -35,7 +35,6 @@ import { Route as AuthenticatedDashboardOrganizationRouteImport } from './routes
 import { Route as AuthenticatedDashboardGroupRouteImport } from './routes/_authenticated/dashboard.group'
 import { Route as AuthenticatedDashboardAudienceRouteImport } from './routes/_authenticated/dashboard.audience'
 import { Route as AuthenticatedDashboardArtistRouteImport } from './routes/_authenticated/dashboard.artist'
-import { Route as AuthenticatedDashboardAdminRouteImport } from './routes/_authenticated/dashboard.admin'
 
 const SuspendedRoute = SuspendedRouteImport.update({
   id: '/suspended',
@@ -171,12 +170,6 @@ const AuthenticatedDashboardArtistRoute =
     path: '/dashboard/artist',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
-const AuthenticatedDashboardAdminRoute =
-  AuthenticatedDashboardAdminRouteImport.update({
-    id: '/dashboard/admin',
-    path: '/dashboard/admin',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -196,7 +189,6 @@ export interface FileRoutesByFullPath {
   '/explore/groups': typeof ExploreGroupsRouteWithChildren
   '/explore/shows': typeof ExploreShowsRouteWithChildren
   '/explore/': typeof ExploreIndexRoute
-  '/dashboard/admin': typeof AuthenticatedDashboardAdminRoute
   '/dashboard/artist': typeof AuthenticatedDashboardArtistRoute
   '/dashboard/audience': typeof AuthenticatedDashboardAudienceRoute
   '/dashboard/group': typeof AuthenticatedDashboardGroupRoute
@@ -223,7 +215,6 @@ export interface FileRoutesByTo {
   '/explore/groups': typeof ExploreGroupsRouteWithChildren
   '/explore/shows': typeof ExploreShowsRouteWithChildren
   '/explore': typeof ExploreIndexRoute
-  '/dashboard/admin': typeof AuthenticatedDashboardAdminRoute
   '/dashboard/artist': typeof AuthenticatedDashboardArtistRoute
   '/dashboard/audience': typeof AuthenticatedDashboardAudienceRoute
   '/dashboard/group': typeof AuthenticatedDashboardGroupRoute
@@ -253,7 +244,6 @@ export interface FileRoutesById {
   '/explore/groups': typeof ExploreGroupsRouteWithChildren
   '/explore/shows': typeof ExploreShowsRouteWithChildren
   '/explore/': typeof ExploreIndexRoute
-  '/_authenticated/dashboard/admin': typeof AuthenticatedDashboardAdminRoute
   '/_authenticated/dashboard/artist': typeof AuthenticatedDashboardArtistRoute
   '/_authenticated/dashboard/audience': typeof AuthenticatedDashboardAudienceRoute
   '/_authenticated/dashboard/group': typeof AuthenticatedDashboardGroupRoute
@@ -283,7 +273,6 @@ export interface FileRouteTypes {
     | '/explore/groups'
     | '/explore/shows'
     | '/explore/'
-    | '/dashboard/admin'
     | '/dashboard/artist'
     | '/dashboard/audience'
     | '/dashboard/group'
@@ -310,7 +299,6 @@ export interface FileRouteTypes {
     | '/explore/groups'
     | '/explore/shows'
     | '/explore'
-    | '/dashboard/admin'
     | '/dashboard/artist'
     | '/dashboard/audience'
     | '/dashboard/group'
@@ -339,7 +327,6 @@ export interface FileRouteTypes {
     | '/explore/groups'
     | '/explore/shows'
     | '/explore/'
-    | '/_authenticated/dashboard/admin'
     | '/_authenticated/dashboard/artist'
     | '/_authenticated/dashboard/audience'
     | '/_authenticated/dashboard/group'
@@ -551,18 +538,10 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardArtistRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/dashboard/admin': {
-      id: '/_authenticated/dashboard/admin'
-      path: '/dashboard/admin'
-      fullPath: '/dashboard/admin'
-      preLoaderRoute: typeof AuthenticatedDashboardAdminRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
   }
 }
 
 interface AuthenticatedRouteRouteChildren {
-  AuthenticatedDashboardAdminRoute: typeof AuthenticatedDashboardAdminRoute
   AuthenticatedDashboardArtistRoute: typeof AuthenticatedDashboardArtistRoute
   AuthenticatedDashboardAudienceRoute: typeof AuthenticatedDashboardAudienceRoute
   AuthenticatedDashboardGroupRoute: typeof AuthenticatedDashboardGroupRoute
@@ -571,7 +550,6 @@ interface AuthenticatedRouteRouteChildren {
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
-  AuthenticatedDashboardAdminRoute: AuthenticatedDashboardAdminRoute,
   AuthenticatedDashboardArtistRoute: AuthenticatedDashboardArtistRoute,
   AuthenticatedDashboardAudienceRoute: AuthenticatedDashboardAudienceRoute,
   AuthenticatedDashboardGroupRoute: AuthenticatedDashboardGroupRoute,
