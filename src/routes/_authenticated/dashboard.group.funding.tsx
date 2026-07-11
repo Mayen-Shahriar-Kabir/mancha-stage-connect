@@ -52,7 +52,6 @@ function FundingPage() {
   const close = async (c: Campaign) => {
     await supabase.from("funding_campaigns").update({ status: "closed" }).eq("id", c.id);
     toast.success("Campaign closed"); load();
-    void updateProduction; // keep import satisfied
   };
 
   const totalRaised = items.reduce((s, c) => s + Number(c.raised_amount), 0);
