@@ -29,7 +29,7 @@ function OrgHome() {
     <PortalLayout
       groupLabel={orgTypeLabels[type]}
       homeUrl="/dashboard/organization"
-      nav={ORG_NAV}
+      nav={getOrgNav(type)}
       eyebrow={orgTypeLabels[type]}
       title={profile?.organization_name ?? "Your organization portal"}
       description="Sponsor, host, cast, and measure — everything you do with Bangladesh's theatre ecosystem, in one place."
