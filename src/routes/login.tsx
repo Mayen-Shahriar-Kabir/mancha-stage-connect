@@ -16,7 +16,7 @@ import { dashboardPathForRole, type AppRole, type AccountStatus } from "@/hooks/
 
 const schema = z.object({
   email: z.string().trim().email("Enter a valid email"),
-  password: z.string().min(6, "At least 6 characters"),
+  password: z.string().min(4, "At least 4 characters"),
   remember: z.boolean().optional(),
 });
 
