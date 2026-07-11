@@ -4,8 +4,32 @@ import artist2 from "@/assets/artist-2.jpg";
 import artist3 from "@/assets/artist-3.jpg";
 import artist4 from "@/assets/artist-4.jpg";
 
-const localPhotos = [artist1, artist2, artist3, artist4];
-const photoFor = (i: number) => localPhotos[i % localPhotos.length];
+const malePhotos = [artist1, artist3];
+const femalePhotos = [artist2, artist4];
+const photoFor = (i: number, gender: "m" | "f") => {
+  const pool = gender === "m" ? malePhotos : femalePhotos;
+  return pool[i % pool.length];
+};
+
+const GENDER: Record<string, "m" | "f"> = {
+  "anisul-haque": "m",
+  "meherun-nisa": "f",
+  "rafid-rahman": "m",
+  "sultana-begum": "f",
+  "farhana-mithila": "f",
+  "tanvir-chowdhury": "m",
+  "nusrat-jahan": "f",
+  "kamruzzaman-runu": "m",
+  "shamim-ara": "f",
+  "muhammad-salim": "m",
+  "ayesha-karim": "f",
+  "imran-hossain": "m",
+  "sabina-yasmin-arif": "f",
+  "rifat-chowdhury": "m",
+  "faisal-ahmed": "m",
+  "nazia-kabir": "f",
+};
+
 
 const covers = [
   "https://images.unsplash.com/photo-1503095396549-807759245b35?w=1600&q=80",
@@ -252,7 +276,7 @@ export const ARTISTS: Artist[] = seed.map((a, i) => ({
   slug: a.slug,
   name: a.name,
   stageName: a.stageName,
-  photo: photoFor(i),
+  photo: photoFor(i, GENDER[a.slug] ?? "m"),
   cover: covers[i % covers.length],
   specialization: a.specialization,
   yearsExperience: a.years,

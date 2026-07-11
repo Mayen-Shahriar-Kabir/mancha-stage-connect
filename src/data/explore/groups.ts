@@ -6,7 +6,7 @@ const covers = [
   "https://images.unsplash.com/photo-1516307365426-bea591f05011?w=1600&q=80",
   "https://images.unsplash.com/photo-1524712245354-2c4e5e7121c0?w=1600&q=80",
   "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=1600&q=80",
-  "https://images.unsplash.com/photo-1519683384663-1c317b0e08f9?w=1600&q=80",
+  "https://images.unsplash.com/photo-1547153760-18fc86324498?w=1600&q=80",
   "https://images.unsplash.com/photo-1499364615650-ec38552f4f34?w=1600&q=80",
   "https://images.unsplash.com/photo-1504704911898-68304a7d2807?w=1600&q=80",
 ];
