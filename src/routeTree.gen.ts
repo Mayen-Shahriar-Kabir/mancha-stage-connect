@@ -23,7 +23,14 @@ import { Route as ContactRouteImport } from './routes/contact'
 import { Route as ArtistsRouteImport } from './routes/artists'
 import { Route as AccessDeniedRouteImport } from './routes/access-denied'
 import { Route as AboutRouteImport } from './routes/about'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedDashboardIndexRouteImport } from './routes/_authenticated/dashboard.index'
+import { Route as AuthenticatedDashboardOrganizationRouteImport } from './routes/_authenticated/dashboard.organization'
+import { Route as AuthenticatedDashboardGroupRouteImport } from './routes/_authenticated/dashboard.group'
+import { Route as AuthenticatedDashboardAudienceRouteImport } from './routes/_authenticated/dashboard.audience'
+import { Route as AuthenticatedDashboardArtistRouteImport } from './routes/_authenticated/dashboard.artist'
+import { Route as AuthenticatedDashboardAdminRouteImport } from './routes/_authenticated/dashboard.admin'
 
 const SuspendedRoute = SuspendedRouteImport.update({
   id: '/suspended',
@@ -95,11 +102,51 @@ const AboutRoute = AboutRouteImport.update({
   path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedDashboardIndexRoute =
+  AuthenticatedDashboardIndexRouteImport.update({
+    id: '/dashboard/',
+    path: '/dashboard/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedDashboardOrganizationRoute =
+  AuthenticatedDashboardOrganizationRouteImport.update({
+    id: '/dashboard/organization',
+    path: '/dashboard/organization',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedDashboardGroupRoute =
+  AuthenticatedDashboardGroupRouteImport.update({
+    id: '/dashboard/group',
+    path: '/dashboard/group',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedDashboardAudienceRoute =
+  AuthenticatedDashboardAudienceRouteImport.update({
+    id: '/dashboard/audience',
+    path: '/dashboard/audience',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedDashboardArtistRoute =
+  AuthenticatedDashboardArtistRouteImport.update({
+    id: '/dashboard/artist',
+    path: '/dashboard/artist',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedDashboardAdminRoute =
+  AuthenticatedDashboardAdminRouteImport.update({
+    id: '/dashboard/admin',
+    path: '/dashboard/admin',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -117,6 +164,12 @@ export interface FileRoutesByFullPath {
   '/shows': typeof ShowsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/suspended': typeof SuspendedRoute
+  '/dashboard/admin': typeof AuthenticatedDashboardAdminRoute
+  '/dashboard/artist': typeof AuthenticatedDashboardArtistRoute
+  '/dashboard/audience': typeof AuthenticatedDashboardAudienceRoute
+  '/dashboard/group': typeof AuthenticatedDashboardGroupRoute
+  '/dashboard/organization': typeof AuthenticatedDashboardOrganizationRoute
+  '/dashboard/': typeof AuthenticatedDashboardIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -134,10 +187,17 @@ export interface FileRoutesByTo {
   '/shows': typeof ShowsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/suspended': typeof SuspendedRoute
+  '/dashboard/admin': typeof AuthenticatedDashboardAdminRoute
+  '/dashboard/artist': typeof AuthenticatedDashboardArtistRoute
+  '/dashboard/audience': typeof AuthenticatedDashboardAudienceRoute
+  '/dashboard/group': typeof AuthenticatedDashboardGroupRoute
+  '/dashboard/organization': typeof AuthenticatedDashboardOrganizationRoute
+  '/dashboard': typeof AuthenticatedDashboardIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/about': typeof AboutRoute
   '/access-denied': typeof AccessDeniedRoute
   '/artists': typeof ArtistsRoute
@@ -152,6 +212,12 @@ export interface FileRoutesById {
   '/shows': typeof ShowsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/suspended': typeof SuspendedRoute
+  '/_authenticated/dashboard/admin': typeof AuthenticatedDashboardAdminRoute
+  '/_authenticated/dashboard/artist': typeof AuthenticatedDashboardArtistRoute
+  '/_authenticated/dashboard/audience': typeof AuthenticatedDashboardAudienceRoute
+  '/_authenticated/dashboard/group': typeof AuthenticatedDashboardGroupRoute
+  '/_authenticated/dashboard/organization': typeof AuthenticatedDashboardOrganizationRoute
+  '/_authenticated/dashboard/': typeof AuthenticatedDashboardIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -171,6 +237,12 @@ export interface FileRouteTypes {
     | '/shows'
     | '/sitemap.xml'
     | '/suspended'
+    | '/dashboard/admin'
+    | '/dashboard/artist'
+    | '/dashboard/audience'
+    | '/dashboard/group'
+    | '/dashboard/organization'
+    | '/dashboard/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -188,9 +260,16 @@ export interface FileRouteTypes {
     | '/shows'
     | '/sitemap.xml'
     | '/suspended'
+    | '/dashboard/admin'
+    | '/dashboard/artist'
+    | '/dashboard/audience'
+    | '/dashboard/group'
+    | '/dashboard/organization'
+    | '/dashboard'
   id:
     | '__root__'
     | '/'
+    | '/_authenticated'
     | '/about'
     | '/access-denied'
     | '/artists'
@@ -205,10 +284,17 @@ export interface FileRouteTypes {
     | '/shows'
     | '/sitemap.xml'
     | '/suspended'
+    | '/_authenticated/dashboard/admin'
+    | '/_authenticated/dashboard/artist'
+    | '/_authenticated/dashboard/audience'
+    | '/_authenticated/dashboard/group'
+    | '/_authenticated/dashboard/organization'
+    | '/_authenticated/dashboard/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AboutRoute: typeof AboutRoute
   AccessDeniedRoute: typeof AccessDeniedRoute
   ArtistsRoute: typeof ArtistsRoute
@@ -325,6 +411,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -332,11 +425,76 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/dashboard/': {
+      id: '/_authenticated/dashboard/'
+      path: '/dashboard'
+      fullPath: '/dashboard/'
+      preLoaderRoute: typeof AuthenticatedDashboardIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/dashboard/organization': {
+      id: '/_authenticated/dashboard/organization'
+      path: '/dashboard/organization'
+      fullPath: '/dashboard/organization'
+      preLoaderRoute: typeof AuthenticatedDashboardOrganizationRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/dashboard/group': {
+      id: '/_authenticated/dashboard/group'
+      path: '/dashboard/group'
+      fullPath: '/dashboard/group'
+      preLoaderRoute: typeof AuthenticatedDashboardGroupRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/dashboard/audience': {
+      id: '/_authenticated/dashboard/audience'
+      path: '/dashboard/audience'
+      fullPath: '/dashboard/audience'
+      preLoaderRoute: typeof AuthenticatedDashboardAudienceRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/dashboard/artist': {
+      id: '/_authenticated/dashboard/artist'
+      path: '/dashboard/artist'
+      fullPath: '/dashboard/artist'
+      preLoaderRoute: typeof AuthenticatedDashboardArtistRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/dashboard/admin': {
+      id: '/_authenticated/dashboard/admin'
+      path: '/dashboard/admin'
+      fullPath: '/dashboard/admin'
+      preLoaderRoute: typeof AuthenticatedDashboardAdminRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedDashboardAdminRoute: typeof AuthenticatedDashboardAdminRoute
+  AuthenticatedDashboardArtistRoute: typeof AuthenticatedDashboardArtistRoute
+  AuthenticatedDashboardAudienceRoute: typeof AuthenticatedDashboardAudienceRoute
+  AuthenticatedDashboardGroupRoute: typeof AuthenticatedDashboardGroupRoute
+  AuthenticatedDashboardOrganizationRoute: typeof AuthenticatedDashboardOrganizationRoute
+  AuthenticatedDashboardIndexRoute: typeof AuthenticatedDashboardIndexRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedDashboardAdminRoute: AuthenticatedDashboardAdminRoute,
+  AuthenticatedDashboardArtistRoute: AuthenticatedDashboardArtistRoute,
+  AuthenticatedDashboardAudienceRoute: AuthenticatedDashboardAudienceRoute,
+  AuthenticatedDashboardGroupRoute: AuthenticatedDashboardGroupRoute,
+  AuthenticatedDashboardOrganizationRoute:
+    AuthenticatedDashboardOrganizationRoute,
+  AuthenticatedDashboardIndexRoute: AuthenticatedDashboardIndexRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AboutRoute: AboutRoute,
   AccessDeniedRoute: AccessDeniedRoute,
   ArtistsRoute: ArtistsRoute,
