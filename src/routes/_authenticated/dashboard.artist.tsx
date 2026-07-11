@@ -4,7 +4,7 @@ import { useAuth, dashboardPathForRole } from "@/hooks/use-auth";
 export const Route = createFileRoute("/_authenticated/dashboard/artist")({
   head: () => ({
     meta: [
-      { title: "Artist Studio — Mancha" },
+      { title: "Artist Dashboard — Mancha" },
       { name: "robots", content: "noindex" },
     ],
   }),
