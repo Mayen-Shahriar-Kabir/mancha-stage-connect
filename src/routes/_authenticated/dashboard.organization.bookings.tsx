@@ -13,6 +13,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { DemoFormDialog, type DemoField } from "@/components/business/DemoFormDialog";
+import { AvailableVenuesPanel } from "@/components/business/AvailableVenuesPanel";
 import { useDemoList } from "@/lib/demo-store";
 import { useAuth } from "@/hooks/use-auth";
 import { orgBookings as seedBookings, type OrgBooking } from "@/data/portal/organization";
