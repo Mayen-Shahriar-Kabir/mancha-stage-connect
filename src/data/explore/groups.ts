@@ -1,4 +1,9 @@
 import type { Group } from "./types";
+import nagorikCover from "@/assets/group-nagorik.jpg";
+
+const COVER_OVERRIDES: Record<string, string> = {
+  "nagorik-natya-sampradaya": nagorikCover,
+};
 
 const covers = [
   "https://images.unsplash.com/photo-1503095396549-807759245b35?w=1600&q=80",
