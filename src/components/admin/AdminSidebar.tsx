@@ -24,7 +24,15 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 
-const NAV = [
+type NavItem = {
+  title: string;
+  url: string;
+  icon: typeof LayoutDashboard;
+  exact?: boolean;
+  badge?: string;
+};
+
+const NAV: NavItem[] = [
   { title: "Dashboard", url: "/dashboard/admin", icon: LayoutDashboard, exact: true },
   { title: "Approvals", url: "/dashboard/admin/approvals", icon: UserCheck, badge: "34" },
   { title: "Users", url: "/dashboard/admin/users", icon: Users },
@@ -34,7 +42,7 @@ const NAV = [
   { title: "Reviews", url: "/dashboard/admin/reviews", icon: Star },
   { title: "Reports", url: "/dashboard/admin/reports", icon: BarChart3 },
   { title: "Settings", url: "/dashboard/admin/settings", icon: Settings },
-] as const;
+];
 
 export function AdminSidebar() {
   const { state } = useSidebar();
