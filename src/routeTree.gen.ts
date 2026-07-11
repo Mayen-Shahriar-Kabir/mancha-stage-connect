@@ -49,6 +49,7 @@ import { Route as AuthenticatedDashboardArtistTrainingRouteImport } from './rout
 import { Route as AuthenticatedDashboardArtistProductionsRouteImport } from './routes/_authenticated/dashboard.artist.productions'
 import { Route as AuthenticatedDashboardArtistPortfolioRouteImport } from './routes/_authenticated/dashboard.artist.portfolio'
 import { Route as AuthenticatedDashboardArtistOpportunitiesRouteImport } from './routes/_authenticated/dashboard.artist.opportunities'
+import { Route as AuthenticatedDashboardArtistNotificationsRouteImport } from './routes/_authenticated/dashboard.artist.notifications'
 import { Route as AuthenticatedDashboardArtistInvitationsRouteImport } from './routes/_authenticated/dashboard.artist.invitations'
 import { Route as AuthenticatedDashboardArtistGroupsRouteImport } from './routes/_authenticated/dashboard.artist.groups'
 import { Route as AuthenticatedDashboardArtistApplicationsRouteImport } from './routes/_authenticated/dashboard.artist.applications'
@@ -279,6 +280,12 @@ const AuthenticatedDashboardArtistOpportunitiesRoute =
     path: '/opportunities',
     getParentRoute: () => AuthenticatedDashboardArtistRoute,
   } as any)
+const AuthenticatedDashboardArtistNotificationsRoute =
+  AuthenticatedDashboardArtistNotificationsRouteImport.update({
+    id: '/notifications',
+    path: '/notifications',
+    getParentRoute: () => AuthenticatedDashboardArtistRoute,
+  } as any)
 const AuthenticatedDashboardArtistInvitationsRoute =
   AuthenticatedDashboardArtistInvitationsRouteImport.update({
     id: '/invitations',
@@ -382,6 +389,7 @@ export interface FileRoutesByFullPath {
   '/dashboard/artist/applications': typeof AuthenticatedDashboardArtistApplicationsRoute
   '/dashboard/artist/groups': typeof AuthenticatedDashboardArtistGroupsRoute
   '/dashboard/artist/invitations': typeof AuthenticatedDashboardArtistInvitationsRoute
+  '/dashboard/artist/notifications': typeof AuthenticatedDashboardArtistNotificationsRoute
   '/dashboard/artist/opportunities': typeof AuthenticatedDashboardArtistOpportunitiesRoute
   '/dashboard/artist/portfolio': typeof AuthenticatedDashboardArtistPortfolioRoute
   '/dashboard/artist/productions': typeof AuthenticatedDashboardArtistProductionsRoute
@@ -430,6 +438,7 @@ export interface FileRoutesByTo {
   '/dashboard/artist/applications': typeof AuthenticatedDashboardArtistApplicationsRoute
   '/dashboard/artist/groups': typeof AuthenticatedDashboardArtistGroupsRoute
   '/dashboard/artist/invitations': typeof AuthenticatedDashboardArtistInvitationsRoute
+  '/dashboard/artist/notifications': typeof AuthenticatedDashboardArtistNotificationsRoute
   '/dashboard/artist/opportunities': typeof AuthenticatedDashboardArtistOpportunitiesRoute
   '/dashboard/artist/portfolio': typeof AuthenticatedDashboardArtistPortfolioRoute
   '/dashboard/artist/productions': typeof AuthenticatedDashboardArtistProductionsRoute
@@ -484,6 +493,7 @@ export interface FileRoutesById {
   '/_authenticated/dashboard/artist/applications': typeof AuthenticatedDashboardArtistApplicationsRoute
   '/_authenticated/dashboard/artist/groups': typeof AuthenticatedDashboardArtistGroupsRoute
   '/_authenticated/dashboard/artist/invitations': typeof AuthenticatedDashboardArtistInvitationsRoute
+  '/_authenticated/dashboard/artist/notifications': typeof AuthenticatedDashboardArtistNotificationsRoute
   '/_authenticated/dashboard/artist/opportunities': typeof AuthenticatedDashboardArtistOpportunitiesRoute
   '/_authenticated/dashboard/artist/portfolio': typeof AuthenticatedDashboardArtistPortfolioRoute
   '/_authenticated/dashboard/artist/productions': typeof AuthenticatedDashboardArtistProductionsRoute
@@ -538,6 +548,7 @@ export interface FileRouteTypes {
     | '/dashboard/artist/applications'
     | '/dashboard/artist/groups'
     | '/dashboard/artist/invitations'
+    | '/dashboard/artist/notifications'
     | '/dashboard/artist/opportunities'
     | '/dashboard/artist/portfolio'
     | '/dashboard/artist/productions'
@@ -586,6 +597,7 @@ export interface FileRouteTypes {
     | '/dashboard/artist/applications'
     | '/dashboard/artist/groups'
     | '/dashboard/artist/invitations'
+    | '/dashboard/artist/notifications'
     | '/dashboard/artist/opportunities'
     | '/dashboard/artist/portfolio'
     | '/dashboard/artist/productions'
@@ -639,6 +651,7 @@ export interface FileRouteTypes {
     | '/_authenticated/dashboard/artist/applications'
     | '/_authenticated/dashboard/artist/groups'
     | '/_authenticated/dashboard/artist/invitations'
+    | '/_authenticated/dashboard/artist/notifications'
     | '/_authenticated/dashboard/artist/opportunities'
     | '/_authenticated/dashboard/artist/portfolio'
     | '/_authenticated/dashboard/artist/productions'
@@ -955,6 +968,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardArtistOpportunitiesRouteImport
       parentRoute: typeof AuthenticatedDashboardArtistRoute
     }
+    '/_authenticated/dashboard/artist/notifications': {
+      id: '/_authenticated/dashboard/artist/notifications'
+      path: '/notifications'
+      fullPath: '/dashboard/artist/notifications'
+      preLoaderRoute: typeof AuthenticatedDashboardArtistNotificationsRouteImport
+      parentRoute: typeof AuthenticatedDashboardArtistRoute
+    }
     '/_authenticated/dashboard/artist/invitations': {
       id: '/_authenticated/dashboard/artist/invitations'
       path: '/invitations'
@@ -1078,6 +1098,7 @@ interface AuthenticatedDashboardArtistRouteChildren {
   AuthenticatedDashboardArtistApplicationsRoute: typeof AuthenticatedDashboardArtistApplicationsRoute
   AuthenticatedDashboardArtistGroupsRoute: typeof AuthenticatedDashboardArtistGroupsRoute
   AuthenticatedDashboardArtistInvitationsRoute: typeof AuthenticatedDashboardArtistInvitationsRoute
+  AuthenticatedDashboardArtistNotificationsRoute: typeof AuthenticatedDashboardArtistNotificationsRoute
   AuthenticatedDashboardArtistOpportunitiesRoute: typeof AuthenticatedDashboardArtistOpportunitiesRoute
   AuthenticatedDashboardArtistPortfolioRoute: typeof AuthenticatedDashboardArtistPortfolioRoute
   AuthenticatedDashboardArtistProductionsRoute: typeof AuthenticatedDashboardArtistProductionsRoute
@@ -1093,6 +1114,8 @@ const AuthenticatedDashboardArtistRouteChildren: AuthenticatedDashboardArtistRou
       AuthenticatedDashboardArtistGroupsRoute,
     AuthenticatedDashboardArtistInvitationsRoute:
       AuthenticatedDashboardArtistInvitationsRoute,
+    AuthenticatedDashboardArtistNotificationsRoute:
+      AuthenticatedDashboardArtistNotificationsRoute,
     AuthenticatedDashboardArtistOpportunitiesRoute:
       AuthenticatedDashboardArtistOpportunitiesRoute,
     AuthenticatedDashboardArtistPortfolioRoute:
