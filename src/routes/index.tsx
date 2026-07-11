@@ -348,7 +348,7 @@ function FeaturedShows() {
         eyebrow="Now on stage"
         title="Featured shows this season"
         desc="Handpicked productions from across the country — from folk revivals to bold new writing."
-        cta={{ to: "/shows", label: "See all shows" }}
+        cta={{ to: "/explore/shows", label: "See all shows" }}
       />
 
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -423,7 +423,7 @@ function FeaturedGroups() {
           eyebrow="The troupes"
           title="Featured theatre groups"
           desc="From heritage institutions to bold new collectives shaping the next chapter of Bangla theatre."
-          cta={{ to: "/groups", label: "Browse all groups" }}
+          cta={{ to: "/explore/groups", label: "Browse all groups" }}
         />
 
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -490,7 +490,7 @@ function FeaturedArtists() {
         eyebrow="The talent"
         title="Featured artists"
         desc="Verified performers, directors and playwrights building tomorrow's canon."
-        cta={{ to: "/artists", label: "Discover all artists" }}
+        cta={{ to: "/explore/artists", label: "Discover all artists" }}
       />
 
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
