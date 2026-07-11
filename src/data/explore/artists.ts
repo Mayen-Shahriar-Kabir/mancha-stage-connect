@@ -4,8 +4,12 @@ import artist2 from "@/assets/artist-2.jpg";
 import artist3 from "@/assets/artist-3.jpg";
 import artist4 from "@/assets/artist-4.jpg";
 
-const localPhotos = [artist1, artist2, artist3, artist4];
-const photoFor = (i: number) => localPhotos[i % localPhotos.length];
+const malePhotos = [artist1, artist3];
+const femalePhotos = [artist2, artist4];
+const photoFor = (i: number, gender: "m" | "f") => {
+  const pool = gender === "m" ? malePhotos : femalePhotos;
+  return pool[i % pool.length];
+};
 
 const covers = [
   "https://images.unsplash.com/photo-1503095396549-807759245b35?w=1600&q=80",
