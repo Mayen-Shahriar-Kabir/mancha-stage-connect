@@ -14,9 +14,7 @@ import { useAuth, dashboardPathForRole, ROLE_LABELS } from "@/hooks/use-auth";
 
 const NAV = [
   { to: "/", label: "Home" },
-  { to: "/shows", label: "Shows" },
-  { to: "/artists", label: "Artists" },
-  { to: "/groups", label: "Groups" },
+  { to: "/explore/shows", label: "Explore", match: "/explore" },
   { to: "/about", label: "About" },
   { to: "/contact", label: "Contact" },
 ] as const;
@@ -55,7 +53,8 @@ export function Navbar() {
 
         <nav className="hidden items-center gap-8 md:flex" aria-label="Primary">
           {NAV.map((item) => {
-            const active = pathname === item.to;
+            const matchPath = "match" in item ? item.match : item.to;
+            const active = item.to === "/" ? pathname === "/" : pathname.startsWith(matchPath);
             return (
               <Link
                 key={item.to}
