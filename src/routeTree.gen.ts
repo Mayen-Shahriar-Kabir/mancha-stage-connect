@@ -27,6 +27,9 @@ import { Route as AboutRouteImport } from './routes/about'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ExploreIndexRouteImport } from './routes/explore.index'
+import { Route as ExploreShowsRouteImport } from './routes/explore.shows'
+import { Route as ExploreGroupsRouteImport } from './routes/explore.groups'
+import { Route as ExploreArtistsRouteImport } from './routes/explore.artists'
 import { Route as AuthenticatedDashboardIndexRouteImport } from './routes/_authenticated/dashboard.index'
 import { Route as AuthenticatedDashboardOrganizationRouteImport } from './routes/_authenticated/dashboard.organization'
 import { Route as AuthenticatedDashboardGroupRouteImport } from './routes/_authenticated/dashboard.group'
@@ -123,6 +126,21 @@ const ExploreIndexRoute = ExploreIndexRouteImport.update({
   path: '/',
   getParentRoute: () => ExploreRoute,
 } as any)
+const ExploreShowsRoute = ExploreShowsRouteImport.update({
+  id: '/shows',
+  path: '/shows',
+  getParentRoute: () => ExploreRoute,
+} as any)
+const ExploreGroupsRoute = ExploreGroupsRouteImport.update({
+  id: '/groups',
+  path: '/groups',
+  getParentRoute: () => ExploreRoute,
+} as any)
+const ExploreArtistsRoute = ExploreArtistsRouteImport.update({
+  id: '/artists',
+  path: '/artists',
+  getParentRoute: () => ExploreRoute,
+} as any)
 const AuthenticatedDashboardIndexRoute =
   AuthenticatedDashboardIndexRouteImport.update({
     id: '/dashboard/',
@@ -177,6 +195,9 @@ export interface FileRoutesByFullPath {
   '/shows': typeof ShowsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/suspended': typeof SuspendedRoute
+  '/explore/artists': typeof ExploreArtistsRoute
+  '/explore/groups': typeof ExploreGroupsRoute
+  '/explore/shows': typeof ExploreShowsRoute
   '/explore/': typeof ExploreIndexRoute
   '/dashboard/admin': typeof AuthenticatedDashboardAdminRoute
   '/dashboard/artist': typeof AuthenticatedDashboardArtistRoute
@@ -201,6 +222,9 @@ export interface FileRoutesByTo {
   '/shows': typeof ShowsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/suspended': typeof SuspendedRoute
+  '/explore/artists': typeof ExploreArtistsRoute
+  '/explore/groups': typeof ExploreGroupsRoute
+  '/explore/shows': typeof ExploreShowsRoute
   '/explore': typeof ExploreIndexRoute
   '/dashboard/admin': typeof AuthenticatedDashboardAdminRoute
   '/dashboard/artist': typeof AuthenticatedDashboardArtistRoute
@@ -228,6 +252,9 @@ export interface FileRoutesById {
   '/shows': typeof ShowsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/suspended': typeof SuspendedRoute
+  '/explore/artists': typeof ExploreArtistsRoute
+  '/explore/groups': typeof ExploreGroupsRoute
+  '/explore/shows': typeof ExploreShowsRoute
   '/explore/': typeof ExploreIndexRoute
   '/_authenticated/dashboard/admin': typeof AuthenticatedDashboardAdminRoute
   '/_authenticated/dashboard/artist': typeof AuthenticatedDashboardArtistRoute
@@ -255,6 +282,9 @@ export interface FileRouteTypes {
     | '/shows'
     | '/sitemap.xml'
     | '/suspended'
+    | '/explore/artists'
+    | '/explore/groups'
+    | '/explore/shows'
     | '/explore/'
     | '/dashboard/admin'
     | '/dashboard/artist'
@@ -279,6 +309,9 @@ export interface FileRouteTypes {
     | '/shows'
     | '/sitemap.xml'
     | '/suspended'
+    | '/explore/artists'
+    | '/explore/groups'
+    | '/explore/shows'
     | '/explore'
     | '/dashboard/admin'
     | '/dashboard/artist'
@@ -305,6 +338,9 @@ export interface FileRouteTypes {
     | '/shows'
     | '/sitemap.xml'
     | '/suspended'
+    | '/explore/artists'
+    | '/explore/groups'
+    | '/explore/shows'
     | '/explore/'
     | '/_authenticated/dashboard/admin'
     | '/_authenticated/dashboard/artist'
@@ -462,6 +498,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ExploreIndexRouteImport
       parentRoute: typeof ExploreRoute
     }
+    '/explore/shows': {
+      id: '/explore/shows'
+      path: '/shows'
+      fullPath: '/explore/shows'
+      preLoaderRoute: typeof ExploreShowsRouteImport
+      parentRoute: typeof ExploreRoute
+    }
+    '/explore/groups': {
+      id: '/explore/groups'
+      path: '/groups'
+      fullPath: '/explore/groups'
+      preLoaderRoute: typeof ExploreGroupsRouteImport
+      parentRoute: typeof ExploreRoute
+    }
+    '/explore/artists': {
+      id: '/explore/artists'
+      path: '/artists'
+      fullPath: '/explore/artists'
+      preLoaderRoute: typeof ExploreArtistsRouteImport
+      parentRoute: typeof ExploreRoute
+    }
     '/_authenticated/dashboard/': {
       id: '/_authenticated/dashboard/'
       path: '/dashboard'
@@ -530,10 +587,16 @@ const AuthenticatedRouteRouteWithChildren =
   AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
 
 interface ExploreRouteChildren {
+  ExploreArtistsRoute: typeof ExploreArtistsRoute
+  ExploreGroupsRoute: typeof ExploreGroupsRoute
+  ExploreShowsRoute: typeof ExploreShowsRoute
   ExploreIndexRoute: typeof ExploreIndexRoute
 }
 
 const ExploreRouteChildren: ExploreRouteChildren = {
+  ExploreArtistsRoute: ExploreArtistsRoute,
+  ExploreGroupsRoute: ExploreGroupsRoute,
+  ExploreShowsRoute: ExploreShowsRoute,
   ExploreIndexRoute: ExploreIndexRoute,
 }
 
