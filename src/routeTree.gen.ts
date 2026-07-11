@@ -31,10 +31,7 @@ import { Route as AuthenticatedDashboardIndexRouteImport } from './routes/_authe
 import { Route as ExploreShowsSlugRouteImport } from './routes/explore.shows.$slug'
 import { Route as ExploreGroupsSlugRouteImport } from './routes/explore.groups.$slug'
 import { Route as ExploreArtistsSlugRouteImport } from './routes/explore.artists.$slug'
-import { Route as AuthenticatedDashboardOrganizationRouteImport } from './routes/_authenticated/dashboard.organization'
 import { Route as AuthenticatedDashboardGroupRouteImport } from './routes/_authenticated/dashboard.group'
-import { Route as AuthenticatedDashboardAudienceRouteImport } from './routes/_authenticated/dashboard.audience'
-import { Route as AuthenticatedDashboardArtistRouteImport } from './routes/_authenticated/dashboard.artist'
 import { Route as AuthenticatedDashboardAdminRouteImport } from './routes/_authenticated/dashboard.admin'
 import { Route as AuthenticatedDashboardGroupIndexRouteImport } from './routes/_authenticated/dashboard.group.index'
 import { Route as AuthenticatedDashboardAdminIndexRouteImport } from './routes/_authenticated/dashboard.admin.index'
@@ -165,28 +162,10 @@ const ExploreArtistsSlugRoute = ExploreArtistsSlugRouteImport.update({
   path: '/$slug',
   getParentRoute: () => ExploreArtistsRoute,
 } as any)
-const AuthenticatedDashboardOrganizationRoute =
-  AuthenticatedDashboardOrganizationRouteImport.update({
-    id: '/dashboard/organization',
-    path: '/dashboard/organization',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
 const AuthenticatedDashboardGroupRoute =
   AuthenticatedDashboardGroupRouteImport.update({
     id: '/dashboard/group',
     path: '/dashboard/group',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
-const AuthenticatedDashboardAudienceRoute =
-  AuthenticatedDashboardAudienceRouteImport.update({
-    id: '/dashboard/audience',
-    path: '/dashboard/audience',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
-const AuthenticatedDashboardArtistRoute =
-  AuthenticatedDashboardArtistRouteImport.update({
-    id: '/dashboard/artist',
-    path: '/dashboard/artist',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedDashboardAdminRoute =
@@ -323,10 +302,7 @@ export interface FileRoutesByFullPath {
   '/explore/shows': typeof ExploreShowsRouteWithChildren
   '/explore/': typeof ExploreIndexRoute
   '/dashboard/admin': typeof AuthenticatedDashboardAdminRouteWithChildren
-  '/dashboard/artist': typeof AuthenticatedDashboardArtistRoute
-  '/dashboard/audience': typeof AuthenticatedDashboardAudienceRoute
   '/dashboard/group': typeof AuthenticatedDashboardGroupRouteWithChildren
-  '/dashboard/organization': typeof AuthenticatedDashboardOrganizationRoute
   '/explore/artists/$slug': typeof ExploreArtistsSlugRoute
   '/explore/groups/$slug': typeof ExploreGroupsSlugRoute
   '/explore/shows/$slug': typeof ExploreShowsSlugRoute
@@ -367,9 +343,6 @@ export interface FileRoutesByTo {
   '/explore/groups': typeof ExploreGroupsRouteWithChildren
   '/explore/shows': typeof ExploreShowsRouteWithChildren
   '/explore': typeof ExploreIndexRoute
-  '/dashboard/artist': typeof AuthenticatedDashboardArtistRoute
-  '/dashboard/audience': typeof AuthenticatedDashboardAudienceRoute
-  '/dashboard/organization': typeof AuthenticatedDashboardOrganizationRoute
   '/explore/artists/$slug': typeof ExploreArtistsSlugRoute
   '/explore/groups/$slug': typeof ExploreGroupsSlugRoute
   '/explore/shows/$slug': typeof ExploreShowsSlugRoute
@@ -414,10 +387,7 @@ export interface FileRoutesById {
   '/explore/shows': typeof ExploreShowsRouteWithChildren
   '/explore/': typeof ExploreIndexRoute
   '/_authenticated/dashboard/admin': typeof AuthenticatedDashboardAdminRouteWithChildren
-  '/_authenticated/dashboard/artist': typeof AuthenticatedDashboardArtistRoute
-  '/_authenticated/dashboard/audience': typeof AuthenticatedDashboardAudienceRoute
   '/_authenticated/dashboard/group': typeof AuthenticatedDashboardGroupRouteWithChildren
-  '/_authenticated/dashboard/organization': typeof AuthenticatedDashboardOrganizationRoute
   '/explore/artists/$slug': typeof ExploreArtistsSlugRoute
   '/explore/groups/$slug': typeof ExploreGroupsSlugRoute
   '/explore/shows/$slug': typeof ExploreShowsSlugRoute
@@ -462,10 +432,7 @@ export interface FileRouteTypes {
     | '/explore/shows'
     | '/explore/'
     | '/dashboard/admin'
-    | '/dashboard/artist'
-    | '/dashboard/audience'
     | '/dashboard/group'
-    | '/dashboard/organization'
     | '/explore/artists/$slug'
     | '/explore/groups/$slug'
     | '/explore/shows/$slug'
@@ -506,9 +473,6 @@ export interface FileRouteTypes {
     | '/explore/groups'
     | '/explore/shows'
     | '/explore'
-    | '/dashboard/artist'
-    | '/dashboard/audience'
-    | '/dashboard/organization'
     | '/explore/artists/$slug'
     | '/explore/groups/$slug'
     | '/explore/shows/$slug'
@@ -552,10 +516,7 @@ export interface FileRouteTypes {
     | '/explore/shows'
     | '/explore/'
     | '/_authenticated/dashboard/admin'
-    | '/_authenticated/dashboard/artist'
-    | '/_authenticated/dashboard/audience'
     | '/_authenticated/dashboard/group'
-    | '/_authenticated/dashboard/organization'
     | '/explore/artists/$slug'
     | '/explore/groups/$slug'
     | '/explore/shows/$slug'
@@ -753,32 +714,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ExploreArtistsSlugRouteImport
       parentRoute: typeof ExploreArtistsRoute
     }
-    '/_authenticated/dashboard/organization': {
-      id: '/_authenticated/dashboard/organization'
-      path: '/dashboard/organization'
-      fullPath: '/dashboard/organization'
-      preLoaderRoute: typeof AuthenticatedDashboardOrganizationRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
     '/_authenticated/dashboard/group': {
       id: '/_authenticated/dashboard/group'
       path: '/dashboard/group'
       fullPath: '/dashboard/group'
       preLoaderRoute: typeof AuthenticatedDashboardGroupRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/dashboard/audience': {
-      id: '/_authenticated/dashboard/audience'
-      path: '/dashboard/audience'
-      fullPath: '/dashboard/audience'
-      preLoaderRoute: typeof AuthenticatedDashboardAudienceRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/dashboard/artist': {
-      id: '/_authenticated/dashboard/artist'
-      path: '/dashboard/artist'
-      fullPath: '/dashboard/artist'
-      preLoaderRoute: typeof AuthenticatedDashboardArtistRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/dashboard/admin': {
@@ -997,22 +937,15 @@ const AuthenticatedDashboardGroupRouteWithChildren =
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedDashboardAdminRoute: typeof AuthenticatedDashboardAdminRouteWithChildren
-  AuthenticatedDashboardArtistRoute: typeof AuthenticatedDashboardArtistRoute
-  AuthenticatedDashboardAudienceRoute: typeof AuthenticatedDashboardAudienceRoute
   AuthenticatedDashboardGroupRoute: typeof AuthenticatedDashboardGroupRouteWithChildren
-  AuthenticatedDashboardOrganizationRoute: typeof AuthenticatedDashboardOrganizationRoute
   AuthenticatedDashboardIndexRoute: typeof AuthenticatedDashboardIndexRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedDashboardAdminRoute:
     AuthenticatedDashboardAdminRouteWithChildren,
-  AuthenticatedDashboardArtistRoute: AuthenticatedDashboardArtistRoute,
-  AuthenticatedDashboardAudienceRoute: AuthenticatedDashboardAudienceRoute,
   AuthenticatedDashboardGroupRoute:
     AuthenticatedDashboardGroupRouteWithChildren,
-  AuthenticatedDashboardOrganizationRoute:
-    AuthenticatedDashboardOrganizationRoute,
   AuthenticatedDashboardIndexRoute: AuthenticatedDashboardIndexRoute,
 }
 
@@ -1091,13 +1024,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
