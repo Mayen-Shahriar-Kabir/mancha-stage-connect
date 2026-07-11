@@ -4,10 +4,10 @@ import { cn } from "@/lib/utils";
 const FALLBACK =
   "https://images.unsplash.com/photo-1503095396549-807759245b35?w=1200&q=80";
 
-interface Props extends React.ImgHTMLAttributes<HTMLImageElement> {
+type Props = Omit<React.ImgHTMLAttributes<HTMLImageElement>, "src"> & {
   src?: string | null;
   fallback?: string;
-}
+};
 
 /**
  * Poster / cover image that gracefully falls back to a branded stage photo
