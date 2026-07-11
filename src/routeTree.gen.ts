@@ -36,8 +36,18 @@ import { Route as AuthenticatedDashboardGroupRouteImport } from './routes/_authe
 import { Route as AuthenticatedDashboardAudienceRouteImport } from './routes/_authenticated/dashboard.audience'
 import { Route as AuthenticatedDashboardArtistRouteImport } from './routes/_authenticated/dashboard.artist'
 import { Route as AuthenticatedDashboardAdminRouteImport } from './routes/_authenticated/dashboard.admin'
+import { Route as AuthenticatedDashboardOrganizationIndexRouteImport } from './routes/_authenticated/dashboard.organization.index'
 import { Route as AuthenticatedDashboardGroupIndexRouteImport } from './routes/_authenticated/dashboard.group.index'
+import { Route as AuthenticatedDashboardAudienceIndexRouteImport } from './routes/_authenticated/dashboard.audience.index'
+import { Route as AuthenticatedDashboardArtistIndexRouteImport } from './routes/_authenticated/dashboard.artist.index'
 import { Route as AuthenticatedDashboardAdminIndexRouteImport } from './routes/_authenticated/dashboard.admin.index'
+import { Route as AuthenticatedDashboardOrganizationSettingsRouteImport } from './routes/_authenticated/dashboard.organization.settings'
+import { Route as AuthenticatedDashboardOrganizationOpportunitiesRouteImport } from './routes/_authenticated/dashboard.organization.opportunities'
+import { Route as AuthenticatedDashboardOrganizationNotificationsRouteImport } from './routes/_authenticated/dashboard.organization.notifications'
+import { Route as AuthenticatedDashboardOrganizationEventsRouteImport } from './routes/_authenticated/dashboard.organization.events'
+import { Route as AuthenticatedDashboardOrganizationCollaborationsRouteImport } from './routes/_authenticated/dashboard.organization.collaborations'
+import { Route as AuthenticatedDashboardOrganizationBookingsRouteImport } from './routes/_authenticated/dashboard.organization.bookings'
+import { Route as AuthenticatedDashboardOrganizationAnalyticsRouteImport } from './routes/_authenticated/dashboard.organization.analytics'
 import { Route as AuthenticatedDashboardGroupSettingsRouteImport } from './routes/_authenticated/dashboard.group.settings'
 import { Route as AuthenticatedDashboardGroupProductionsRouteImport } from './routes/_authenticated/dashboard.group.productions'
 import { Route as AuthenticatedDashboardGroupOpportunitiesRouteImport } from './routes/_authenticated/dashboard.group.opportunities'
@@ -46,6 +56,23 @@ import { Route as AuthenticatedDashboardGroupLearningRouteImport } from './route
 import { Route as AuthenticatedDashboardGroupFundingRouteImport } from './routes/_authenticated/dashboard.group.funding'
 import { Route as AuthenticatedDashboardGroupCommunityRouteImport } from './routes/_authenticated/dashboard.group.community'
 import { Route as AuthenticatedDashboardGroupAnalyticsRouteImport } from './routes/_authenticated/dashboard.group.analytics'
+import { Route as AuthenticatedDashboardAudienceWatchlistRouteImport } from './routes/_authenticated/dashboard.audience.watchlist'
+import { Route as AuthenticatedDashboardAudienceTicketsRouteImport } from './routes/_authenticated/dashboard.audience.tickets'
+import { Route as AuthenticatedDashboardAudienceSettingsRouteImport } from './routes/_authenticated/dashboard.audience.settings'
+import { Route as AuthenticatedDashboardAudienceReviewsRouteImport } from './routes/_authenticated/dashboard.audience.reviews'
+import { Route as AuthenticatedDashboardAudiencePremiumRouteImport } from './routes/_authenticated/dashboard.audience.premium'
+import { Route as AuthenticatedDashboardAudienceNotificationsRouteImport } from './routes/_authenticated/dashboard.audience.notifications'
+import { Route as AuthenticatedDashboardAudienceMeetupsRouteImport } from './routes/_authenticated/dashboard.audience.meetups'
+import { Route as AuthenticatedDashboardAudienceCommunityRouteImport } from './routes/_authenticated/dashboard.audience.community'
+import { Route as AuthenticatedDashboardArtistTrainingRouteImport } from './routes/_authenticated/dashboard.artist.training'
+import { Route as AuthenticatedDashboardArtistSettingsRouteImport } from './routes/_authenticated/dashboard.artist.settings'
+import { Route as AuthenticatedDashboardArtistProductionsRouteImport } from './routes/_authenticated/dashboard.artist.productions'
+import { Route as AuthenticatedDashboardArtistPortfolioRouteImport } from './routes/_authenticated/dashboard.artist.portfolio'
+import { Route as AuthenticatedDashboardArtistOpportunitiesRouteImport } from './routes/_authenticated/dashboard.artist.opportunities'
+import { Route as AuthenticatedDashboardArtistNotificationsRouteImport } from './routes/_authenticated/dashboard.artist.notifications'
+import { Route as AuthenticatedDashboardArtistInvitationsRouteImport } from './routes/_authenticated/dashboard.artist.invitations'
+import { Route as AuthenticatedDashboardArtistGroupsRouteImport } from './routes/_authenticated/dashboard.artist.groups'
+import { Route as AuthenticatedDashboardArtistApplicationsRouteImport } from './routes/_authenticated/dashboard.artist.applications'
 import { Route as AuthenticatedDashboardAdminUsersRouteImport } from './routes/_authenticated/dashboard.admin.users'
 import { Route as AuthenticatedDashboardAdminSubscriptionsRouteImport } from './routes/_authenticated/dashboard.admin.subscriptions'
 import { Route as AuthenticatedDashboardAdminSettingsRouteImport } from './routes/_authenticated/dashboard.admin.settings'
@@ -195,17 +222,77 @@ const AuthenticatedDashboardAdminRoute =
     path: '/dashboard/admin',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedDashboardOrganizationIndexRoute =
+  AuthenticatedDashboardOrganizationIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => AuthenticatedDashboardOrganizationRoute,
+  } as any)
 const AuthenticatedDashboardGroupIndexRoute =
   AuthenticatedDashboardGroupIndexRouteImport.update({
     id: '/',
     path: '/',
     getParentRoute: () => AuthenticatedDashboardGroupRoute,
   } as any)
+const AuthenticatedDashboardAudienceIndexRoute =
+  AuthenticatedDashboardAudienceIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => AuthenticatedDashboardAudienceRoute,
+  } as any)
+const AuthenticatedDashboardArtistIndexRoute =
+  AuthenticatedDashboardArtistIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => AuthenticatedDashboardArtistRoute,
+  } as any)
 const AuthenticatedDashboardAdminIndexRoute =
   AuthenticatedDashboardAdminIndexRouteImport.update({
     id: '/',
     path: '/',
     getParentRoute: () => AuthenticatedDashboardAdminRoute,
+  } as any)
+const AuthenticatedDashboardOrganizationSettingsRoute =
+  AuthenticatedDashboardOrganizationSettingsRouteImport.update({
+    id: '/settings',
+    path: '/settings',
+    getParentRoute: () => AuthenticatedDashboardOrganizationRoute,
+  } as any)
+const AuthenticatedDashboardOrganizationOpportunitiesRoute =
+  AuthenticatedDashboardOrganizationOpportunitiesRouteImport.update({
+    id: '/opportunities',
+    path: '/opportunities',
+    getParentRoute: () => AuthenticatedDashboardOrganizationRoute,
+  } as any)
+const AuthenticatedDashboardOrganizationNotificationsRoute =
+  AuthenticatedDashboardOrganizationNotificationsRouteImport.update({
+    id: '/notifications',
+    path: '/notifications',
+    getParentRoute: () => AuthenticatedDashboardOrganizationRoute,
+  } as any)
+const AuthenticatedDashboardOrganizationEventsRoute =
+  AuthenticatedDashboardOrganizationEventsRouteImport.update({
+    id: '/events',
+    path: '/events',
+    getParentRoute: () => AuthenticatedDashboardOrganizationRoute,
+  } as any)
+const AuthenticatedDashboardOrganizationCollaborationsRoute =
+  AuthenticatedDashboardOrganizationCollaborationsRouteImport.update({
+    id: '/collaborations',
+    path: '/collaborations',
+    getParentRoute: () => AuthenticatedDashboardOrganizationRoute,
+  } as any)
+const AuthenticatedDashboardOrganizationBookingsRoute =
+  AuthenticatedDashboardOrganizationBookingsRouteImport.update({
+    id: '/bookings',
+    path: '/bookings',
+    getParentRoute: () => AuthenticatedDashboardOrganizationRoute,
+  } as any)
+const AuthenticatedDashboardOrganizationAnalyticsRoute =
+  AuthenticatedDashboardOrganizationAnalyticsRouteImport.update({
+    id: '/analytics',
+    path: '/analytics',
+    getParentRoute: () => AuthenticatedDashboardOrganizationRoute,
   } as any)
 const AuthenticatedDashboardGroupSettingsRoute =
   AuthenticatedDashboardGroupSettingsRouteImport.update({
@@ -254,6 +341,108 @@ const AuthenticatedDashboardGroupAnalyticsRoute =
     id: '/analytics',
     path: '/analytics',
     getParentRoute: () => AuthenticatedDashboardGroupRoute,
+  } as any)
+const AuthenticatedDashboardAudienceWatchlistRoute =
+  AuthenticatedDashboardAudienceWatchlistRouteImport.update({
+    id: '/watchlist',
+    path: '/watchlist',
+    getParentRoute: () => AuthenticatedDashboardAudienceRoute,
+  } as any)
+const AuthenticatedDashboardAudienceTicketsRoute =
+  AuthenticatedDashboardAudienceTicketsRouteImport.update({
+    id: '/tickets',
+    path: '/tickets',
+    getParentRoute: () => AuthenticatedDashboardAudienceRoute,
+  } as any)
+const AuthenticatedDashboardAudienceSettingsRoute =
+  AuthenticatedDashboardAudienceSettingsRouteImport.update({
+    id: '/settings',
+    path: '/settings',
+    getParentRoute: () => AuthenticatedDashboardAudienceRoute,
+  } as any)
+const AuthenticatedDashboardAudienceReviewsRoute =
+  AuthenticatedDashboardAudienceReviewsRouteImport.update({
+    id: '/reviews',
+    path: '/reviews',
+    getParentRoute: () => AuthenticatedDashboardAudienceRoute,
+  } as any)
+const AuthenticatedDashboardAudiencePremiumRoute =
+  AuthenticatedDashboardAudiencePremiumRouteImport.update({
+    id: '/premium',
+    path: '/premium',
+    getParentRoute: () => AuthenticatedDashboardAudienceRoute,
+  } as any)
+const AuthenticatedDashboardAudienceNotificationsRoute =
+  AuthenticatedDashboardAudienceNotificationsRouteImport.update({
+    id: '/notifications',
+    path: '/notifications',
+    getParentRoute: () => AuthenticatedDashboardAudienceRoute,
+  } as any)
+const AuthenticatedDashboardAudienceMeetupsRoute =
+  AuthenticatedDashboardAudienceMeetupsRouteImport.update({
+    id: '/meetups',
+    path: '/meetups',
+    getParentRoute: () => AuthenticatedDashboardAudienceRoute,
+  } as any)
+const AuthenticatedDashboardAudienceCommunityRoute =
+  AuthenticatedDashboardAudienceCommunityRouteImport.update({
+    id: '/community',
+    path: '/community',
+    getParentRoute: () => AuthenticatedDashboardAudienceRoute,
+  } as any)
+const AuthenticatedDashboardArtistTrainingRoute =
+  AuthenticatedDashboardArtistTrainingRouteImport.update({
+    id: '/training',
+    path: '/training',
+    getParentRoute: () => AuthenticatedDashboardArtistRoute,
+  } as any)
+const AuthenticatedDashboardArtistSettingsRoute =
+  AuthenticatedDashboardArtistSettingsRouteImport.update({
+    id: '/settings',
+    path: '/settings',
+    getParentRoute: () => AuthenticatedDashboardArtistRoute,
+  } as any)
+const AuthenticatedDashboardArtistProductionsRoute =
+  AuthenticatedDashboardArtistProductionsRouteImport.update({
+    id: '/productions',
+    path: '/productions',
+    getParentRoute: () => AuthenticatedDashboardArtistRoute,
+  } as any)
+const AuthenticatedDashboardArtistPortfolioRoute =
+  AuthenticatedDashboardArtistPortfolioRouteImport.update({
+    id: '/portfolio',
+    path: '/portfolio',
+    getParentRoute: () => AuthenticatedDashboardArtistRoute,
+  } as any)
+const AuthenticatedDashboardArtistOpportunitiesRoute =
+  AuthenticatedDashboardArtistOpportunitiesRouteImport.update({
+    id: '/opportunities',
+    path: '/opportunities',
+    getParentRoute: () => AuthenticatedDashboardArtistRoute,
+  } as any)
+const AuthenticatedDashboardArtistNotificationsRoute =
+  AuthenticatedDashboardArtistNotificationsRouteImport.update({
+    id: '/notifications',
+    path: '/notifications',
+    getParentRoute: () => AuthenticatedDashboardArtistRoute,
+  } as any)
+const AuthenticatedDashboardArtistInvitationsRoute =
+  AuthenticatedDashboardArtistInvitationsRouteImport.update({
+    id: '/invitations',
+    path: '/invitations',
+    getParentRoute: () => AuthenticatedDashboardArtistRoute,
+  } as any)
+const AuthenticatedDashboardArtistGroupsRoute =
+  AuthenticatedDashboardArtistGroupsRouteImport.update({
+    id: '/groups',
+    path: '/groups',
+    getParentRoute: () => AuthenticatedDashboardArtistRoute,
+  } as any)
+const AuthenticatedDashboardArtistApplicationsRoute =
+  AuthenticatedDashboardArtistApplicationsRouteImport.update({
+    id: '/applications',
+    path: '/applications',
+    getParentRoute: () => AuthenticatedDashboardArtistRoute,
   } as any)
 const AuthenticatedDashboardAdminUsersRoute =
   AuthenticatedDashboardAdminUsersRouteImport.update({
@@ -323,10 +512,10 @@ export interface FileRoutesByFullPath {
   '/explore/shows': typeof ExploreShowsRouteWithChildren
   '/explore/': typeof ExploreIndexRoute
   '/dashboard/admin': typeof AuthenticatedDashboardAdminRouteWithChildren
-  '/dashboard/artist': typeof AuthenticatedDashboardArtistRoute
-  '/dashboard/audience': typeof AuthenticatedDashboardAudienceRoute
+  '/dashboard/artist': typeof AuthenticatedDashboardArtistRouteWithChildren
+  '/dashboard/audience': typeof AuthenticatedDashboardAudienceRouteWithChildren
   '/dashboard/group': typeof AuthenticatedDashboardGroupRouteWithChildren
-  '/dashboard/organization': typeof AuthenticatedDashboardOrganizationRoute
+  '/dashboard/organization': typeof AuthenticatedDashboardOrganizationRouteWithChildren
   '/explore/artists/$slug': typeof ExploreArtistsSlugRoute
   '/explore/groups/$slug': typeof ExploreGroupsSlugRoute
   '/explore/shows/$slug': typeof ExploreShowsSlugRoute
@@ -339,6 +528,23 @@ export interface FileRoutesByFullPath {
   '/dashboard/admin/settings': typeof AuthenticatedDashboardAdminSettingsRoute
   '/dashboard/admin/subscriptions': typeof AuthenticatedDashboardAdminSubscriptionsRoute
   '/dashboard/admin/users': typeof AuthenticatedDashboardAdminUsersRoute
+  '/dashboard/artist/applications': typeof AuthenticatedDashboardArtistApplicationsRoute
+  '/dashboard/artist/groups': typeof AuthenticatedDashboardArtistGroupsRoute
+  '/dashboard/artist/invitations': typeof AuthenticatedDashboardArtistInvitationsRoute
+  '/dashboard/artist/notifications': typeof AuthenticatedDashboardArtistNotificationsRoute
+  '/dashboard/artist/opportunities': typeof AuthenticatedDashboardArtistOpportunitiesRoute
+  '/dashboard/artist/portfolio': typeof AuthenticatedDashboardArtistPortfolioRoute
+  '/dashboard/artist/productions': typeof AuthenticatedDashboardArtistProductionsRoute
+  '/dashboard/artist/settings': typeof AuthenticatedDashboardArtistSettingsRoute
+  '/dashboard/artist/training': typeof AuthenticatedDashboardArtistTrainingRoute
+  '/dashboard/audience/community': typeof AuthenticatedDashboardAudienceCommunityRoute
+  '/dashboard/audience/meetups': typeof AuthenticatedDashboardAudienceMeetupsRoute
+  '/dashboard/audience/notifications': typeof AuthenticatedDashboardAudienceNotificationsRoute
+  '/dashboard/audience/premium': typeof AuthenticatedDashboardAudiencePremiumRoute
+  '/dashboard/audience/reviews': typeof AuthenticatedDashboardAudienceReviewsRoute
+  '/dashboard/audience/settings': typeof AuthenticatedDashboardAudienceSettingsRoute
+  '/dashboard/audience/tickets': typeof AuthenticatedDashboardAudienceTicketsRoute
+  '/dashboard/audience/watchlist': typeof AuthenticatedDashboardAudienceWatchlistRoute
   '/dashboard/group/analytics': typeof AuthenticatedDashboardGroupAnalyticsRoute
   '/dashboard/group/community': typeof AuthenticatedDashboardGroupCommunityRoute
   '/dashboard/group/funding': typeof AuthenticatedDashboardGroupFundingRoute
@@ -347,8 +553,18 @@ export interface FileRoutesByFullPath {
   '/dashboard/group/opportunities': typeof AuthenticatedDashboardGroupOpportunitiesRoute
   '/dashboard/group/productions': typeof AuthenticatedDashboardGroupProductionsRoute
   '/dashboard/group/settings': typeof AuthenticatedDashboardGroupSettingsRoute
+  '/dashboard/organization/analytics': typeof AuthenticatedDashboardOrganizationAnalyticsRoute
+  '/dashboard/organization/bookings': typeof AuthenticatedDashboardOrganizationBookingsRoute
+  '/dashboard/organization/collaborations': typeof AuthenticatedDashboardOrganizationCollaborationsRoute
+  '/dashboard/organization/events': typeof AuthenticatedDashboardOrganizationEventsRoute
+  '/dashboard/organization/notifications': typeof AuthenticatedDashboardOrganizationNotificationsRoute
+  '/dashboard/organization/opportunities': typeof AuthenticatedDashboardOrganizationOpportunitiesRoute
+  '/dashboard/organization/settings': typeof AuthenticatedDashboardOrganizationSettingsRoute
   '/dashboard/admin/': typeof AuthenticatedDashboardAdminIndexRoute
+  '/dashboard/artist/': typeof AuthenticatedDashboardArtistIndexRoute
+  '/dashboard/audience/': typeof AuthenticatedDashboardAudienceIndexRoute
   '/dashboard/group/': typeof AuthenticatedDashboardGroupIndexRoute
+  '/dashboard/organization/': typeof AuthenticatedDashboardOrganizationIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -367,9 +583,6 @@ export interface FileRoutesByTo {
   '/explore/groups': typeof ExploreGroupsRouteWithChildren
   '/explore/shows': typeof ExploreShowsRouteWithChildren
   '/explore': typeof ExploreIndexRoute
-  '/dashboard/artist': typeof AuthenticatedDashboardArtistRoute
-  '/dashboard/audience': typeof AuthenticatedDashboardAudienceRoute
-  '/dashboard/organization': typeof AuthenticatedDashboardOrganizationRoute
   '/explore/artists/$slug': typeof ExploreArtistsSlugRoute
   '/explore/groups/$slug': typeof ExploreGroupsSlugRoute
   '/explore/shows/$slug': typeof ExploreShowsSlugRoute
@@ -382,6 +595,23 @@ export interface FileRoutesByTo {
   '/dashboard/admin/settings': typeof AuthenticatedDashboardAdminSettingsRoute
   '/dashboard/admin/subscriptions': typeof AuthenticatedDashboardAdminSubscriptionsRoute
   '/dashboard/admin/users': typeof AuthenticatedDashboardAdminUsersRoute
+  '/dashboard/artist/applications': typeof AuthenticatedDashboardArtistApplicationsRoute
+  '/dashboard/artist/groups': typeof AuthenticatedDashboardArtistGroupsRoute
+  '/dashboard/artist/invitations': typeof AuthenticatedDashboardArtistInvitationsRoute
+  '/dashboard/artist/notifications': typeof AuthenticatedDashboardArtistNotificationsRoute
+  '/dashboard/artist/opportunities': typeof AuthenticatedDashboardArtistOpportunitiesRoute
+  '/dashboard/artist/portfolio': typeof AuthenticatedDashboardArtistPortfolioRoute
+  '/dashboard/artist/productions': typeof AuthenticatedDashboardArtistProductionsRoute
+  '/dashboard/artist/settings': typeof AuthenticatedDashboardArtistSettingsRoute
+  '/dashboard/artist/training': typeof AuthenticatedDashboardArtistTrainingRoute
+  '/dashboard/audience/community': typeof AuthenticatedDashboardAudienceCommunityRoute
+  '/dashboard/audience/meetups': typeof AuthenticatedDashboardAudienceMeetupsRoute
+  '/dashboard/audience/notifications': typeof AuthenticatedDashboardAudienceNotificationsRoute
+  '/dashboard/audience/premium': typeof AuthenticatedDashboardAudiencePremiumRoute
+  '/dashboard/audience/reviews': typeof AuthenticatedDashboardAudienceReviewsRoute
+  '/dashboard/audience/settings': typeof AuthenticatedDashboardAudienceSettingsRoute
+  '/dashboard/audience/tickets': typeof AuthenticatedDashboardAudienceTicketsRoute
+  '/dashboard/audience/watchlist': typeof AuthenticatedDashboardAudienceWatchlistRoute
   '/dashboard/group/analytics': typeof AuthenticatedDashboardGroupAnalyticsRoute
   '/dashboard/group/community': typeof AuthenticatedDashboardGroupCommunityRoute
   '/dashboard/group/funding': typeof AuthenticatedDashboardGroupFundingRoute
@@ -390,8 +620,18 @@ export interface FileRoutesByTo {
   '/dashboard/group/opportunities': typeof AuthenticatedDashboardGroupOpportunitiesRoute
   '/dashboard/group/productions': typeof AuthenticatedDashboardGroupProductionsRoute
   '/dashboard/group/settings': typeof AuthenticatedDashboardGroupSettingsRoute
+  '/dashboard/organization/analytics': typeof AuthenticatedDashboardOrganizationAnalyticsRoute
+  '/dashboard/organization/bookings': typeof AuthenticatedDashboardOrganizationBookingsRoute
+  '/dashboard/organization/collaborations': typeof AuthenticatedDashboardOrganizationCollaborationsRoute
+  '/dashboard/organization/events': typeof AuthenticatedDashboardOrganizationEventsRoute
+  '/dashboard/organization/notifications': typeof AuthenticatedDashboardOrganizationNotificationsRoute
+  '/dashboard/organization/opportunities': typeof AuthenticatedDashboardOrganizationOpportunitiesRoute
+  '/dashboard/organization/settings': typeof AuthenticatedDashboardOrganizationSettingsRoute
   '/dashboard/admin': typeof AuthenticatedDashboardAdminIndexRoute
+  '/dashboard/artist': typeof AuthenticatedDashboardArtistIndexRoute
+  '/dashboard/audience': typeof AuthenticatedDashboardAudienceIndexRoute
   '/dashboard/group': typeof AuthenticatedDashboardGroupIndexRoute
+  '/dashboard/organization': typeof AuthenticatedDashboardOrganizationIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -414,10 +654,10 @@ export interface FileRoutesById {
   '/explore/shows': typeof ExploreShowsRouteWithChildren
   '/explore/': typeof ExploreIndexRoute
   '/_authenticated/dashboard/admin': typeof AuthenticatedDashboardAdminRouteWithChildren
-  '/_authenticated/dashboard/artist': typeof AuthenticatedDashboardArtistRoute
-  '/_authenticated/dashboard/audience': typeof AuthenticatedDashboardAudienceRoute
+  '/_authenticated/dashboard/artist': typeof AuthenticatedDashboardArtistRouteWithChildren
+  '/_authenticated/dashboard/audience': typeof AuthenticatedDashboardAudienceRouteWithChildren
   '/_authenticated/dashboard/group': typeof AuthenticatedDashboardGroupRouteWithChildren
-  '/_authenticated/dashboard/organization': typeof AuthenticatedDashboardOrganizationRoute
+  '/_authenticated/dashboard/organization': typeof AuthenticatedDashboardOrganizationRouteWithChildren
   '/explore/artists/$slug': typeof ExploreArtistsSlugRoute
   '/explore/groups/$slug': typeof ExploreGroupsSlugRoute
   '/explore/shows/$slug': typeof ExploreShowsSlugRoute
@@ -430,6 +670,23 @@ export interface FileRoutesById {
   '/_authenticated/dashboard/admin/settings': typeof AuthenticatedDashboardAdminSettingsRoute
   '/_authenticated/dashboard/admin/subscriptions': typeof AuthenticatedDashboardAdminSubscriptionsRoute
   '/_authenticated/dashboard/admin/users': typeof AuthenticatedDashboardAdminUsersRoute
+  '/_authenticated/dashboard/artist/applications': typeof AuthenticatedDashboardArtistApplicationsRoute
+  '/_authenticated/dashboard/artist/groups': typeof AuthenticatedDashboardArtistGroupsRoute
+  '/_authenticated/dashboard/artist/invitations': typeof AuthenticatedDashboardArtistInvitationsRoute
+  '/_authenticated/dashboard/artist/notifications': typeof AuthenticatedDashboardArtistNotificationsRoute
+  '/_authenticated/dashboard/artist/opportunities': typeof AuthenticatedDashboardArtistOpportunitiesRoute
+  '/_authenticated/dashboard/artist/portfolio': typeof AuthenticatedDashboardArtistPortfolioRoute
+  '/_authenticated/dashboard/artist/productions': typeof AuthenticatedDashboardArtistProductionsRoute
+  '/_authenticated/dashboard/artist/settings': typeof AuthenticatedDashboardArtistSettingsRoute
+  '/_authenticated/dashboard/artist/training': typeof AuthenticatedDashboardArtistTrainingRoute
+  '/_authenticated/dashboard/audience/community': typeof AuthenticatedDashboardAudienceCommunityRoute
+  '/_authenticated/dashboard/audience/meetups': typeof AuthenticatedDashboardAudienceMeetupsRoute
+  '/_authenticated/dashboard/audience/notifications': typeof AuthenticatedDashboardAudienceNotificationsRoute
+  '/_authenticated/dashboard/audience/premium': typeof AuthenticatedDashboardAudiencePremiumRoute
+  '/_authenticated/dashboard/audience/reviews': typeof AuthenticatedDashboardAudienceReviewsRoute
+  '/_authenticated/dashboard/audience/settings': typeof AuthenticatedDashboardAudienceSettingsRoute
+  '/_authenticated/dashboard/audience/tickets': typeof AuthenticatedDashboardAudienceTicketsRoute
+  '/_authenticated/dashboard/audience/watchlist': typeof AuthenticatedDashboardAudienceWatchlistRoute
   '/_authenticated/dashboard/group/analytics': typeof AuthenticatedDashboardGroupAnalyticsRoute
   '/_authenticated/dashboard/group/community': typeof AuthenticatedDashboardGroupCommunityRoute
   '/_authenticated/dashboard/group/funding': typeof AuthenticatedDashboardGroupFundingRoute
@@ -438,8 +695,18 @@ export interface FileRoutesById {
   '/_authenticated/dashboard/group/opportunities': typeof AuthenticatedDashboardGroupOpportunitiesRoute
   '/_authenticated/dashboard/group/productions': typeof AuthenticatedDashboardGroupProductionsRoute
   '/_authenticated/dashboard/group/settings': typeof AuthenticatedDashboardGroupSettingsRoute
+  '/_authenticated/dashboard/organization/analytics': typeof AuthenticatedDashboardOrganizationAnalyticsRoute
+  '/_authenticated/dashboard/organization/bookings': typeof AuthenticatedDashboardOrganizationBookingsRoute
+  '/_authenticated/dashboard/organization/collaborations': typeof AuthenticatedDashboardOrganizationCollaborationsRoute
+  '/_authenticated/dashboard/organization/events': typeof AuthenticatedDashboardOrganizationEventsRoute
+  '/_authenticated/dashboard/organization/notifications': typeof AuthenticatedDashboardOrganizationNotificationsRoute
+  '/_authenticated/dashboard/organization/opportunities': typeof AuthenticatedDashboardOrganizationOpportunitiesRoute
+  '/_authenticated/dashboard/organization/settings': typeof AuthenticatedDashboardOrganizationSettingsRoute
   '/_authenticated/dashboard/admin/': typeof AuthenticatedDashboardAdminIndexRoute
+  '/_authenticated/dashboard/artist/': typeof AuthenticatedDashboardArtistIndexRoute
+  '/_authenticated/dashboard/audience/': typeof AuthenticatedDashboardAudienceIndexRoute
   '/_authenticated/dashboard/group/': typeof AuthenticatedDashboardGroupIndexRoute
+  '/_authenticated/dashboard/organization/': typeof AuthenticatedDashboardOrganizationIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -478,6 +745,23 @@ export interface FileRouteTypes {
     | '/dashboard/admin/settings'
     | '/dashboard/admin/subscriptions'
     | '/dashboard/admin/users'
+    | '/dashboard/artist/applications'
+    | '/dashboard/artist/groups'
+    | '/dashboard/artist/invitations'
+    | '/dashboard/artist/notifications'
+    | '/dashboard/artist/opportunities'
+    | '/dashboard/artist/portfolio'
+    | '/dashboard/artist/productions'
+    | '/dashboard/artist/settings'
+    | '/dashboard/artist/training'
+    | '/dashboard/audience/community'
+    | '/dashboard/audience/meetups'
+    | '/dashboard/audience/notifications'
+    | '/dashboard/audience/premium'
+    | '/dashboard/audience/reviews'
+    | '/dashboard/audience/settings'
+    | '/dashboard/audience/tickets'
+    | '/dashboard/audience/watchlist'
     | '/dashboard/group/analytics'
     | '/dashboard/group/community'
     | '/dashboard/group/funding'
@@ -486,8 +770,18 @@ export interface FileRouteTypes {
     | '/dashboard/group/opportunities'
     | '/dashboard/group/productions'
     | '/dashboard/group/settings'
+    | '/dashboard/organization/analytics'
+    | '/dashboard/organization/bookings'
+    | '/dashboard/organization/collaborations'
+    | '/dashboard/organization/events'
+    | '/dashboard/organization/notifications'
+    | '/dashboard/organization/opportunities'
+    | '/dashboard/organization/settings'
     | '/dashboard/admin/'
+    | '/dashboard/artist/'
+    | '/dashboard/audience/'
     | '/dashboard/group/'
+    | '/dashboard/organization/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -506,9 +800,6 @@ export interface FileRouteTypes {
     | '/explore/groups'
     | '/explore/shows'
     | '/explore'
-    | '/dashboard/artist'
-    | '/dashboard/audience'
-    | '/dashboard/organization'
     | '/explore/artists/$slug'
     | '/explore/groups/$slug'
     | '/explore/shows/$slug'
@@ -521,6 +812,23 @@ export interface FileRouteTypes {
     | '/dashboard/admin/settings'
     | '/dashboard/admin/subscriptions'
     | '/dashboard/admin/users'
+    | '/dashboard/artist/applications'
+    | '/dashboard/artist/groups'
+    | '/dashboard/artist/invitations'
+    | '/dashboard/artist/notifications'
+    | '/dashboard/artist/opportunities'
+    | '/dashboard/artist/portfolio'
+    | '/dashboard/artist/productions'
+    | '/dashboard/artist/settings'
+    | '/dashboard/artist/training'
+    | '/dashboard/audience/community'
+    | '/dashboard/audience/meetups'
+    | '/dashboard/audience/notifications'
+    | '/dashboard/audience/premium'
+    | '/dashboard/audience/reviews'
+    | '/dashboard/audience/settings'
+    | '/dashboard/audience/tickets'
+    | '/dashboard/audience/watchlist'
     | '/dashboard/group/analytics'
     | '/dashboard/group/community'
     | '/dashboard/group/funding'
@@ -529,8 +837,18 @@ export interface FileRouteTypes {
     | '/dashboard/group/opportunities'
     | '/dashboard/group/productions'
     | '/dashboard/group/settings'
+    | '/dashboard/organization/analytics'
+    | '/dashboard/organization/bookings'
+    | '/dashboard/organization/collaborations'
+    | '/dashboard/organization/events'
+    | '/dashboard/organization/notifications'
+    | '/dashboard/organization/opportunities'
+    | '/dashboard/organization/settings'
     | '/dashboard/admin'
+    | '/dashboard/artist'
+    | '/dashboard/audience'
     | '/dashboard/group'
+    | '/dashboard/organization'
   id:
     | '__root__'
     | '/'
@@ -568,6 +886,23 @@ export interface FileRouteTypes {
     | '/_authenticated/dashboard/admin/settings'
     | '/_authenticated/dashboard/admin/subscriptions'
     | '/_authenticated/dashboard/admin/users'
+    | '/_authenticated/dashboard/artist/applications'
+    | '/_authenticated/dashboard/artist/groups'
+    | '/_authenticated/dashboard/artist/invitations'
+    | '/_authenticated/dashboard/artist/notifications'
+    | '/_authenticated/dashboard/artist/opportunities'
+    | '/_authenticated/dashboard/artist/portfolio'
+    | '/_authenticated/dashboard/artist/productions'
+    | '/_authenticated/dashboard/artist/settings'
+    | '/_authenticated/dashboard/artist/training'
+    | '/_authenticated/dashboard/audience/community'
+    | '/_authenticated/dashboard/audience/meetups'
+    | '/_authenticated/dashboard/audience/notifications'
+    | '/_authenticated/dashboard/audience/premium'
+    | '/_authenticated/dashboard/audience/reviews'
+    | '/_authenticated/dashboard/audience/settings'
+    | '/_authenticated/dashboard/audience/tickets'
+    | '/_authenticated/dashboard/audience/watchlist'
     | '/_authenticated/dashboard/group/analytics'
     | '/_authenticated/dashboard/group/community'
     | '/_authenticated/dashboard/group/funding'
@@ -576,8 +911,18 @@ export interface FileRouteTypes {
     | '/_authenticated/dashboard/group/opportunities'
     | '/_authenticated/dashboard/group/productions'
     | '/_authenticated/dashboard/group/settings'
+    | '/_authenticated/dashboard/organization/analytics'
+    | '/_authenticated/dashboard/organization/bookings'
+    | '/_authenticated/dashboard/organization/collaborations'
+    | '/_authenticated/dashboard/organization/events'
+    | '/_authenticated/dashboard/organization/notifications'
+    | '/_authenticated/dashboard/organization/opportunities'
+    | '/_authenticated/dashboard/organization/settings'
     | '/_authenticated/dashboard/admin/'
+    | '/_authenticated/dashboard/artist/'
+    | '/_authenticated/dashboard/audience/'
     | '/_authenticated/dashboard/group/'
+    | '/_authenticated/dashboard/organization/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -788,6 +1133,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardAdminRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/dashboard/organization/': {
+      id: '/_authenticated/dashboard/organization/'
+      path: '/'
+      fullPath: '/dashboard/organization/'
+      preLoaderRoute: typeof AuthenticatedDashboardOrganizationIndexRouteImport
+      parentRoute: typeof AuthenticatedDashboardOrganizationRoute
+    }
     '/_authenticated/dashboard/group/': {
       id: '/_authenticated/dashboard/group/'
       path: '/'
@@ -795,12 +1147,75 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardGroupIndexRouteImport
       parentRoute: typeof AuthenticatedDashboardGroupRoute
     }
+    '/_authenticated/dashboard/audience/': {
+      id: '/_authenticated/dashboard/audience/'
+      path: '/'
+      fullPath: '/dashboard/audience/'
+      preLoaderRoute: typeof AuthenticatedDashboardAudienceIndexRouteImport
+      parentRoute: typeof AuthenticatedDashboardAudienceRoute
+    }
+    '/_authenticated/dashboard/artist/': {
+      id: '/_authenticated/dashboard/artist/'
+      path: '/'
+      fullPath: '/dashboard/artist/'
+      preLoaderRoute: typeof AuthenticatedDashboardArtistIndexRouteImport
+      parentRoute: typeof AuthenticatedDashboardArtistRoute
+    }
     '/_authenticated/dashboard/admin/': {
       id: '/_authenticated/dashboard/admin/'
       path: '/'
       fullPath: '/dashboard/admin/'
       preLoaderRoute: typeof AuthenticatedDashboardAdminIndexRouteImport
       parentRoute: typeof AuthenticatedDashboardAdminRoute
+    }
+    '/_authenticated/dashboard/organization/settings': {
+      id: '/_authenticated/dashboard/organization/settings'
+      path: '/settings'
+      fullPath: '/dashboard/organization/settings'
+      preLoaderRoute: typeof AuthenticatedDashboardOrganizationSettingsRouteImport
+      parentRoute: typeof AuthenticatedDashboardOrganizationRoute
+    }
+    '/_authenticated/dashboard/organization/opportunities': {
+      id: '/_authenticated/dashboard/organization/opportunities'
+      path: '/opportunities'
+      fullPath: '/dashboard/organization/opportunities'
+      preLoaderRoute: typeof AuthenticatedDashboardOrganizationOpportunitiesRouteImport
+      parentRoute: typeof AuthenticatedDashboardOrganizationRoute
+    }
+    '/_authenticated/dashboard/organization/notifications': {
+      id: '/_authenticated/dashboard/organization/notifications'
+      path: '/notifications'
+      fullPath: '/dashboard/organization/notifications'
+      preLoaderRoute: typeof AuthenticatedDashboardOrganizationNotificationsRouteImport
+      parentRoute: typeof AuthenticatedDashboardOrganizationRoute
+    }
+    '/_authenticated/dashboard/organization/events': {
+      id: '/_authenticated/dashboard/organization/events'
+      path: '/events'
+      fullPath: '/dashboard/organization/events'
+      preLoaderRoute: typeof AuthenticatedDashboardOrganizationEventsRouteImport
+      parentRoute: typeof AuthenticatedDashboardOrganizationRoute
+    }
+    '/_authenticated/dashboard/organization/collaborations': {
+      id: '/_authenticated/dashboard/organization/collaborations'
+      path: '/collaborations'
+      fullPath: '/dashboard/organization/collaborations'
+      preLoaderRoute: typeof AuthenticatedDashboardOrganizationCollaborationsRouteImport
+      parentRoute: typeof AuthenticatedDashboardOrganizationRoute
+    }
+    '/_authenticated/dashboard/organization/bookings': {
+      id: '/_authenticated/dashboard/organization/bookings'
+      path: '/bookings'
+      fullPath: '/dashboard/organization/bookings'
+      preLoaderRoute: typeof AuthenticatedDashboardOrganizationBookingsRouteImport
+      parentRoute: typeof AuthenticatedDashboardOrganizationRoute
+    }
+    '/_authenticated/dashboard/organization/analytics': {
+      id: '/_authenticated/dashboard/organization/analytics'
+      path: '/analytics'
+      fullPath: '/dashboard/organization/analytics'
+      preLoaderRoute: typeof AuthenticatedDashboardOrganizationAnalyticsRouteImport
+      parentRoute: typeof AuthenticatedDashboardOrganizationRoute
     }
     '/_authenticated/dashboard/group/settings': {
       id: '/_authenticated/dashboard/group/settings'
@@ -857,6 +1272,125 @@ declare module '@tanstack/react-router' {
       fullPath: '/dashboard/group/analytics'
       preLoaderRoute: typeof AuthenticatedDashboardGroupAnalyticsRouteImport
       parentRoute: typeof AuthenticatedDashboardGroupRoute
+    }
+    '/_authenticated/dashboard/audience/watchlist': {
+      id: '/_authenticated/dashboard/audience/watchlist'
+      path: '/watchlist'
+      fullPath: '/dashboard/audience/watchlist'
+      preLoaderRoute: typeof AuthenticatedDashboardAudienceWatchlistRouteImport
+      parentRoute: typeof AuthenticatedDashboardAudienceRoute
+    }
+    '/_authenticated/dashboard/audience/tickets': {
+      id: '/_authenticated/dashboard/audience/tickets'
+      path: '/tickets'
+      fullPath: '/dashboard/audience/tickets'
+      preLoaderRoute: typeof AuthenticatedDashboardAudienceTicketsRouteImport
+      parentRoute: typeof AuthenticatedDashboardAudienceRoute
+    }
+    '/_authenticated/dashboard/audience/settings': {
+      id: '/_authenticated/dashboard/audience/settings'
+      path: '/settings'
+      fullPath: '/dashboard/audience/settings'
+      preLoaderRoute: typeof AuthenticatedDashboardAudienceSettingsRouteImport
+      parentRoute: typeof AuthenticatedDashboardAudienceRoute
+    }
+    '/_authenticated/dashboard/audience/reviews': {
+      id: '/_authenticated/dashboard/audience/reviews'
+      path: '/reviews'
+      fullPath: '/dashboard/audience/reviews'
+      preLoaderRoute: typeof AuthenticatedDashboardAudienceReviewsRouteImport
+      parentRoute: typeof AuthenticatedDashboardAudienceRoute
+    }
+    '/_authenticated/dashboard/audience/premium': {
+      id: '/_authenticated/dashboard/audience/premium'
+      path: '/premium'
+      fullPath: '/dashboard/audience/premium'
+      preLoaderRoute: typeof AuthenticatedDashboardAudiencePremiumRouteImport
+      parentRoute: typeof AuthenticatedDashboardAudienceRoute
+    }
+    '/_authenticated/dashboard/audience/notifications': {
+      id: '/_authenticated/dashboard/audience/notifications'
+      path: '/notifications'
+      fullPath: '/dashboard/audience/notifications'
+      preLoaderRoute: typeof AuthenticatedDashboardAudienceNotificationsRouteImport
+      parentRoute: typeof AuthenticatedDashboardAudienceRoute
+    }
+    '/_authenticated/dashboard/audience/meetups': {
+      id: '/_authenticated/dashboard/audience/meetups'
+      path: '/meetups'
+      fullPath: '/dashboard/audience/meetups'
+      preLoaderRoute: typeof AuthenticatedDashboardAudienceMeetupsRouteImport
+      parentRoute: typeof AuthenticatedDashboardAudienceRoute
+    }
+    '/_authenticated/dashboard/audience/community': {
+      id: '/_authenticated/dashboard/audience/community'
+      path: '/community'
+      fullPath: '/dashboard/audience/community'
+      preLoaderRoute: typeof AuthenticatedDashboardAudienceCommunityRouteImport
+      parentRoute: typeof AuthenticatedDashboardAudienceRoute
+    }
+    '/_authenticated/dashboard/artist/training': {
+      id: '/_authenticated/dashboard/artist/training'
+      path: '/training'
+      fullPath: '/dashboard/artist/training'
+      preLoaderRoute: typeof AuthenticatedDashboardArtistTrainingRouteImport
+      parentRoute: typeof AuthenticatedDashboardArtistRoute
+    }
+    '/_authenticated/dashboard/artist/settings': {
+      id: '/_authenticated/dashboard/artist/settings'
+      path: '/settings'
+      fullPath: '/dashboard/artist/settings'
+      preLoaderRoute: typeof AuthenticatedDashboardArtistSettingsRouteImport
+      parentRoute: typeof AuthenticatedDashboardArtistRoute
+    }
+    '/_authenticated/dashboard/artist/productions': {
+      id: '/_authenticated/dashboard/artist/productions'
+      path: '/productions'
+      fullPath: '/dashboard/artist/productions'
+      preLoaderRoute: typeof AuthenticatedDashboardArtistProductionsRouteImport
+      parentRoute: typeof AuthenticatedDashboardArtistRoute
+    }
+    '/_authenticated/dashboard/artist/portfolio': {
+      id: '/_authenticated/dashboard/artist/portfolio'
+      path: '/portfolio'
+      fullPath: '/dashboard/artist/portfolio'
+      preLoaderRoute: typeof AuthenticatedDashboardArtistPortfolioRouteImport
+      parentRoute: typeof AuthenticatedDashboardArtistRoute
+    }
+    '/_authenticated/dashboard/artist/opportunities': {
+      id: '/_authenticated/dashboard/artist/opportunities'
+      path: '/opportunities'
+      fullPath: '/dashboard/artist/opportunities'
+      preLoaderRoute: typeof AuthenticatedDashboardArtistOpportunitiesRouteImport
+      parentRoute: typeof AuthenticatedDashboardArtistRoute
+    }
+    '/_authenticated/dashboard/artist/notifications': {
+      id: '/_authenticated/dashboard/artist/notifications'
+      path: '/notifications'
+      fullPath: '/dashboard/artist/notifications'
+      preLoaderRoute: typeof AuthenticatedDashboardArtistNotificationsRouteImport
+      parentRoute: typeof AuthenticatedDashboardArtistRoute
+    }
+    '/_authenticated/dashboard/artist/invitations': {
+      id: '/_authenticated/dashboard/artist/invitations'
+      path: '/invitations'
+      fullPath: '/dashboard/artist/invitations'
+      preLoaderRoute: typeof AuthenticatedDashboardArtistInvitationsRouteImport
+      parentRoute: typeof AuthenticatedDashboardArtistRoute
+    }
+    '/_authenticated/dashboard/artist/groups': {
+      id: '/_authenticated/dashboard/artist/groups'
+      path: '/groups'
+      fullPath: '/dashboard/artist/groups'
+      preLoaderRoute: typeof AuthenticatedDashboardArtistGroupsRouteImport
+      parentRoute: typeof AuthenticatedDashboardArtistRoute
+    }
+    '/_authenticated/dashboard/artist/applications': {
+      id: '/_authenticated/dashboard/artist/applications'
+      path: '/applications'
+      fullPath: '/dashboard/artist/applications'
+      preLoaderRoute: typeof AuthenticatedDashboardArtistApplicationsRouteImport
+      parentRoute: typeof AuthenticatedDashboardArtistRoute
     }
     '/_authenticated/dashboard/admin/users': {
       id: '/_authenticated/dashboard/admin/users'
@@ -956,6 +1490,87 @@ const AuthenticatedDashboardAdminRouteWithChildren =
     AuthenticatedDashboardAdminRouteChildren,
   )
 
+interface AuthenticatedDashboardArtistRouteChildren {
+  AuthenticatedDashboardArtistApplicationsRoute: typeof AuthenticatedDashboardArtistApplicationsRoute
+  AuthenticatedDashboardArtistGroupsRoute: typeof AuthenticatedDashboardArtistGroupsRoute
+  AuthenticatedDashboardArtistInvitationsRoute: typeof AuthenticatedDashboardArtistInvitationsRoute
+  AuthenticatedDashboardArtistNotificationsRoute: typeof AuthenticatedDashboardArtistNotificationsRoute
+  AuthenticatedDashboardArtistOpportunitiesRoute: typeof AuthenticatedDashboardArtistOpportunitiesRoute
+  AuthenticatedDashboardArtistPortfolioRoute: typeof AuthenticatedDashboardArtistPortfolioRoute
+  AuthenticatedDashboardArtistProductionsRoute: typeof AuthenticatedDashboardArtistProductionsRoute
+  AuthenticatedDashboardArtistSettingsRoute: typeof AuthenticatedDashboardArtistSettingsRoute
+  AuthenticatedDashboardArtistTrainingRoute: typeof AuthenticatedDashboardArtistTrainingRoute
+  AuthenticatedDashboardArtistIndexRoute: typeof AuthenticatedDashboardArtistIndexRoute
+}
+
+const AuthenticatedDashboardArtistRouteChildren: AuthenticatedDashboardArtistRouteChildren =
+  {
+    AuthenticatedDashboardArtistApplicationsRoute:
+      AuthenticatedDashboardArtistApplicationsRoute,
+    AuthenticatedDashboardArtistGroupsRoute:
+      AuthenticatedDashboardArtistGroupsRoute,
+    AuthenticatedDashboardArtistInvitationsRoute:
+      AuthenticatedDashboardArtistInvitationsRoute,
+    AuthenticatedDashboardArtistNotificationsRoute:
+      AuthenticatedDashboardArtistNotificationsRoute,
+    AuthenticatedDashboardArtistOpportunitiesRoute:
+      AuthenticatedDashboardArtistOpportunitiesRoute,
+    AuthenticatedDashboardArtistPortfolioRoute:
+      AuthenticatedDashboardArtistPortfolioRoute,
+    AuthenticatedDashboardArtistProductionsRoute:
+      AuthenticatedDashboardArtistProductionsRoute,
+    AuthenticatedDashboardArtistSettingsRoute:
+      AuthenticatedDashboardArtistSettingsRoute,
+    AuthenticatedDashboardArtistTrainingRoute:
+      AuthenticatedDashboardArtistTrainingRoute,
+    AuthenticatedDashboardArtistIndexRoute:
+      AuthenticatedDashboardArtistIndexRoute,
+  }
+
+const AuthenticatedDashboardArtistRouteWithChildren =
+  AuthenticatedDashboardArtistRoute._addFileChildren(
+    AuthenticatedDashboardArtistRouteChildren,
+  )
+
+interface AuthenticatedDashboardAudienceRouteChildren {
+  AuthenticatedDashboardAudienceCommunityRoute: typeof AuthenticatedDashboardAudienceCommunityRoute
+  AuthenticatedDashboardAudienceMeetupsRoute: typeof AuthenticatedDashboardAudienceMeetupsRoute
+  AuthenticatedDashboardAudienceNotificationsRoute: typeof AuthenticatedDashboardAudienceNotificationsRoute
+  AuthenticatedDashboardAudiencePremiumRoute: typeof AuthenticatedDashboardAudiencePremiumRoute
+  AuthenticatedDashboardAudienceReviewsRoute: typeof AuthenticatedDashboardAudienceReviewsRoute
+  AuthenticatedDashboardAudienceSettingsRoute: typeof AuthenticatedDashboardAudienceSettingsRoute
+  AuthenticatedDashboardAudienceTicketsRoute: typeof AuthenticatedDashboardAudienceTicketsRoute
+  AuthenticatedDashboardAudienceWatchlistRoute: typeof AuthenticatedDashboardAudienceWatchlistRoute
+  AuthenticatedDashboardAudienceIndexRoute: typeof AuthenticatedDashboardAudienceIndexRoute
+}
+
+const AuthenticatedDashboardAudienceRouteChildren: AuthenticatedDashboardAudienceRouteChildren =
+  {
+    AuthenticatedDashboardAudienceCommunityRoute:
+      AuthenticatedDashboardAudienceCommunityRoute,
+    AuthenticatedDashboardAudienceMeetupsRoute:
+      AuthenticatedDashboardAudienceMeetupsRoute,
+    AuthenticatedDashboardAudienceNotificationsRoute:
+      AuthenticatedDashboardAudienceNotificationsRoute,
+    AuthenticatedDashboardAudiencePremiumRoute:
+      AuthenticatedDashboardAudiencePremiumRoute,
+    AuthenticatedDashboardAudienceReviewsRoute:
+      AuthenticatedDashboardAudienceReviewsRoute,
+    AuthenticatedDashboardAudienceSettingsRoute:
+      AuthenticatedDashboardAudienceSettingsRoute,
+    AuthenticatedDashboardAudienceTicketsRoute:
+      AuthenticatedDashboardAudienceTicketsRoute,
+    AuthenticatedDashboardAudienceWatchlistRoute:
+      AuthenticatedDashboardAudienceWatchlistRoute,
+    AuthenticatedDashboardAudienceIndexRoute:
+      AuthenticatedDashboardAudienceIndexRoute,
+  }
+
+const AuthenticatedDashboardAudienceRouteWithChildren =
+  AuthenticatedDashboardAudienceRoute._addFileChildren(
+    AuthenticatedDashboardAudienceRouteChildren,
+  )
+
 interface AuthenticatedDashboardGroupRouteChildren {
   AuthenticatedDashboardGroupAnalyticsRoute: typeof AuthenticatedDashboardGroupAnalyticsRoute
   AuthenticatedDashboardGroupCommunityRoute: typeof AuthenticatedDashboardGroupCommunityRoute
@@ -995,24 +1610,62 @@ const AuthenticatedDashboardGroupRouteWithChildren =
     AuthenticatedDashboardGroupRouteChildren,
   )
 
+interface AuthenticatedDashboardOrganizationRouteChildren {
+  AuthenticatedDashboardOrganizationAnalyticsRoute: typeof AuthenticatedDashboardOrganizationAnalyticsRoute
+  AuthenticatedDashboardOrganizationBookingsRoute: typeof AuthenticatedDashboardOrganizationBookingsRoute
+  AuthenticatedDashboardOrganizationCollaborationsRoute: typeof AuthenticatedDashboardOrganizationCollaborationsRoute
+  AuthenticatedDashboardOrganizationEventsRoute: typeof AuthenticatedDashboardOrganizationEventsRoute
+  AuthenticatedDashboardOrganizationNotificationsRoute: typeof AuthenticatedDashboardOrganizationNotificationsRoute
+  AuthenticatedDashboardOrganizationOpportunitiesRoute: typeof AuthenticatedDashboardOrganizationOpportunitiesRoute
+  AuthenticatedDashboardOrganizationSettingsRoute: typeof AuthenticatedDashboardOrganizationSettingsRoute
+  AuthenticatedDashboardOrganizationIndexRoute: typeof AuthenticatedDashboardOrganizationIndexRoute
+}
+
+const AuthenticatedDashboardOrganizationRouteChildren: AuthenticatedDashboardOrganizationRouteChildren =
+  {
+    AuthenticatedDashboardOrganizationAnalyticsRoute:
+      AuthenticatedDashboardOrganizationAnalyticsRoute,
+    AuthenticatedDashboardOrganizationBookingsRoute:
+      AuthenticatedDashboardOrganizationBookingsRoute,
+    AuthenticatedDashboardOrganizationCollaborationsRoute:
+      AuthenticatedDashboardOrganizationCollaborationsRoute,
+    AuthenticatedDashboardOrganizationEventsRoute:
+      AuthenticatedDashboardOrganizationEventsRoute,
+    AuthenticatedDashboardOrganizationNotificationsRoute:
+      AuthenticatedDashboardOrganizationNotificationsRoute,
+    AuthenticatedDashboardOrganizationOpportunitiesRoute:
+      AuthenticatedDashboardOrganizationOpportunitiesRoute,
+    AuthenticatedDashboardOrganizationSettingsRoute:
+      AuthenticatedDashboardOrganizationSettingsRoute,
+    AuthenticatedDashboardOrganizationIndexRoute:
+      AuthenticatedDashboardOrganizationIndexRoute,
+  }
+
+const AuthenticatedDashboardOrganizationRouteWithChildren =
+  AuthenticatedDashboardOrganizationRoute._addFileChildren(
+    AuthenticatedDashboardOrganizationRouteChildren,
+  )
+
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedDashboardAdminRoute: typeof AuthenticatedDashboardAdminRouteWithChildren
-  AuthenticatedDashboardArtistRoute: typeof AuthenticatedDashboardArtistRoute
-  AuthenticatedDashboardAudienceRoute: typeof AuthenticatedDashboardAudienceRoute
+  AuthenticatedDashboardArtistRoute: typeof AuthenticatedDashboardArtistRouteWithChildren
+  AuthenticatedDashboardAudienceRoute: typeof AuthenticatedDashboardAudienceRouteWithChildren
   AuthenticatedDashboardGroupRoute: typeof AuthenticatedDashboardGroupRouteWithChildren
-  AuthenticatedDashboardOrganizationRoute: typeof AuthenticatedDashboardOrganizationRoute
+  AuthenticatedDashboardOrganizationRoute: typeof AuthenticatedDashboardOrganizationRouteWithChildren
   AuthenticatedDashboardIndexRoute: typeof AuthenticatedDashboardIndexRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedDashboardAdminRoute:
     AuthenticatedDashboardAdminRouteWithChildren,
-  AuthenticatedDashboardArtistRoute: AuthenticatedDashboardArtistRoute,
-  AuthenticatedDashboardAudienceRoute: AuthenticatedDashboardAudienceRoute,
+  AuthenticatedDashboardArtistRoute:
+    AuthenticatedDashboardArtistRouteWithChildren,
+  AuthenticatedDashboardAudienceRoute:
+    AuthenticatedDashboardAudienceRouteWithChildren,
   AuthenticatedDashboardGroupRoute:
     AuthenticatedDashboardGroupRouteWithChildren,
   AuthenticatedDashboardOrganizationRoute:
-    AuthenticatedDashboardOrganizationRoute,
+    AuthenticatedDashboardOrganizationRouteWithChildren,
   AuthenticatedDashboardIndexRoute: AuthenticatedDashboardIndexRoute,
 }
 
