@@ -256,7 +256,7 @@ export const ARTISTS: Artist[] = seed.map((a, i) => ({
   slug: a.slug,
   name: a.name,
   stageName: a.stageName,
-  photo: photoFor(i),
+  photo: photoFor(i, GENDER[a.slug] ?? "m"),
   cover: covers[i % covers.length],
   specialization: a.specialization,
   yearsExperience: a.years,
