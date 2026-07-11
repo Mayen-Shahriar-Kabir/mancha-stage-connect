@@ -11,17 +11,14 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SuspendedRouteImport } from './routes/suspended'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
-import { Route as ShowsRouteImport } from './routes/shows'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as RegistrationSubmittedRouteImport } from './routes/registration-submitted'
 import { Route as RegisterRouteImport } from './routes/register'
 import { Route as PendingApprovalRouteImport } from './routes/pending-approval'
 import { Route as LoginRouteImport } from './routes/login'
-import { Route as GroupsRouteImport } from './routes/groups'
 import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
 import { Route as ExploreRouteImport } from './routes/explore'
 import { Route as ContactRouteImport } from './routes/contact'
-import { Route as ArtistsRouteImport } from './routes/artists'
 import { Route as AccessDeniedRouteImport } from './routes/access-denied'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
@@ -50,11 +47,6 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ShowsRoute = ShowsRouteImport.update({
-  id: '/shows',
-  path: '/shows',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const ResetPasswordRoute = ResetPasswordRouteImport.update({
   id: '/reset-password',
   path: '/reset-password',
@@ -80,11 +72,6 @@ const LoginRoute = LoginRouteImport.update({
   path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
-const GroupsRoute = GroupsRouteImport.update({
-  id: '/groups',
-  path: '/groups',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const ForgotPasswordRoute = ForgotPasswordRouteImport.update({
   id: '/forgot-password',
   path: '/forgot-password',
@@ -98,11 +85,6 @@ const ExploreRoute = ExploreRouteImport.update({
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ArtistsRoute = ArtistsRouteImport.update({
-  id: '/artists',
-  path: '/artists',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AccessDeniedRoute = AccessDeniedRouteImport.update({
@@ -200,17 +182,14 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/access-denied': typeof AccessDeniedRoute
-  '/artists': typeof ArtistsRoute
   '/contact': typeof ContactRoute
   '/explore': typeof ExploreRouteWithChildren
   '/forgot-password': typeof ForgotPasswordRoute
-  '/groups': typeof GroupsRoute
   '/login': typeof LoginRoute
   '/pending-approval': typeof PendingApprovalRoute
   '/register': typeof RegisterRoute
   '/registration-submitted': typeof RegistrationSubmittedRoute
   '/reset-password': typeof ResetPasswordRoute
-  '/shows': typeof ShowsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/suspended': typeof SuspendedRoute
   '/explore/artists': typeof ExploreArtistsRouteWithChildren
@@ -231,16 +210,13 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/access-denied': typeof AccessDeniedRoute
-  '/artists': typeof ArtistsRoute
   '/contact': typeof ContactRoute
   '/forgot-password': typeof ForgotPasswordRoute
-  '/groups': typeof GroupsRoute
   '/login': typeof LoginRoute
   '/pending-approval': typeof PendingApprovalRoute
   '/register': typeof RegisterRoute
   '/registration-submitted': typeof RegistrationSubmittedRoute
   '/reset-password': typeof ResetPasswordRoute
-  '/shows': typeof ShowsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/suspended': typeof SuspendedRoute
   '/explore/artists': typeof ExploreArtistsRouteWithChildren
@@ -263,17 +239,14 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/about': typeof AboutRoute
   '/access-denied': typeof AccessDeniedRoute
-  '/artists': typeof ArtistsRoute
   '/contact': typeof ContactRoute
   '/explore': typeof ExploreRouteWithChildren
   '/forgot-password': typeof ForgotPasswordRoute
-  '/groups': typeof GroupsRoute
   '/login': typeof LoginRoute
   '/pending-approval': typeof PendingApprovalRoute
   '/register': typeof RegisterRoute
   '/registration-submitted': typeof RegistrationSubmittedRoute
   '/reset-password': typeof ResetPasswordRoute
-  '/shows': typeof ShowsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/suspended': typeof SuspendedRoute
   '/explore/artists': typeof ExploreArtistsRouteWithChildren
@@ -296,17 +269,14 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/access-denied'
-    | '/artists'
     | '/contact'
     | '/explore'
     | '/forgot-password'
-    | '/groups'
     | '/login'
     | '/pending-approval'
     | '/register'
     | '/registration-submitted'
     | '/reset-password'
-    | '/shows'
     | '/sitemap.xml'
     | '/suspended'
     | '/explore/artists'
@@ -327,16 +297,13 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/access-denied'
-    | '/artists'
     | '/contact'
     | '/forgot-password'
-    | '/groups'
     | '/login'
     | '/pending-approval'
     | '/register'
     | '/registration-submitted'
     | '/reset-password'
-    | '/shows'
     | '/sitemap.xml'
     | '/suspended'
     | '/explore/artists'
@@ -358,17 +325,14 @@ export interface FileRouteTypes {
     | '/_authenticated'
     | '/about'
     | '/access-denied'
-    | '/artists'
     | '/contact'
     | '/explore'
     | '/forgot-password'
-    | '/groups'
     | '/login'
     | '/pending-approval'
     | '/register'
     | '/registration-submitted'
     | '/reset-password'
-    | '/shows'
     | '/sitemap.xml'
     | '/suspended'
     | '/explore/artists'
@@ -391,17 +355,14 @@ export interface RootRouteChildren {
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AboutRoute: typeof AboutRoute
   AccessDeniedRoute: typeof AccessDeniedRoute
-  ArtistsRoute: typeof ArtistsRoute
   ContactRoute: typeof ContactRoute
   ExploreRoute: typeof ExploreRouteWithChildren
   ForgotPasswordRoute: typeof ForgotPasswordRoute
-  GroupsRoute: typeof GroupsRoute
   LoginRoute: typeof LoginRoute
   PendingApprovalRoute: typeof PendingApprovalRoute
   RegisterRoute: typeof RegisterRoute
   RegistrationSubmittedRoute: typeof RegistrationSubmittedRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
-  ShowsRoute: typeof ShowsRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   SuspendedRoute: typeof SuspendedRoute
 }
@@ -420,13 +381,6 @@ declare module '@tanstack/react-router' {
       path: '/sitemap.xml'
       fullPath: '/sitemap.xml'
       preLoaderRoute: typeof SitemapDotxmlRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/shows': {
-      id: '/shows'
-      path: '/shows'
-      fullPath: '/shows'
-      preLoaderRoute: typeof ShowsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/reset-password': {
@@ -464,13 +418,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/groups': {
-      id: '/groups'
-      path: '/groups'
-      fullPath: '/groups'
-      preLoaderRoute: typeof GroupsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/forgot-password': {
       id: '/forgot-password'
       path: '/forgot-password'
@@ -490,13 +437,6 @@ declare module '@tanstack/react-router' {
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof ContactRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/artists': {
-      id: '/artists'
-      path: '/artists'
-      fullPath: '/artists'
-      preLoaderRoute: typeof ArtistsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/access-denied': {
@@ -701,17 +641,14 @@ const rootRouteChildren: RootRouteChildren = {
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AboutRoute: AboutRoute,
   AccessDeniedRoute: AccessDeniedRoute,
-  ArtistsRoute: ArtistsRoute,
   ContactRoute: ContactRoute,
   ExploreRoute: ExploreRouteWithChildren,
   ForgotPasswordRoute: ForgotPasswordRoute,
-  GroupsRoute: GroupsRoute,
   LoginRoute: LoginRoute,
   PendingApprovalRoute: PendingApprovalRoute,
   RegisterRoute: RegisterRoute,
   RegistrationSubmittedRoute: RegistrationSubmittedRoute,
   ResetPasswordRoute: ResetPasswordRoute,
-  ShowsRoute: ShowsRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   SuspendedRoute: SuspendedRoute,
 }
