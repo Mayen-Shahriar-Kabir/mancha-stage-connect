@@ -78,17 +78,18 @@ export const seedDemoAccounts = createServerFn({ method: "POST" })
         }
 
         // Ensure profile exists (trigger should have created it on insert; upsert for safety)
-        const profilePatch: Record<string, unknown> = {
+        const profilePatch = {
           id: userId,
           email: acct.email,
           full_name: acct.full_name,
           primary_role: acct.role,
-          organization_type: acct.role === "organization" ? acct.organization_type ?? null : null,
+          organization_type:
+            acct.role === "organization" ? acct.organization_type ?? null : null,
           organization_name:
             acct.role === "organization" || acct.role === "theatre_group"
               ? acct.organization_name ?? null
               : null,
-          status: "active", // all demo accounts pre-approved
+          status: "active" as const, // all demo accounts pre-approved
         };
 
         await supabaseAdmin.from("profiles").upsert(profilePatch, { onConflict: "id" });
