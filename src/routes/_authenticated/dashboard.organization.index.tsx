@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Handshake, CalendarDays, Megaphone, Users, Plus } from "lucide-react";
 import { PortalLayout } from "@/components/portal/PortalLayout";
-import { ORG_NAV } from "@/components/portal/org-nav";
+import { getOrgNav } from "@/components/portal/org-nav";
 import { StatCard, Panel, StatusPill } from "@/components/admin/primitives";
 import { Button } from "@/components/ui/button";
 import { useAuth, type OrganizationType } from "@/hooks/use-auth";
