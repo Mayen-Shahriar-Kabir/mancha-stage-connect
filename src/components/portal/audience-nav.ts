@@ -2,6 +2,8 @@ import type { PortalNavItem } from "@/components/portal/PortalSidebar";
 import {
   LayoutDashboard,
   Ticket,
+  Clapperboard,
+  HandCoins,
   Heart,
   Crown,
   Users,
@@ -13,7 +15,9 @@ import {
 
 export const AUDIENCE_NAV: PortalNavItem[] = [
   { title: "Dashboard", url: "/dashboard/audience", icon: LayoutDashboard, exact: true },
-  { title: "My Tickets", url: "/dashboard/audience/tickets", icon: Ticket, badge: 2 },
+  { title: "Book Shows", url: "/dashboard/audience/book", icon: Clapperboard },
+  { title: "My Tickets", url: "/dashboard/audience/tickets", icon: Ticket },
+  { title: "Fund Campaigns", url: "/dashboard/audience/funding", icon: HandCoins },
   { title: "Watchlist", url: "/dashboard/audience/watchlist", icon: Heart },
   { title: "Premium", url: "/dashboard/audience/premium", icon: Crown },
   { title: "Community", url: "/dashboard/audience/community", icon: Users },
