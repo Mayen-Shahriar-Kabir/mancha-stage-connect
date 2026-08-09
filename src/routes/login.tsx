@@ -16,8 +16,10 @@ import { dashboardPathForRole, type AppRole, type AccountStatus } from "@/hooks/
 import { sanitizeRedirect } from "@/lib/safe-redirect";
 
 const schema = z.object({
-  email: z.string().trim().email("Enter a valid email"),
-  password: z.string().min(4, "At least 4 characters"),
+  email: z.string().trim().email("Enter a valid email").max(255),
+  // Sign-in never advertises the strength policy — that would let an attacker
+  // fingerprint valid password shapes. Length is only a sanity bound.
+  password: z.string().min(1, "Enter your password").max(72),
   remember: z.boolean().optional(),
 });
 
