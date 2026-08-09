@@ -14,7 +14,7 @@ import { AuthShell } from "@/components/auth/AuthShell";
 
 const schema = z
   .object({
-    password: z.string().min(4, "At least 4 characters").max(72),
+    password: passwordSchema,
     confirm: z.string(),
   })
   .refine((d) => d.password === d.confirm, {
