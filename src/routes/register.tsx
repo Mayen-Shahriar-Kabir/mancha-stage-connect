@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { passwordSchema, PASSWORD_RULES, passwordStrength } from "@/lib/validation";
 import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
 
@@ -24,7 +25,7 @@ const schema = z
     full_name: z.string().trim().min(2, "Please tell us your name").max(100),
     email: z.string().trim().email("Enter a valid email").max(255),
     phone: z.string().trim().max(30).optional().or(z.literal("")),
-    password: z.string().min(4, "At least 4 characters").max(72, "Too long"),
+    password: passwordSchema,
     confirm: z.string(),
     role: z.enum(["audience", "theatre_group", "theatre_artist", "organization"]),
     organization_type: z
@@ -253,6 +254,17 @@ function RegisterPage() {
               autoComplete="new-password"
               {...form.register("password")}
             />
+            <div className="flex gap-1" aria-hidden>
+              {[0, 1, 2, 3].map((i) => (
+                <span
+                  key={i}
+                  className={`h-1 flex-1 rounded-full transition-colors ${
+                    passwordStrength(form.watch("password") ?? "") > i ? "bg-brand" : "bg-muted"
+                  }`}
+                />
+              ))}
+            </div>
+            <p className="text-xs text-muted-foreground">{PASSWORD_RULES}</p>
             {form.formState.errors.password && (
               <p className="text-xs text-destructive">{form.formState.errors.password.message}</p>
             )}

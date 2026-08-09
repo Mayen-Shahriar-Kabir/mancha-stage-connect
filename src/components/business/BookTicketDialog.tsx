@@ -4,7 +4,8 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { bookTicket, pushNotification, fmtBDT, type Production } from "@/lib/business";
+import { bookTicket, fmtBDT, type Production } from "@/lib/business";
+import { seatCountSchema } from "@/lib/validation";
 import { useAuth } from "@/hooks/use-auth";
 
 export function BookTicketDialog({
@@ -26,19 +27,14 @@ export function BookTicketDialog({
 
   const submit = async () => {
     if (!user) { toast.error("Sign in to book"); return; }
-    if (seats < 1 || seats > available) { toast.error("Invalid seat count"); return; }
+    const parsed = seatCountSchema.safeParse(seats);
+    if (!parsed.success) { toast.error(parsed.error.issues[0]?.message ?? "Invalid seat count"); return; }
+    if (parsed.data > available) { toast.error("Not enough seats left"); return; }
     setBusy(true);
     try {
-      const ticket = await bookTicket(production.id, user.id, seats, unit);
-      await pushNotification(user.id, "booking",
-        `Booking confirmed · ${production.title}`,
-        `${seats} seat${seats > 1 ? "s" : ""} · ${fmtBDT(total)} · ${ticket.booking_code}`,
-        "/dashboard/audience/tickets");
-      // Notify the group
-      await pushNotification(production.group_id, "booking",
-        `New booking · ${production.title}`,
-        `${seats} seat${seats > 1 ? "s" : ""} · ${fmtBDT(total)}`,
-        "/dashboard/group/productions");
+      // The database validates capacity, pricing and publication state, then
+      // records the ticket and both notifications in one atomic transaction.
+      const ticket = await bookTicket(production.id, parsed.data);
       toast.success(`Booked! Code ${ticket.booking_code}`);
       onOpenChange(false);
       onBooked?.();

@@ -63,23 +63,23 @@ export async function deleteProduction(id: string) {
 }
 
 /* ---------------- Tickets ---------------- */
-export async function bookTicket(productionId: string, userId: string, seatCount: number, unitPrice: number) {
-  const booking_code = "MN-" + Math.random().toString(36).slice(2, 8).toUpperCase();
-  const { data, error } = await supabase.from("tickets").insert({
-    production_id: productionId,
-    user_id: userId,
-    seat_count: seatCount,
-    unit_price: unitPrice,
-    total_price: unitPrice * seatCount,
-    booking_code,
-    status: "confirmed",
-  }).select().single();
+/**
+ * Booking is server-authoritative. The browser only supplies the production and
+ * the seat count; price, total, booking code, capacity checks and the seats_sold
+ * counter are all computed inside the database under a row lock, so prices
+ * cannot be tampered with and concurrent buyers cannot oversell.
+ */
+export async function bookTicket(productionId: string, seatCount: number) {
+  const { data, error } = await supabase.rpc("book_ticket", {
+    _production_id: productionId,
+    _seat_count: seatCount,
+  });
   if (error) throw error;
-  return data;
+  return data as unknown as Ticket;
 }
 
 export async function cancelTicket(id: string) {
-  const { error } = await supabase.from("tickets").update({ status: "cancelled" }).eq("id", id);
+  const { error } = await supabase.rpc("cancel_ticket", { _ticket_id: id });
   if (error) throw error;
 }
 
@@ -122,10 +122,23 @@ export async function createCampaign(input: Database["public"]["Tables"]["fundin
   return data;
 }
 
-export async function contribute(campaignId: string, userId: string, amount: number, message?: string) {
-  const { data, error } = await supabase.from("funding_contributions").insert({
-    campaign_id: campaignId, user_id: userId, amount, message: message ?? null,
-  }).select().single();
+/**
+ * Contributions run through a SECURITY DEFINER function so the contributor is
+ * taken from the session, the campaign is verified to be active, and the
+ * raised_amount total is updated atomically with the insert.
+ */
+export async function contribute(
+  campaignId: string,
+  amount: number,
+  message?: string,
+  isAnonymous = false,
+) {
+  const { data, error } = await supabase.rpc("contribute_to_campaign", {
+    _campaign_id: campaignId,
+    _amount: amount,
+    _message: message ?? undefined,
+    _is_anonymous: isAnonymous,
+  });
   if (error) throw error;
   return data;
 }
@@ -188,14 +201,9 @@ export async function markAllRead(userId: string) {
   await supabase.from("notifications").update({ read: true }).eq("user_id", userId).eq("read", false);
 }
 
-export async function pushNotification(
-  userId: string,
-  type: Notification["type"],
-  title: string,
-  body?: string,
-  link?: string,
-) {
-  await supabase.from("notifications").insert({
-    user_id: userId, type, title, body: body ?? null, link: link ?? null,
-  });
-}
+/**
+ * Notifications are never written from the browser. They are emitted by trusted
+ * database triggers (bookings, contributions, approvals, reviews) so that no
+ * client can forge a message on another user's behalf.
+ */
+

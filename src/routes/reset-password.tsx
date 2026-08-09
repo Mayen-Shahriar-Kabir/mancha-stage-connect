@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { passwordSchema, PASSWORD_RULES } from "@/lib/validation";
 import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
 
@@ -14,7 +15,7 @@ import { AuthShell } from "@/components/auth/AuthShell";
 
 const schema = z
   .object({
-    password: z.string().min(4, "At least 4 characters").max(72),
+    password: passwordSchema,
     confirm: z.string(),
   })
   .refine((d) => d.password === d.confirm, {
@@ -114,6 +115,7 @@ function ResetPasswordPage() {
             autoComplete="new-password"
             {...form.register("password")}
           />
+          <p className="text-xs text-muted-foreground">{PASSWORD_RULES}</p>
           {form.formState.errors.password && (
             <p className="text-xs text-destructive">{form.formState.errors.password.message}</p>
           )}

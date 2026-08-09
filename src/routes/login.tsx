@@ -13,19 +13,23 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { supabase } from "@/integrations/supabase/client";
 import { AuthShell } from "@/components/auth/AuthShell";
 import { dashboardPathForRole, type AppRole, type AccountStatus } from "@/hooks/use-auth";
+import { sanitizeRedirect } from "@/lib/safe-redirect";
 
 const schema = z.object({
-  email: z.string().trim().email("Enter a valid email"),
-  password: z.string().min(4, "At least 4 characters"),
+  email: z.string().trim().email("Enter a valid email").max(255),
+  // Sign-in never advertises the strength policy — that would let an attacker
+  // fingerprint valid password shapes. Length is only a sanity bound.
+  password: z.string().min(1, "Enter your password").max(72),
   remember: z.boolean().optional(),
 });
 
 type FormValues = z.infer<typeof schema>;
 
 export const Route = createFileRoute("/login")({
-  validateSearch: (s: Record<string, unknown>) => ({
-    redirect: typeof s.redirect === "string" ? s.redirect : undefined,
-  }),
+  validateSearch: (s: Record<string, unknown>): { redirect?: string } => {
+    const raw = typeof s.redirect === "string" ? sanitizeRedirect(s.redirect, "") : "";
+    return raw ? { redirect: raw } : {};
+  },
   head: () => ({
     meta: [
       { title: "Sign in — Mancha" },
@@ -63,22 +67,10 @@ function LoginPage() {
         return;
       }
 
-      // "Remember me" — if unchecked, clear session on tab close.
-      if (!values.remember && typeof window !== "undefined") {
-        try {
-          const raw = window.localStorage.getItem("sb-auth-token") ?? null;
-          // Move the auth token to sessionStorage so it dies with the tab.
-          const keys = Object.keys(window.localStorage).filter((k) => k.startsWith("sb-"));
-          for (const k of keys) {
-            const v = window.localStorage.getItem(k);
-            if (v) window.sessionStorage.setItem(k, v);
-            window.localStorage.removeItem(k);
-          }
-          void raw;
-        } catch {
-          /* ignore */
-        }
-      }
+      // NOTE: session persistence is owned by Supabase Auth. We deliberately do
+      // not relocate or rewrite its storage keys by hand — doing so breaks token
+      // refresh and multi-tab session restoration.
+
 
       // Fetch profile to know status + role for routing.
       const { data: profile } = await supabase
@@ -100,7 +92,7 @@ function LoginPage() {
       }
 
       toast.success("Welcome back to Mancha");
-      navigate({ to: redirect ?? dashboardPathForRole(role) });
+      navigate({ to: sanitizeRedirect(redirect, dashboardPathForRole(role)) });
     } finally {
       setSubmitting(false);
     }

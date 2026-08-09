@@ -86,7 +86,6 @@ import { Route as AuthenticatedDashboardAdminReviewsRouteImport } from './routes
 import { Route as AuthenticatedDashboardAdminReportsRouteImport } from './routes/_authenticated/dashboard.admin.reports'
 import { Route as AuthenticatedDashboardAdminProductionsRouteImport } from './routes/_authenticated/dashboard.admin.productions'
 import { Route as AuthenticatedDashboardAdminFundingRouteImport } from './routes/_authenticated/dashboard.admin.funding'
-import { Route as AuthenticatedDashboardAdminDemoAccountsRouteImport } from './routes/_authenticated/dashboard.admin.demo-accounts'
 import { Route as AuthenticatedDashboardAdminApprovalsRouteImport } from './routes/_authenticated/dashboard.admin.approvals'
 
 const SuspendedRoute = SuspendedRouteImport.update({
@@ -529,12 +528,6 @@ const AuthenticatedDashboardAdminFundingRoute =
     path: '/funding',
     getParentRoute: () => AuthenticatedDashboardAdminRoute,
   } as any)
-const AuthenticatedDashboardAdminDemoAccountsRoute =
-  AuthenticatedDashboardAdminDemoAccountsRouteImport.update({
-    id: '/demo-accounts',
-    path: '/demo-accounts',
-    getParentRoute: () => AuthenticatedDashboardAdminRoute,
-  } as any)
 const AuthenticatedDashboardAdminApprovalsRoute =
   AuthenticatedDashboardAdminApprovalsRouteImport.update({
     id: '/approvals',
@@ -570,7 +563,6 @@ export interface FileRoutesByFullPath {
   '/explore/shows/$slug': typeof ExploreShowsSlugRoute
   '/dashboard/': typeof AuthenticatedDashboardIndexRoute
   '/dashboard/admin/approvals': typeof AuthenticatedDashboardAdminApprovalsRoute
-  '/dashboard/admin/demo-accounts': typeof AuthenticatedDashboardAdminDemoAccountsRoute
   '/dashboard/admin/funding': typeof AuthenticatedDashboardAdminFundingRoute
   '/dashboard/admin/productions': typeof AuthenticatedDashboardAdminProductionsRoute
   '/dashboard/admin/reports': typeof AuthenticatedDashboardAdminReportsRoute
@@ -644,7 +636,6 @@ export interface FileRoutesByTo {
   '/explore/shows/$slug': typeof ExploreShowsSlugRoute
   '/dashboard': typeof AuthenticatedDashboardIndexRoute
   '/dashboard/admin/approvals': typeof AuthenticatedDashboardAdminApprovalsRoute
-  '/dashboard/admin/demo-accounts': typeof AuthenticatedDashboardAdminDemoAccountsRoute
   '/dashboard/admin/funding': typeof AuthenticatedDashboardAdminFundingRoute
   '/dashboard/admin/productions': typeof AuthenticatedDashboardAdminProductionsRoute
   '/dashboard/admin/reports': typeof AuthenticatedDashboardAdminReportsRoute
@@ -726,7 +717,6 @@ export interface FileRoutesById {
   '/explore/shows/$slug': typeof ExploreShowsSlugRoute
   '/_authenticated/dashboard/': typeof AuthenticatedDashboardIndexRoute
   '/_authenticated/dashboard/admin/approvals': typeof AuthenticatedDashboardAdminApprovalsRoute
-  '/_authenticated/dashboard/admin/demo-accounts': typeof AuthenticatedDashboardAdminDemoAccountsRoute
   '/_authenticated/dashboard/admin/funding': typeof AuthenticatedDashboardAdminFundingRoute
   '/_authenticated/dashboard/admin/productions': typeof AuthenticatedDashboardAdminProductionsRoute
   '/_authenticated/dashboard/admin/reports': typeof AuthenticatedDashboardAdminReportsRoute
@@ -808,7 +798,6 @@ export interface FileRouteTypes {
     | '/explore/shows/$slug'
     | '/dashboard/'
     | '/dashboard/admin/approvals'
-    | '/dashboard/admin/demo-accounts'
     | '/dashboard/admin/funding'
     | '/dashboard/admin/productions'
     | '/dashboard/admin/reports'
@@ -882,7 +871,6 @@ export interface FileRouteTypes {
     | '/explore/shows/$slug'
     | '/dashboard'
     | '/dashboard/admin/approvals'
-    | '/dashboard/admin/demo-accounts'
     | '/dashboard/admin/funding'
     | '/dashboard/admin/productions'
     | '/dashboard/admin/reports'
@@ -963,7 +951,6 @@ export interface FileRouteTypes {
     | '/explore/shows/$slug'
     | '/_authenticated/dashboard/'
     | '/_authenticated/dashboard/admin/approvals'
-    | '/_authenticated/dashboard/admin/demo-accounts'
     | '/_authenticated/dashboard/admin/funding'
     | '/_authenticated/dashboard/admin/productions'
     | '/_authenticated/dashboard/admin/reports'
@@ -1574,13 +1561,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardAdminFundingRouteImport
       parentRoute: typeof AuthenticatedDashboardAdminRoute
     }
-    '/_authenticated/dashboard/admin/demo-accounts': {
-      id: '/_authenticated/dashboard/admin/demo-accounts'
-      path: '/demo-accounts'
-      fullPath: '/dashboard/admin/demo-accounts'
-      preLoaderRoute: typeof AuthenticatedDashboardAdminDemoAccountsRouteImport
-      parentRoute: typeof AuthenticatedDashboardAdminRoute
-    }
     '/_authenticated/dashboard/admin/approvals': {
       id: '/_authenticated/dashboard/admin/approvals'
       path: '/approvals'
@@ -1593,7 +1573,6 @@ declare module '@tanstack/react-router' {
 
 interface AuthenticatedDashboardAdminRouteChildren {
   AuthenticatedDashboardAdminApprovalsRoute: typeof AuthenticatedDashboardAdminApprovalsRoute
-  AuthenticatedDashboardAdminDemoAccountsRoute: typeof AuthenticatedDashboardAdminDemoAccountsRoute
   AuthenticatedDashboardAdminFundingRoute: typeof AuthenticatedDashboardAdminFundingRoute
   AuthenticatedDashboardAdminProductionsRoute: typeof AuthenticatedDashboardAdminProductionsRoute
   AuthenticatedDashboardAdminReportsRoute: typeof AuthenticatedDashboardAdminReportsRoute
@@ -1608,8 +1587,6 @@ const AuthenticatedDashboardAdminRouteChildren: AuthenticatedDashboardAdminRoute
   {
     AuthenticatedDashboardAdminApprovalsRoute:
       AuthenticatedDashboardAdminApprovalsRoute,
-    AuthenticatedDashboardAdminDemoAccountsRoute:
-      AuthenticatedDashboardAdminDemoAccountsRoute,
     AuthenticatedDashboardAdminFundingRoute:
       AuthenticatedDashboardAdminFundingRoute,
     AuthenticatedDashboardAdminProductionsRoute:
@@ -1905,13 +1882,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
