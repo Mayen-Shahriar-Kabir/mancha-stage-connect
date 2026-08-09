@@ -4,7 +4,8 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { bookTicket, pushNotification, fmtBDT, type Production } from "@/lib/business";
+import { bookTicket, fmtBDT, type Production } from "@/lib/business";
+import { seatCountSchema } from "@/lib/validation";
 import { useAuth } from "@/hooks/use-auth";
 
 export function BookTicketDialog({
