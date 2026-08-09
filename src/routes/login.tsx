@@ -23,9 +23,10 @@ const schema = z.object({
 type FormValues = z.infer<typeof schema>;
 
 export const Route = createFileRoute("/login")({
-  validateSearch: (s: Record<string, unknown>) => ({
-    redirect: typeof s.redirect === "string" ? s.redirect : undefined,
-  }),
+  validateSearch: (s: Record<string, unknown>): { redirect?: string } => {
+    const raw = typeof s.redirect === "string" ? sanitizeRedirect(s.redirect, "") : "";
+    return raw ? { redirect: raw } : {};
+  },
   head: () => ({
     meta: [
       { title: "Sign in — Mancha" },
