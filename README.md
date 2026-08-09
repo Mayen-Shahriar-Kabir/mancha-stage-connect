@@ -17,60 +17,61 @@ bun run dev
 
 ---
 
-## 🎭 Demo Mode
+## Security model
 
-This project is an academic prototype. **Demo Mode is currently enabled** to simplify testing and presentations:
+Demo Mode has been **removed**. The application now runs a production security
+posture; the browser is treated as untrusted at every boundary.
 
-- ✅ Email verification is **disabled** — accounts sign in immediately.
-- ✅ Password minimum is relaxed to **4 characters** (simple values like `1234` are allowed).
-- ✅ Admin approval workflow still functions: audience accounts are active on signup, all other roles remain `pending` until an admin approves.
-- ✅ Seeded demo accounts (below) are pre-approved and ready to sign in.
+### Authentication
 
-### Demo credentials
+- Passwords require **10+ characters with upper case, lower case and a digit**
+  (`src/lib/validation.ts`). The same rule is applied on signup and on reset.
+- Sign-in errors are deliberately generic so accounts cannot be enumerated.
+- Session persistence is owned entirely by Supabase Auth — the app never
+  relocates or rewrites auth storage keys by hand.
+- `?redirect=` values are sanitized to same-origin absolute paths
+  (`src/lib/safe-redirect.ts`), closing the open-redirect vector on `/login`.
 
-All passwords are `1234`.
+### Roles and accounts
 
-| Role            | Email                     | Password | Status  |
-| --------------- | ------------------------- | -------- | ------- |
-| Admin           | `admin@mancha.demo`       | `1234`   | Active  |
-| Theatre Group   | `group@mancha.demo`       | `1234`   | Active  |
-| Theatre Artist  | `artist@mancha.demo`      | `1234`   | Active  |
-| Audience        | `audience@mancha.demo`    | `1234`   | Active  |
-| University      | `university@mancha.demo`  | `1234`   | Active  |
-| Corporate       | `corporate@mancha.demo`   | `1234`   | Active  |
-| Tourism Board   | `tourism@mancha.demo`     | `1234`   | Active  |
-| Film & OTT      | `film@mancha.demo`        | `1234`   | Active  |
+- Roles live in a dedicated `user_roles` table and are read through the
+  `has_role()` security-definer function — never from `profiles`.
+- A `guard_profile_update` trigger blocks any non-admin attempt to change
+  `primary_role` or `status`, so self-escalation is impossible even if the
+  client is tampered with.
+- Account status transitions follow a server-side state machine, and every
+  role change, approval and suspension is written to `security_audit_log`.
 
-### Seeding the demo accounts
+### Business logic is server-authoritative
 
-1. Sign in as an admin (or bootstrap the first admin using the SQL snippet at the bottom of this file).
-2. Navigate to **Admin Console → Demo Accounts** (`/dashboard/admin/demo-accounts`).
-3. Click **Seed demo accounts**. The page will create any missing users, reset passwords to `1234`, and mark them all as `active`.
-4. Repeat the click any time to re-sync passwords / statuses.
+Money and capacity are never trusted from the client:
 
-The seeded credentials are also copy-clickable directly from that page for use during a live demo.
+| Action              | Server function            | Guarantees |
+| ------------------- | -------------------------- | ---------- |
+| Ticket booking      | `book_ticket()`            | Row-locked capacity check, authoritative pricing, generated booking code, atomic `seats_sold` update |
+| Ticket cancellation | `cancel_ticket()`          | Ownership check, atomic seat release |
+| Funding             | `contribute_to_campaign()` | Campaign must be active, contributor taken from the session, atomic `raised_amount` update |
 
-### Restoring production security
+Direct client inserts into `tickets`, `funding_contributions` and
+`notifications` are revoked. Notifications are emitted only by trusted database
+triggers, so no client can forge a message for another user.
 
-To harden the app for production, revert the following:
+### Data exposure
 
-- `src/routes/register.tsx` and `src/routes/reset-password.tsx` — restore the 8-character password schema with letter+digit requirements.
-- `src/routes/login.tsx` — restore the min-6 password check.
-- Supabase Auth settings — turn **auto-confirm email** OFF and enable **HIBP leaked-password protection**.
-- Remove or gate `/dashboard/admin/demo-accounts` and delete the demo users.
+- RLS is enabled on every table, with policies scoped to `auth.uid()`.
+- Public discovery reads a narrow `public_directory` table (names and roles
+  only), maintained by triggers — the `profiles` table itself is never exposed
+  to anonymous clients.
 
-### Bootstrapping the first admin manually
+## Bootstrapping the first admin
 
-If no admin exists yet, register any account, then run in the Cloud SQL editor:
+Register an account, then run in the Cloud SQL editor:
 
 ```sql
-UPDATE public.profiles
-   SET primary_role='admin', status='active'
- WHERE email='you@example.com';
-
-UPDATE public.user_roles
-   SET role='admin'
- WHERE user_id=(SELECT id FROM public.profiles WHERE email='you@example.com');
+SELECT public.admin_set_user_role(
+  (SELECT id FROM public.profiles WHERE email='you@example.com'),
+  'admin'
+);
 ```
 
-Once you have one admin, use **Demo Accounts** to seed the rest with one click.
+Subsequent role and approval changes are performed from the Admin Console.
