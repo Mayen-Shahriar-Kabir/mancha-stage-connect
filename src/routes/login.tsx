@@ -90,7 +90,7 @@ function LoginPage() {
       }
 
       toast.success("Welcome back to Mancha");
-      navigate({ to: redirect ?? dashboardPathForRole(role) });
+      navigate({ to: sanitizeRedirect(redirect, dashboardPathForRole(role)) });
     } finally {
       setSubmitting(false);
     }
