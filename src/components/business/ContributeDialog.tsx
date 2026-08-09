@@ -26,18 +26,13 @@ export function ContributeDialog({
 
   const submit = async () => {
     if (!user) { toast.error("Sign in to contribute"); return; }
-    if (amount < 100) { toast.error("Minimum contribution is ৳100"); return; }
+    const parsed = contributionAmountSchema.safeParse(amount);
+    if (!parsed.success) { toast.error(parsed.error.issues[0]?.message ?? "Invalid amount"); return; }
     setBusy(true);
     try {
-      await contribute(campaign.id, user.id, amount, message);
-      await pushNotification(user.id, "funding",
-        `Thank you for backing ${campaign.title}`,
-        `Contribution of ${fmtBDT(amount)} received`,
-        "/dashboard/audience/community");
-      await pushNotification(campaign.group_id, "funding",
-        `New contribution · ${fmtBDT(amount)}`,
-        `${profile?.full_name ?? "A supporter"} backed ${campaign.title}`,
-        "/dashboard/group/funding");
+      // Contributor identity, campaign state and the running total are all
+      // resolved server-side inside a single transaction.
+      await contribute(campaign.id, parsed.data, message.trim().slice(0, 500));
       setThanked(true);
       toast.success("Contribution recorded (simulated payment)");
       onDone?.();
