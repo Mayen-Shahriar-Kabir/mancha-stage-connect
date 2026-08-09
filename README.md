@@ -80,7 +80,7 @@ Subsequent role and approval changes are performed from the Admin Console.
 
 The eight `@mancha.demo` accounts seeded during prototyping still own most of
 the sample productions, tickets and campaigns, so their data was preserved.
-Their passwords have been **rotated to 48-character random values** — the old
-`1234` credential no longer authenticates. To use one of them again, trigger a
-password reset from `/forgot-password`, or set a new password with
-`admin_set_account_status` / the Admin Console.
+All eight share the password `123456` (the auth server enforces a 6-character
+minimum, so the original `1234` cannot be set). This is a deliberately weak
+shared credential for prototype demos only — rotate or delete these accounts
+before any real deployment.
