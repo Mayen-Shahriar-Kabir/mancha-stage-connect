@@ -122,10 +122,23 @@ export async function createCampaign(input: Database["public"]["Tables"]["fundin
   return data;
 }
 
-export async function contribute(campaignId: string, userId: string, amount: number, message?: string) {
-  const { data, error } = await supabase.from("funding_contributions").insert({
-    campaign_id: campaignId, user_id: userId, amount, message: message ?? null,
-  }).select().single();
+/**
+ * Contributions run through a SECURITY DEFINER function so the contributor is
+ * taken from the session, the campaign is verified to be active, and the
+ * raised_amount total is updated atomically with the insert.
+ */
+export async function contribute(
+  campaignId: string,
+  amount: number,
+  message?: string,
+  isAnonymous = false,
+) {
+  const { data, error } = await supabase.rpc("contribute_to_campaign", {
+    _campaign_id: campaignId,
+    _amount: amount,
+    _message: message ?? undefined,
+    _is_anonymous: isAnonymous,
+  });
   if (error) throw error;
   return data;
 }
