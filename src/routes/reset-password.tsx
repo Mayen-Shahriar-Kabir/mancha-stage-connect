@@ -115,6 +115,7 @@ function ResetPasswordPage() {
             autoComplete="new-password"
             {...form.register("password")}
           />
+          <p className="text-xs text-muted-foreground">{PASSWORD_RULES}</p>
           {form.formState.errors.password && (
             <p className="text-xs text-destructive">{form.formState.errors.password.message}</p>
           )}
