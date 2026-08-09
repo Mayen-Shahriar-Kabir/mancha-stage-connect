@@ -65,22 +65,10 @@ function LoginPage() {
         return;
       }
 
-      // "Remember me" — if unchecked, clear session on tab close.
-      if (!values.remember && typeof window !== "undefined") {
-        try {
-          const raw = window.localStorage.getItem("sb-auth-token") ?? null;
-          // Move the auth token to sessionStorage so it dies with the tab.
-          const keys = Object.keys(window.localStorage).filter((k) => k.startsWith("sb-"));
-          for (const k of keys) {
-            const v = window.localStorage.getItem(k);
-            if (v) window.sessionStorage.setItem(k, v);
-            window.localStorage.removeItem(k);
-          }
-          void raw;
-        } catch {
-          /* ignore */
-        }
-      }
+      // NOTE: session persistence is owned by Supabase Auth. We deliberately do
+      // not relocate or rewrite its storage keys by hand — doing so breaks token
+      // refresh and multi-tab session restoration.
+
 
       // Fetch profile to know status + role for routing.
       const { data: profile } = await supabase
