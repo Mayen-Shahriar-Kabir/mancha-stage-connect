@@ -13,6 +13,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { supabase } from "@/integrations/supabase/client";
 import { AuthShell } from "@/components/auth/AuthShell";
 import { dashboardPathForRole, type AppRole, type AccountStatus } from "@/hooks/use-auth";
+import { sanitizeRedirect } from "@/lib/safe-redirect";
 
 const schema = z.object({
   email: z.string().trim().email("Enter a valid email"),
