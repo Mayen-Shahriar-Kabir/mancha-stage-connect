@@ -332,6 +332,36 @@ export type Database = {
         }
         Relationships: []
       }
+      security_audit_log: {
+        Row: {
+          action: string
+          actor_id: string | null
+          created_at: string
+          details: Json
+          id: string
+          target_id: string | null
+          target_table: string | null
+        }
+        Insert: {
+          action: string
+          actor_id?: string | null
+          created_at?: string
+          details?: Json
+          id?: string
+          target_id?: string | null
+          target_table?: string | null
+        }
+        Update: {
+          action?: string
+          actor_id?: string | null
+          created_at?: string
+          details?: Json
+          id?: string
+          target_id?: string | null
+          target_table?: string | null
+        }
+        Relationships: []
+      }
       tickets: {
         Row: {
           booking_code: string
@@ -402,15 +432,113 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      public_profiles: {
+        Row: {
+          full_name: string | null
+          id: string | null
+          organization_name: string | null
+          organization_type:
+            | Database["public"]["Enums"]["organization_type"]
+            | null
+          primary_role: Database["public"]["Enums"]["app_role"] | null
+        }
+        Insert: {
+          full_name?: string | null
+          id?: string | null
+          organization_name?: string | null
+          organization_type?:
+            | Database["public"]["Enums"]["organization_type"]
+            | null
+          primary_role?: Database["public"]["Enums"]["app_role"] | null
+        }
+        Update: {
+          full_name?: string | null
+          id?: string | null
+          organization_name?: string | null
+          organization_type?:
+            | Database["public"]["Enums"]["organization_type"]
+            | null
+          primary_role?: Database["public"]["Enums"]["app_role"] | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
+      admin_set_account_status: {
+        Args: {
+          _status: Database["public"]["Enums"]["account_status"]
+          _user_id: string
+        }
+        Returns: undefined
+      }
+      admin_set_user_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: undefined
+      }
+      book_ticket: {
+        Args: { _production_id: string; _seat_count: number }
+        Returns: {
+          booking_code: string
+          created_at: string
+          id: string
+          production_id: string
+          seat_count: number
+          status: Database["public"]["Enums"]["ticket_status"]
+          total_price: number
+          unit_price: number
+          updated_at: string
+          user_id: string
+        }
+        SetofOptions: {
+          from: "*"
+          to: "tickets"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
+      cancel_ticket: { Args: { _ticket_id: string }; Returns: undefined }
+      contribute_to_campaign: {
+        Args: {
+          _amount: number
+          _campaign_id: string
+          _is_anonymous?: boolean
+          _message?: string
+        }
+        Returns: {
+          amount: number
+          campaign_id: string
+          created_at: string
+          id: string
+          is_anonymous: boolean
+          message: string | null
+          user_id: string
+        }
+        SetofOptions: {
+          from: "*"
+          to: "funding_contributions"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
           _user_id: string
         }
         Returns: boolean
+      }
+      is_active_user: { Args: { _user_id: string }; Returns: boolean }
+      log_security_event: {
+        Args: {
+          _action: string
+          _details?: Json
+          _target_id: string
+          _target_table: string
+        }
+        Returns: undefined
       }
     }
     Enums: {
