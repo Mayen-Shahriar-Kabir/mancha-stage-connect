@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { passwordSchema, PASSWORD_RULES } from "@/lib/validation";
 import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
 
