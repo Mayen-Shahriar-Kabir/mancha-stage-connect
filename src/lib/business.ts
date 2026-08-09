@@ -63,23 +63,23 @@ export async function deleteProduction(id: string) {
 }
 
 /* ---------------- Tickets ---------------- */
-export async function bookTicket(productionId: string, userId: string, seatCount: number, unitPrice: number) {
-  const booking_code = "MN-" + Math.random().toString(36).slice(2, 8).toUpperCase();
-  const { data, error } = await supabase.from("tickets").insert({
-    production_id: productionId,
-    user_id: userId,
-    seat_count: seatCount,
-    unit_price: unitPrice,
-    total_price: unitPrice * seatCount,
-    booking_code,
-    status: "confirmed",
-  }).select().single();
+/**
+ * Booking is server-authoritative. The browser only supplies the production and
+ * the seat count; price, total, booking code, capacity checks and the seats_sold
+ * counter are all computed inside the database under a row lock, so prices
+ * cannot be tampered with and concurrent buyers cannot oversell.
+ */
+export async function bookTicket(productionId: string, seatCount: number) {
+  const { data, error } = await supabase.rpc("book_ticket", {
+    _production_id: productionId,
+    _seat_count: seatCount,
+  });
   if (error) throw error;
-  return data;
+  return data as unknown as Ticket;
 }
 
 export async function cancelTicket(id: string) {
-  const { error } = await supabase.from("tickets").update({ status: "cancelled" }).eq("id", id);
+  const { error } = await supabase.rpc("cancel_ticket", { _ticket_id: id });
   if (error) throw error;
 }
 
