@@ -201,14 +201,9 @@ export async function markAllRead(userId: string) {
   await supabase.from("notifications").update({ read: true }).eq("user_id", userId).eq("read", false);
 }
 
-export async function pushNotification(
-  userId: string,
-  type: Notification["type"],
-  title: string,
-  body?: string,
-  link?: string,
-) {
-  await supabase.from("notifications").insert({
-    user_id: userId, type, title, body: body ?? null, link: link ?? null,
-  });
-}
+/**
+ * Notifications are never written from the browser. They are emitted by trusted
+ * database triggers (bookings, contributions, approvals, reviews) so that no
+ * client can forge a message on another user's behalf.
+ */
+
