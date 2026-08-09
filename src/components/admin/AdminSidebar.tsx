@@ -9,7 +9,6 @@ import {
   Star,
   BarChart3,
   Settings,
-  KeyRound,
 } from "lucide-react";
 import {
   Sidebar,
