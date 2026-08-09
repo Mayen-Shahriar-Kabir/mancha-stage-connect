@@ -43,7 +43,6 @@ const NAV: NavItem[] = [
   { title: "Reviews", url: "/dashboard/admin/reviews", icon: Star },
   { title: "Reports", url: "/dashboard/admin/reports", icon: BarChart3 },
   { title: "Settings", url: "/dashboard/admin/settings", icon: Settings },
-  { title: "Demo Accounts", url: "/dashboard/admin/demo-accounts", icon: KeyRound, badge: "Demo" },
 ];
 
 export function AdminSidebar() {
