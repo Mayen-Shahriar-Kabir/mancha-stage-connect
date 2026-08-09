@@ -267,6 +267,47 @@ export type Database = {
         }
         Relationships: []
       }
+      public_directory: {
+        Row: {
+          display_name: string | null
+          id: string
+          organization_name: string | null
+          organization_type:
+            | Database["public"]["Enums"]["organization_type"]
+            | null
+          primary_role: Database["public"]["Enums"]["app_role"]
+          updated_at: string
+        }
+        Insert: {
+          display_name?: string | null
+          id: string
+          organization_name?: string | null
+          organization_type?:
+            | Database["public"]["Enums"]["organization_type"]
+            | null
+          primary_role: Database["public"]["Enums"]["app_role"]
+          updated_at?: string
+        }
+        Update: {
+          display_name?: string | null
+          id?: string
+          organization_name?: string | null
+          organization_type?:
+            | Database["public"]["Enums"]["organization_type"]
+            | null
+          primary_role?: Database["public"]["Enums"]["app_role"]
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "public_directory_id_fkey"
+            columns: ["id"]
+            isOneToOne: true
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       review_replies: {
         Row: {
           comment: string
@@ -432,36 +473,7 @@ export type Database = {
       }
     }
     Views: {
-      public_profiles: {
-        Row: {
-          full_name: string | null
-          id: string | null
-          organization_name: string | null
-          organization_type:
-            | Database["public"]["Enums"]["organization_type"]
-            | null
-          primary_role: Database["public"]["Enums"]["app_role"] | null
-        }
-        Insert: {
-          full_name?: string | null
-          id?: string | null
-          organization_name?: string | null
-          organization_type?:
-            | Database["public"]["Enums"]["organization_type"]
-            | null
-          primary_role?: Database["public"]["Enums"]["app_role"] | null
-        }
-        Update: {
-          full_name?: string | null
-          id?: string | null
-          organization_name?: string | null
-          organization_type?:
-            | Database["public"]["Enums"]["organization_type"]
-            | null
-          primary_role?: Database["public"]["Enums"]["app_role"] | null
-        }
-        Relationships: []
-      }
+      [_ in never]: never
     }
     Functions: {
       admin_set_account_status: {
