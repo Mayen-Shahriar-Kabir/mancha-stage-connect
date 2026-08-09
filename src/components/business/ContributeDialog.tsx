@@ -6,7 +6,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { contribute, pushNotification, fmtBDT, type Campaign } from "@/lib/business";
+import { contribute, fmtBDT, type Campaign } from "@/lib/business";
+import { contributionAmountSchema } from "@/lib/validation";
 import { useAuth } from "@/hooks/use-auth";
 
 const PRESETS = [500, 1000, 2500, 5000];
