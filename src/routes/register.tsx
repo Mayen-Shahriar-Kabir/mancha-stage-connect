@@ -254,6 +254,17 @@ function RegisterPage() {
               autoComplete="new-password"
               {...form.register("password")}
             />
+            <div className="flex gap-1" aria-hidden>
+              {[0, 1, 2, 3].map((i) => (
+                <span
+                  key={i}
+                  className={`h-1 flex-1 rounded-full transition-colors ${
+                    passwordStrength(form.watch("password") ?? "") > i ? "bg-brand" : "bg-muted"
+                  }`}
+                />
+              ))}
+            </div>
+            <p className="text-xs text-muted-foreground">{PASSWORD_RULES}</p>
             {form.formState.errors.password && (
               <p className="text-xs text-destructive">{form.formState.errors.password.message}</p>
             )}
