@@ -124,8 +124,8 @@ The platform operates on a **zero-trust client architecture**:
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/<your-username>/mancha.git
-cd mancha
+git clone https://github.com/Mayen-Shahriar-Kabir/mancha-stage-connect.git
+cd mancha-stage-connect
 ```
 
 ### 2. Install Dependencies
@@ -159,7 +159,6 @@ VITE_SUPABASE_PUBLISHABLE_KEY="sb_publishable_..."
 VITE_SUPABASE_PROJECT_ID="<your-project-ref>"
 ```
 
-*(Note: Never expose the Supabase `service_role` secret in client-side applications).*
 
 ### 5. Launch the Development Server
 
